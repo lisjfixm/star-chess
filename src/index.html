@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#05051a">
+<meta name="color-scheme" content="dark only">
+<meta name="supported-color-schemes" content="dark">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="星之棋">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2305051a'/%3E%3Cpath d='M50 15 L61 38 L86 40 L67 56 L73 81 L50 67 L27 81 L33 56 L14 40 L39 38 Z' fill='%234dd0e1'/%3E%3C/svg%3E">
+<link rel="manifest" href='data:application/json,%7B%22name%22%3A%22%E6%98%9F%E4%B9%8B%E6%A3%8B%22%2C%22short_name%22%3A%22%E6%98%9F%E4%B9%8B%E6%A3%8B%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2305051a%22%2C%22theme_color%22%3A%22%2305051a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data:image/svg+xml,%253Csvg%2520xmlns%253D%2527http%253A//www.w3.org/2000/svg%2527%2520viewBox%253D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%253D%2527100%2527%2520height%253D%2527100%2527%2520rx%253D%252720%2527%2520fill%253D%2527%252305051a%2527/%253E%253Cpath%2520d%253D%2527M50%252015%2520L61%252038%2520L86%252040%2520L67%252056%2520L73%252081%2520L50%252067%2520L27%252081%2520L33%252056%2520L14%252040%2520L39%252038%2520Z%2527%2520fill%253D%2527%25234dd0e1%2527/%253E%253C/svg%3E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image/svg+xml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D'>
+<title>星之棋 v6.21.0 · 蒼穹星宮篇</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2305051a'/%3E%3Cpath d='M50 15 L61 38 L86 40 L67 56 L73 81 L50 67 L27 81 L33 56 L14 40 L39 38 Z' fill='%234dd0e1'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<style id="snakes-ui">
+/* 星梯蛇陣（蛇梯棋）棋盤 UI：只影響顯示，不動規則 */
+body.snakes-mode #board,
+body.snakes-mode #boardViewport { display:none !important; }
+body.snakes-mode .board-box { align-items:center; justify-content:center; }
+
+.snakes-panel{
+  display:flex; gap:18px; align-items:center; justify-content:center;
+  width:100%; max-width:660px; margin:0 auto; padding:16px;
+  background:linear-gradient(160deg,rgba(22,28,64,.72),rgba(10,14,38,.86));
+  border:1px solid rgba(125,211,252,.22); border-radius:20px;
+  box-shadow:0 18px 48px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.snakes-board{
+  display:grid; grid-template-columns:repeat(10,1fr); grid-template-rows:repeat(10,1fr);
+  gap:3px; flex:1 1 auto; width:100%; max-width:452px; aspect-ratio:1/1;
+  background:rgba(6,10,30,.55); border:1px solid rgba(125,211,252,.18);
+  border-radius:14px; padding:8px; box-shadow:inset 0 0 24px rgba(56,189,248,.08);
+}
+.sn-cell{
+  position:relative; display:flex; align-items:flex-start; justify-content:flex-start;
+  border-radius:6px; background:rgba(36,48,92,.55); font-size:.66rem; line-height:1;
+  color:#cfd8e8; padding:3px; font-variant-numeric:tabular-nums;
+  transition:background .16s ease, transform .16s ease, box-shadow .16s ease;
+}
+.sn-cell:hover{ transform:translateY(-1px); box-shadow:0 4px 10px rgba(0,0,0,.35); }
+.sn-cell.sn-lad{ background:linear-gradient(160deg,rgba(16,185,129,.30),rgba(16,185,129,.12)); color:#d8ffe9; }
+.sn-cell.sn-snk{ background:linear-gradient(160deg,rgba(244,63,94,.26),rgba(244,63,94,.10)); color:#ffe2e6; }
+.sn-cell.sn-goal{ background:linear-gradient(160deg,rgba(251,191,36,.42),rgba(251,191,36,.16)); color:#fff7d8; font-weight:800; }
+.sn-num{ opacity:.72; }
+.sn-cell.sn-lad .sn-num, .sn-cell.sn-snk .sn-num{ opacity:.9; }
+.sn-cell.sn-lad::after{ content:"▲"; position:absolute; right:3px; bottom:2px; font-size:.54rem; color:#34d399; opacity:.95; }
+.sn-cell.sn-snk::after{ content:"▼"; position:absolute; right:3px; bottom:2px; font-size:.54rem; color:#fb7185; opacity:.95; }
+.sn-token{
+  position:absolute; left:50%; bottom:4px; transform:translateX(-50%);
+  width:13px; height:13px; border-radius:50%;
+  box-shadow:0 0 0 1px rgba(255,255,255,.55), 0 0 10px currentColor;
+}
+.sn-token.p1c{ background:#fde047; color:#fde047; }
+.sn-token.p2c{ background:#38bdf8; color:#38bdf8; }
+.sn-cell.sn-both .sn-token.p1c{ left:calc(50% - 9px); transform:none; }
+.sn-cell.sn-both .sn-token.p2c{ left:calc(50% + 9px); transform:none; }
+.snakes-side{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:12px; min-width:128px;
+}
+.snakes-dice{
+  width:64px; height:64px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+  font-size:1.85rem; font-weight:900; color:#fff; font-variant-numeric:tabular-nums;
+  background:linear-gradient(150deg,#22306a,#151d45);
+  border:1px solid rgba(125,211,252,.35);
+  box-shadow:0 8px 20px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.snakes-dice:empty{ color:rgba(255,255,255,.45); }
+.snakes-msg{
+  font-size:.76rem; color:#dbeafe; text-align:center; min-height:1.2em; max-width:132px;
+  padding:4px 10px; border-radius:999px; background:rgba(56,189,248,.12);
+  border:1px solid rgba(125,211,252,.2);
+}
+.snakes-msg:empty{ background:transparent; border-color:transparent; }
+#snakesRoll{ min-width:112px; letter-spacing:.06em; }
+@media (max-width:760px){
+  .snakes-panel{ flex-direction:column; padding:12px; gap:12px; }
+  .snakes-board{ max-width:min(92vw,452px); }
+  .snakes-side{ flex-direction:row; min-width:0; gap:14px; }
+  .sn-cell{ font-size:.58rem; }
+}
+</style>
+</head>
+<body class="hide-elo">
+<canvas id="starfield"></canvas>
+<div class="nebula n1"></div>
+<div class="nebula n2"></div>
+
+
+<div class="lang-switch" id="langSwitch">
+<button class="lang-btn" data-lang="en" type="button">EN</button>
+<button class="lang-btn" data-lang="zh-Hant" type="button">繁</button>
+<button class="lang-btn" data-lang="zh-Hans" type="button">简</button>
+<button class="lang-btn" data-lang="ja" type="button">日</button>
+</div>
+
+<button class="bgm-toggle" id="btnBgmToggle" type="button" title="Cosmic BGM"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span></button>
+<button class="sound-toggle" id="btnSound" type="button" title="音效"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></span></button>
+
+<div class="screen">
+
+
+<div class="view active" id="view-menu">
+<div class="hero">
+<svg class="spark spark-top" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z"/></svg>
+<h1 class="logo" data-i18n="logo">星之棋</h1>
+<svg class="spark spark-bottom" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z"/></svg>
+</div>
+<p class="tagline" data-i18n="tagline">穿越星海 · 弈于苍穹</p>
+
+<div class="menu-actions">
+<button class="q-btn hidden" id="btnContinue" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></span> <span data-i18n="continueGame">繼續對局</span></button>
+<button class="q-btn secondary-menu-btn" id="btnAchievements" type="button"><span class="ic ic-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></span> <span data-i18n="achievements">成就</span></button>
+<button class="q-btn" id="btnStarShop" type="button"><span class="ic ic-gold"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l1.65 3.35 3.7.54-2.68 2.61.63 3.68L12 14.94l-3.3 1.74.63-3.68-2.68-2.61 3.7-.54L12 6.5z"/></svg></span> <span data-i18n="starShop">星幣工坊</span></button>
+<button class="q-btn secondary-menu-btn" id="btnTheme" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1" fill="currentColor"/><circle cx="17.5" cy="10.5" r="1" fill="currentColor"/><circle cx="8.5" cy="7.5" r="1" fill="currentColor"/><circle cx="6.5" cy="12.5" r="1" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.6-.7 1.6-1.6 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7h2c3 0 5.5-2.5 5.5-5.5C22 6.5 17.5 2 12 2z"/></svg></span> <span data-i18n="theme">主題</span></button>
+<button class="q-btn secondary-menu-btn" id="btnRecords" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/></svg></span> <span data-i18n="recentGames">最近對局</span></button>
+<button class="q-btn secondary-menu-btn" id="btnStats" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-4 3 3 5-6"/></svg></span> <span data-i18n="statistics">統計</span></button>
+<button class="q-btn" id="btnDaily" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> <span data-i18n="dailyChallenge">每日挑戰</span><span class="daily-badge" id="dailyStreakBadge"></span></button>
+<button class="q-btn" id="btnSettings" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> <span data-i18n="settings">設定</span></button>
+<button class="q-btn secondary-menu-btn" id="btnDataMgmt" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span> <span data-i18n="dataMgmt">資料管理</span></button>
+<button class="q-btn secondary-menu-btn" id="btnTournament" type="button"><span class="ic ic-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v6a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1"/><path d="M17 6h3a2 2 0 0 1-2 4h-1"/></svg></span> <span data-i18n="tournament">錦標賽</span></button>
+<button class="q-btn" id="btnOdyssey" type="button"><span class="ic ic-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.8 5.5 21 7.5 13.5 2 9 9 9 12 2"/></svg></span> <span data-i18n="starOdyssey">星海遠征</span></button>
+<button class="q-btn" id="btnAllTutorials" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span> <span data-i18n="allTutorials">全棋種教學</span></button>
+<button class="q-btn secondary-menu-btn" id="btnQuests" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span> <span data-i18n="starQuests">星辰任務</span></button>
+<button class="q-btn menu-hub-toggle" id="btnMenuMoreToggle" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span> <span id="txtMenuMoreToggle" data-i18n="moreHub">更多功能</span></button>
+</div>
+
+
+<div class="hero-rank-bar" id="heroRankBar">
+<div class="hrb-left">
+<div class="hrb-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+<div class="hrb-info">
+<div class="hrb-title"><span id="hrbRankTitle">新星棋手</span><span class="hrb-elo" id="hrbEloVal">ELO 1000</span></div>
+<div class="hrb-sub" id="hrbSubText">完成每日任務與遠征，點亮蒼穹星圖</div>
+</div>
+</div>
+<div class="hrb-right">
+<button class="coin-pill-bar" id="btnHeroCoin" type="button" title="Star Coins"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l1.65 3.35 3.7.54-2.68 2.61.63 3.68L12 14.94l-3.3 1.74.63-3.68-2.68-2.61 3.7-.54L12 6.5z"/></svg><span id="hrbCoinVal">0</span></button>
+<button class="hrb-pill" id="btnOpenBook" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span data-i18n="openingBook">開局百科</span></button>
+<button class="hrb-pill nexus-hero-btn" id="btnAstralNexusHub" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span id="lblAstralNexusBtn">星樞聖殿 v6.21.0</span></button>
+</div>
+</div>
+
+
+<div class="menu-cat-tabs v616-cat-tabs" id="menuCatTabs">
+<button class="cat-tab" data-cat="line" type="button" data-i18n="catLineTab">連線 (10)</button>
+<button class="cat-tab" data-cat="territory" type="button" data-i18n="catTerritoryTab">占地 (5)</button>
+<button class="cat-tab" data-cat="capture" type="button" data-i18n="catCaptureTab">吃子 (6)</button>
+<button class="cat-tab" data-cat="strategy" type="button" data-i18n="catStrategyTab">策略 (5)</button>
+<button class="cat-tab cat-fav-star" data-cat="fav" type="button"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:3px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span data-i18n="catFavShort">收藏</span></button>
+<button class="cat-tab active" data-cat="all" type="button" data-i18n="catAll">全部</button>
+</div>
+
+<div class="menu-filter-bar">
+<div class="menu-search-wrap">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+<input type="search" id="gameSearchInput" class="menu-search-inp" placeholder="搜尋 26 種星海棋藝..." aria-label="Search games">
+</div>
+<div class="v616-cols-seg" id="gridColsSeg" role="group" aria-label="排列模式切換">
+<button type="button" class="menu-view-btn col-mode-btn" id="btnGridCol1" data-cols="1" title="單個一排 (1列)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>
+<span data-i18n="colMode1">單個一排</span>
+</button>
+<button type="button" class="menu-view-btn col-mode-btn is-on" id="btnGridToggle" data-cols="2" title="兩個一排 (2列)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+<span data-i18n="gridView">雙欄</span>
+</button>
+<button type="button" class="menu-view-btn col-mode-btn" id="btnGridCol3" data-cols="3" title="三個一排 (3列)">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="5" rx="0.8"/><rect x="9.5" y="3" width="5" height="5" rx="0.8"/><rect x="16" y="3" width="5" height="5" rx="0.8"/><rect x="3" y="9.5" width="5" height="5" rx="0.8"/><rect x="9.5" y="9.5" width="5" height="5" rx="0.8"/><rect x="16" y="9.5" width="5" height="5" rx="0.8"/><rect x="3" y="16" width="5" height="5" rx="0.8"/><rect x="9.5" y="16" width="5" height="5" rx="0.8"/><rect x="16" y="16" width="5" height="5" rx="0.8"/></svg>
+<span data-i18n="colMode3">三個一排</span>
+</button>
+</div>
+</div>
+
+<div class="v616-share-bar">
+<div class="v616-share-inp-wrap">
+<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#4dd0e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+<input type="text" id="menuShareCodeInput" class="v616-share-inp" placeholder="輸入 8–12 位分享短碼 (如 Kx9mP2aQ)..." aria-label="Share code">
+</div>
+<button type="button" class="mini-btn is-on" id="btnMenuLoadShareCode"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg></span><span data-i18n="loadShareCodeBtn">載入局面</span></button>
+<button type="button" class="mini-btn" id="btnMenuOpenPuzzles290" style="border-color:rgba(255,215,0,.45);color:#ffd700"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span data-i18n="openPuzzles290Btn">謎題題庫 (290題)</span></button>
+</div>
+<div class="card-list grid-2col" id="gameCardList">
+<div id="menuEmptyState" class="menu-empty-state hidden" data-i18n="menuEmptyState">此分類暫無棋藝</div>
+<button type="button" class="game-card" data-game="ttt">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="26" y1="8" x2="26" y2="56"/><line x1="38" y1="8" x2="38" y2="56"/>
+<line x1="8" y1="26" x2="56" y2="26"/><line x1="8" y1="38" x2="56" y2="38"/>
+<line x1="13" y1="13" x2="21" y2="21"/><line x1="21" y1="13" x2="13" y2="21"/>
+<circle cx="32" cy="17" r="5"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.ttt">井字棋</div><div class="gc-desc" data-i18n="desc.ttt">三子连线 · 九宫星阵</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="c4">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<circle cx="17" cy="17" r="4" fill="currentColor" opacity="0.6"/>
+<circle cx="29" cy="17" r="4" fill="currentColor" opacity="0.3"/>
+<circle cx="41" cy="17" r="4" fill="currentColor" opacity="0.6"/>
+<circle cx="53" cy="17" r="4" fill="currentColor" opacity="0.3"/>
+<circle cx="17" cy="29" r="4" fill="currentColor" opacity="0.3"/>
+<circle cx="29" cy="29" r="4" fill="currentColor" opacity="0.6"/>
+<circle cx="41" cy="29" r="4" fill="currentColor" opacity="0.3"/>
+<circle cx="17" cy="41" r="4" fill="currentColor" opacity="0.6"/>
+<circle cx="29" cy="41" r="4" fill="currentColor" opacity="0.3"/>
+<circle cx="17" cy="53" r="4" fill="currentColor" opacity="0.3"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.c4">四子棋</div><div class="gc-desc" data-i18n="desc.c4">星落连珠 · 四连制胜</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="gomoku">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="16" y1="16" x2="48" y2="16"/><line x1="16" y1="24" x2="48" y2="24"/>
+<line x1="16" y1="32" x2="48" y2="32"/><line x1="16" y1="40" x2="48" y2="40"/>
+<line x1="16" y1="48" x2="48" y2="48"/>
+<line x1="16" y1="16" x2="16" y2="48"/><line x1="24" y1="16" x2="24" y2="48"/>
+<line x1="32" y1="16" x2="32" y2="48"/><line x1="40" y1="16" x2="40" y2="48"/>
+<line x1="48" y1="16" x2="48" y2="48"/>
+<circle cx="24" cy="24" r="3.5" fill="currentColor"/>
+<circle cx="32" cy="24" r="3.5" fill="currentColor" opacity="0.4"/>
+<circle cx="40" cy="24" r="3.5" fill="currentColor"/>
+<circle cx="32" cy="32" r="3.5" fill="currentColor"/>
+<circle cx="40" cy="32" r="3.5" fill="currentColor" opacity="0.4"/>
+<circle cx="40" cy="40" r="3.5" fill="currentColor"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.gomoku">五子棋</div><div class="gc-desc" data-i18n="desc.gomoku">星罗棋布 · 五子连珠</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="c6">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="14" y1="14" x2="50" y2="14"/><line x1="14" y1="22" x2="50" y2="22"/>
+<line x1="14" y1="30" x2="50" y2="30"/><line x1="14" y1="38" x2="50" y2="38"/>
+<line x1="14" y1="46" x2="50" y2="46"/><line x1="14" y1="54" x2="50" y2="54"/>
+<line x1="14" y1="14" x2="14" y2="54"/><line x1="22" y1="14" x2="22" y2="54"/>
+<line x1="30" y1="14" x2="30" y2="54"/><line x1="38" y1="14" x2="38" y2="54"/>
+<line x1="46" y1="14" x2="46" y2="54"/><line x1="54" y1="14" x2="54" y2="54"/>
+<circle cx="22" cy="22" r="3" fill="currentColor"/>
+<circle cx="30" cy="22" r="3" fill="currentColor" opacity="0.4"/>
+<circle cx="38" cy="22" r="3" fill="currentColor"/>
+<circle cx="30" cy="30" r="3" fill="currentColor"/>
+<circle cx="38" cy="30" r="3" fill="currentColor" opacity="0.4"/>
+<circle cx="38" cy="38" r="3" fill="currentColor"/>
+<text x="46" y="50" font-size="10" fill="currentColor" stroke="none" font-weight="bold">6</text>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.c6">六子棋</div><div class="gc-desc" data-i18n="desc.c6">双星连落 · 六子连城</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="checkers">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<rect x="8" y="8" width="12" height="12" fill="currentColor" opacity="0.2"/>
+<rect x="32" y="8" width="12" height="12" fill="currentColor" opacity="0.2"/>
+<rect x="20" y="20" width="12" height="12" fill="currentColor" opacity="0.2"/>
+<rect x="44" y="20" width="12" height="12" fill="currentColor" opacity="0.2"/>
+<rect x="8" y="32" width="12" height="12" fill="currentColor" opacity="0.2"/>
+<rect x="32" y="32" width="12" height="12" fill="currentColor" opacity="0.2"/>
+<rect x="20" y="44" width="12" height="12" fill="currentColor" opacity="0.2"/>
+<rect x="44" y="44" width="12" height="12" fill="currentColor" opacity="0.2"/>
+<circle cx="14" cy="14" r="4" fill="currentColor"/>
+<circle cx="38" cy="14" r="4" fill="currentColor"/>
+<circle cx="26" cy="50" r="4" fill="currentColor" opacity="0.5"/>
+<circle cx="50" cy="26" r="4" fill="currentColor" opacity="0.5"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.checkers">跳棋</div><div class="gc-desc" data-i18n="desc.checkers">星轨跃迁 · 连跳抵岸</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="go">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="16" y1="16" x2="48" y2="16"/><line x1="16" y1="27" x2="48" y2="27"/>
+<line x1="16" y1="38" x2="48" y2="38"/><line x1="16" y1="49" x2="48" y2="49"/>
+<line x1="16" y1="16" x2="16" y2="49"/><line x1="27" y1="16" x2="27" y2="49"/>
+<line x1="38" y1="16" x2="38" y2="49"/><line x1="49" y1="16" x2="49" y2="49"/>
+<circle cx="27" cy="27" r="5" fill="currentColor"/>
+<circle cx="38" cy="27" r="5" fill="none" stroke="currentColor" stroke-width="2.5"/>
+<circle cx="27" cy="38" r="5" fill="none" stroke="currentColor" stroke-width="2.5"/>
+<circle cx="38" cy="38" r="5" fill="currentColor"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.go">围棋</div><div class="gc-desc" data-i18n="desc.go">气吞星河 · 围地争胜</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="jungle">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<circle cx="32" cy="28" r="10"/>
+<circle cx="28" cy="26" r="1.5" fill="currentColor"/>
+<circle cx="36" cy="26" r="1.5" fill="currentColor"/>
+<path d="M28 32 Q32 35 36 32"/>
+<path d="M22 20 L20 14 M42 20 L44 14"/>
+<path d="M24 44 L20 52 M40 44 L44 52 M32 46 L32 54"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.jungle">斗兽棋</div><div class="gc-desc" data-i18n="desc.jungle">丛林星兽 · 等级争锋</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="chess">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<path d="M32 16 L32 22 M28 18 L36 18"/>
+<path d="M24 28 Q32 24 40 28 L38 36 L26 36 Z"/>
+<path d="M24 36 L40 36 L38 44 L26 44 Z"/>
+<path d="M22 44 L42 44 L40 50 L24 50 Z"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.chess">国际象棋</div><div class="gc-desc" data-i18n="desc.chess">星辰王座 · 将杀对决</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="reversi">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="16" y1="16" x2="48" y2="16"/><line x1="16" y1="27" x2="48" y2="27"/>
+<line x1="16" y1="38" x2="48" y2="38"/><line x1="16" y1="49" x2="48" y2="49"/>
+<line x1="16" y1="16" x2="16" y2="49"/><line x1="27" y1="16" x2="27" y2="49"/>
+<line x1="38" y1="16" x2="38" y2="49"/><line x1="49" y1="16" x2="49" y2="49"/>
+<circle cx="27" cy="27" r="5" fill="currentColor"/>
+<circle cx="38" cy="27" r="5" fill="none" stroke="currentColor" stroke-width="2.5"/>
+<circle cx="27" cy="38" r="5" fill="none" stroke="currentColor" stroke-width="2.5"/>
+<circle cx="38" cy="38" r="5" fill="currentColor"/>
+<path d="M16 49 A16 16 0 0 1 48 49" fill="currentColor" opacity="0.3"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.reversi">黑白棋</div><div class="gc-desc" data-i18n="desc.reversi">翻转星辰 · 占角制胜</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="xiangqi">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="8" y1="32" x2="56" y2="32" stroke-dasharray="3 3"/>
+<line x1="24" y1="8" x2="40" y2="24"/><line x1="40" y1="8" x2="24" y2="24"/>
+<line x1="24" y1="40" x2="40" y2="56"/><line x1="40" y1="40" x2="24" y2="56"/>
+<circle cx="32" cy="18" r="6" fill="currentColor" opacity="0.25"/>
+<circle cx="32" cy="46" r="6" fill="currentColor" opacity="0.25"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.xiangqi">中國象棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.xiangqi">楚河漢界 · 車馬縱橫</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="draughts">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<circle cx="22" cy="44" r="6" fill="currentColor"/>
+<circle cx="34" cy="32" r="6" stroke-dasharray="3 2"/>
+<path d="M25 40 Q32 24 44 20" stroke-width="2.4" stroke-linecap="round"/>
+<polygon points="44 17 48 22 41 23" fill="currentColor"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.draughts">國際跳棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.draughts">斜線連跳 · 加冕星王</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="hex">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+<polygon points="32,10 42,16 42,28 32,34 22,28 22,16" fill="currentColor" opacity="0.35"/>
+<polygon points="22,28 32,34 32,46 22,52 12,46 12,34"/>
+<polygon points="42,28 52,34 52,46 42,52 32,46 32,34" fill="currentColor" opacity="0.65"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.hex">六角星連棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.hex">星橋貫通 · 雙境相連</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="pente">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="16" y1="32" x2="48" y2="32" stroke-dasharray="2 3"/>
+<circle cx="16" cy="32" r="5" fill="currentColor"/>
+<circle cx="27" cy="32" r="4.5" stroke-width="2"/>
+<circle cx="37" cy="32" r="4.5" stroke-width="2"/>
+<circle cx="48" cy="32" r="5" fill="currentColor"/>
+<path d="M24 22 L32 16 L40 22" stroke-width="2"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.pente">星際夾擊棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.pente">五連或雙夾 · 提滿五對勝</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="dots">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<rect x="18" y="18" width="14" height="14" fill="currentColor" opacity="0.35"/>
+<line x1="32" y1="18" x2="46" y2="18"/><line x1="46" y1="18" x2="46" y2="32"/>
+<line x1="18" y1="32" x2="18" y2="46"/><line x1="18" y1="46" x2="32" y2="46"/>
+<circle cx="18" cy="18" r="2.6" fill="currentColor"/><circle cx="32" cy="18" r="2.6" fill="currentColor"/><circle cx="46" cy="18" r="2.6" fill="currentColor"/>
+<circle cx="18" cy="32" r="2.6" fill="currentColor"/><circle cx="32" cy="32" r="2.6" fill="currentColor"/><circle cx="46" cy="32" r="2.6" fill="currentColor"/>
+<circle cx="18" cy="46" r="2.6" fill="currentColor"/><circle cx="32" cy="46" r="2.6" fill="currentColor"/><circle cx="46" cy="46" r="2.6" fill="currentColor"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.dots">星陣點格棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.dots">星軌連線 · 封格連擊</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="morris">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="3"/>
+<rect x="18" y="18" width="28" height="28" rx="2"/>
+<rect x="27" y="27" width="10" height="10" rx="1"/>
+<line x1="32" y1="8" x2="32" y2="27"/><line x1="32" y1="37" x2="32" y2="56"/>
+<line x1="8" y1="32" x2="27" y2="32"/><line x1="37" y1="32" x2="56" y2="32"/>
+<circle cx="8" cy="8" r="3" fill="currentColor"/><circle cx="32" cy="8" r="3" fill="currentColor"/><circle cx="56" cy="8" r="3" fill="currentColor"/>
+<circle cx="18" cy="32" r="3" fill="currentColor"/><circle cx="46" cy="32" r="3" fill="currentColor"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.morris">九子直棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.morris">三環星宮 · 成三提子</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="mancala">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="6" y="16" width="52" height="32" rx="14"/>
+<rect x="10" y="21" width="7" height="22" rx="3.5" fill="currentColor" opacity="0.35"/>
+<rect x="47" y="21" width="7" height="22" rx="3.5" fill="currentColor" opacity="0.35"/>
+<circle cx="23" cy="25" r="3.2"/><circle cx="32" cy="25" r="3.2"/><circle cx="41" cy="25" r="3.2"/>
+<circle cx="23" cy="39" r="3.2" fill="currentColor"/><circle cx="32" cy="39" r="3.2" fill="currentColor"/><circle cx="41" cy="39" r="3.2" fill="currentColor"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.mancala">星際播種棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.mancala">星坑流轉 · 入庫連擊</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="ataxx">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<circle cx="22" cy="22" r="5" fill="currentColor"/>
+<circle cx="42" cy="22" r="5" fill="currentColor" opacity="0.35"/>
+<circle cx="22" cy="42" r="5" fill="currentColor" opacity="0.35"/>
+<circle cx="32" cy="32" r="6" fill="currentColor"/>
+<path d="M26 26 L30 30 M38 26 L34 30 M26 38 L30 34" stroke-width="2"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.ataxx">星際同化棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.ataxx">分裂躍遷 · 鄰格同化</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="breakthrough">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="8" y1="18" x2="56" y2="18" stroke-dasharray="3 3"/>
+<polygon points="32,16 39,28 25,28" fill="currentColor"/>
+<polygon points="20,34 26,44 14,44" fill="currentColor" opacity="0.45"/>
+<polygon points="44,34 50,44 38,44" fill="currentColor" opacity="0.45"/>
+<path d="M32 30 L32 48" stroke-width="2.5"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.breakthrough">星際突破棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.breakthrough">星艦衝鋒 · 破陣達底</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="qubic">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="18,12 52,12 44,24 10,24" fill="currentColor" opacity="0.22"/>
+<polygon points="18,26 52,26 44,38 10,38" fill="currentColor" opacity="0.38"/>
+<polygon points="18,40 52,40 44,52 10,52" fill="currentColor" opacity="0.55"/>
+<line x1="31" y1="14" x2="31" y2="50" stroke-dasharray="2 2"/>
+<circle cx="31" cy="18" r="2.8" fill="currentColor"/>
+<circle cx="31" cy="32" r="2.8" fill="currentColor"/>
+<circle cx="31" cy="46" r="2.8" fill="currentColor"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.qubic">井字棋 3D</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.qubic">4×4×4 三維立體四連星陣</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="uttt">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="24" y1="8" x2="24" y2="56"/><line x1="40" y1="8" x2="40" y2="56"/>
+<line x1="8" y1="24" x2="56" y2="24"/><line x1="8" y1="40" x2="56" y2="40"/>
+<rect x="25.5" y="25.5" width="13" height="13" fill="currentColor" opacity="0.28"/>
+<line x1="12" y1="12" x2="20" y2="20"/><line x1="20" y1="12" x2="12" y2="20"/>
+<circle cx="48" cy="48" r="4.5"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.uttt">終極井字棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.uttt">九宮大棋盤 · 連動鎖定智鬥</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="banqi">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="12" width="48" height="40" rx="4"/>
+<line x1="8" y1="32" x2="56" y2="32"/>
+<line x1="24" y1="12" x2="24" y2="52"/><line x1="40" y1="12" x2="40" y2="52"/>
+<circle cx="16" cy="22" r="5.5" fill="currentColor" opacity="0.45"/>
+<circle cx="32" cy="22" r="5.5"/>
+<path d="M30 20 L34 24 M34 20 L30 24"/>
+<circle cx="48" cy="42" r="5.5" fill="currentColor"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.banqi">象棋暗棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.banqi">4×8 翻牌盲戰 · 炮打隔山</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="shogi">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="32,10 48,20 44,52 20,52 16,20" fill="currentColor" opacity="0.22"/>
+<polygon points="32,10 48,20 44,52 20,52 16,20"/>
+<line x1="25" y1="26" x2="39" y2="26"/>
+<line x1="32" y1="26" x2="32" y2="43"/>
+<line x1="26" y1="34" x2="38" y2="34"/>
+<line x1="23" y1="43" x2="41" y2="43"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.shogi">日本將棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.shogi">9×9 持駒打入 · 敵陣升變</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="loa">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<circle cx="18" cy="18" r="4.5" fill="currentColor"/>
+<circle cx="46" cy="18" r="4.5" fill="currentColor" opacity="0.45"/>
+<circle cx="32" cy="32" r="5.5" fill="currentColor"/>
+<circle cx="20" cy="46" r="4.5" fill="currentColor"/>
+<circle cx="44" cy="44" r="4.5" fill="currentColor"/>
+<line x1="18" y1="18" x2="32" y2="32"/><line x1="20" y1="46" x2="32" y2="32"/><line x1="44" y1="44" x2="32" y2="32"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.loa">側線棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.loa">依線子數躍遷 · 全子連通獲勝</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="yavalath">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="32,8 54,20 54,44 32,56 10,44 10,20"/>
+<circle cx="18" cy="32" r="3.8" fill="currentColor"/>
+<circle cx="27" cy="32" r="3.8" fill="currentColor"/>
+<circle cx="36" cy="32" r="3.8" fill="currentColor"/>
+<circle cx="45" cy="32" r="3.8" fill="currentColor"/>
+<path d="M26 18 L38 24 M38 18 L26 24" stroke-width="2"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.yavalath">災難棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.yavalath">連四致勝 · 連三自爆的雙刃對決</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="amazons">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<polygon points="16,46 20,32 26,38 32,28 38,38 44,32 48,46" fill="currentColor" opacity="0.35"/>
+<line x1="20" y1="22" x2="46" y2="14"/>
+<polyline points="38,12 46,14 43,22"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name"><span data-i18n="name.amazons">亞馬遜棋</span><span class="gc-badge">NEW</span></div><div class="gc-desc" data-i18n="desc.amazons">女武神奔襲 · 星箭封鎖領地</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="snakes">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<line x1="8" y1="20" x2="56" y2="20"/><line x1="8" y1="32" x2="56" y2="32"/><line x1="8" y1="44" x2="56" y2="44"/>
+<line x1="20" y1="8" x2="20" y2="56"/><line x1="32" y1="8" x2="32" y2="56"/><line x1="44" y1="8" x2="44" y2="56"/>
+<line x1="13" y1="51" x2="51" y2="13" stroke-width="2.6"/>
+<path d="M13 13 C 22 22, 14 30, 24 38 S 34 50, 48 51" stroke-width="2.6"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.snakes">星梯蛇陣</div><div class="gc-desc" data-i18n="desc.snakes">擲骰競速 · 登梯避蛇搶先抵終點</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+</div>
+
+<p class="foot-hint" data-i18n="footHint">选择一种棋艺，开启星空对决</p>
+<p class="version-tag">v6.21.0 · 蒼穹星宮篇</p>
+</div>
+
+
+<div class="view" id="view-mode">
+<button class="top-back" id="btnModeBack" type="button" data-i18n="back">← 返回</button>
+<h2 class="view-title"><span id="modeGameName"></span><span data-i18n="modeTitleSuffix"> · 选择模式</span></h2>
+<div class="custom-row hidden" id="chess960Row">
+<label class="toggle-line">
+<span data-i18n="chess960">Chess960</span>
+<span class="toggle-desc" data-i18n="chess960Desc">Fischer Random · shuffled back rank</span>
+<input type="checkbox" id="chk960">
+</label>
+<button class="mini-btn" id="btnShuffle960" type="button" data-i18n="shuffle">重新洗牌</button>
+</div>
+<div class="select-cards">
+<button type="button" class="select-card" data-mode="ai">
+<svg class="sc-ico" viewBox="0 0 60 60">
+<ellipse cx="30" cy="30" rx="24" ry="10" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(-20 30 30)"/>
+<circle cx="30" cy="30" r="11" fill="currentColor"/>
+<circle cx="48" cy="18" r="3.5" class="c-p2"/>
+</svg>
+<div class="sc-name" data-i18n="modeAI">人机对战</div>
+<div class="sc-desc" data-i18n="modeAIdesc">挑战星海AI · 你执先手</div>
+</button>
+<button type="button" class="select-card" data-mode="pvp">
+<svg class="sc-ico" viewBox="0 0 60 60">
+<circle cx="23" cy="32" r="11" fill="currentColor"/>
+<circle cx="39" cy="32" r="11" class="c-p2"/>
+</svg>
+<div class="sc-name" data-i18n="modePVP">双人对战</div>
+<div class="sc-desc" data-i18n="modePVPdesc">同屏对弈 · 轮流落子</div>
+</button>
+<button type="button" class="select-card" data-mode="spectate">
+<svg class="sc-ico" viewBox="0 0 60 60">
+<ellipse cx="30" cy="30" rx="22" ry="14" fill="none" stroke="#ffd700" stroke-width="1.5"/>
+<circle cx="30" cy="30" r="5" fill="#ffd700"/>
+<path d="M30 8 L32 14 L38 14 L33 18 L35 24 L30 20 L25 24 L27 18 L22 14 L28 14 Z" fill="#ffd700"/>
+</svg>
+<div class="sc-name" data-i18n="modeSpectate">AI 觀戰</div>
+<div class="sc-desc" data-i18n="modeSpectatedesc">雙 AI 對弈 · 自動觀賞</div>
+</button>
+</div>
+<button class="rule-btn" id="btnRules" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span data-i18n="rules">規則說明</span></button>
+
+
+<div class="quest-entry" id="questEntry">
+<div class="qe-head-row">
+<div class="qe-game-badge">
+<div class="qe-game-ico" id="qeGameIco"></div>
+<div>
+<div class="qe-title-txt"><span id="qeGameTitle">井字棋</span> · <span data-i18n="questModeTitle">星海闖關模式</span></div>
+<div class="qe-sub-txt" id="qeGameSub" data-i18n="questModeSub">挑戰漸進式星域關卡與特殊法則試煉，收集三星榮耀</div>
+</div>
+</div>
+<div class="qe-progress" style="margin:0;font-weight:800;white-space:nowrap"><span class="qe-star">★</span> <span id="qeCleared">0</span> / <span id="qeTotal">90</span></div>
+</div>
+<div class="qe-mini" id="qeMini" aria-hidden="true">
+<i></i><i class="x"></i><i></i>
+<i></i><i class="o"></i><i></i>
+<i></i><i class="x"></i><i></i>
+</div>
+<div class="qe-btns">
+<button class="qe-btn qe-main" id="btnQuestMain" type="button" data-i18n="questStart">開始闖關</button>
+<button class="qe-btn" id="btnQuestVar" type="button" data-i18n="questVariants">特殊規則關</button>
+</div>
+</div>
+<div style="display:flex;justify-content:center;margin:24px 0 10px;width:100%">
+<button class="r-btn r-menu" id="btnModeBottomBack" type="button" data-i18n="back" style="max-width:240px">← 返回</button>
+</div>
+</div>
+
+
+<div class="view" id="view-diff">
+<button class="top-back" id="btnDiffBack" type="button" data-i18n="back">← 返回</button>
+<h2 class="view-title"><span id="diffGameName"></span><span data-i18n="diffTitleSuffix"> · 选择难度</span></h2>
+<div class="select-cards three diff-ladder">
+<button type="button" class="select-card diff-card" data-diff="moon-">
+<div class="diff-planet-slot" data-diff-planet="moon"></div>
+<svg class="diff-ico c-easy" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M12 24 L20 15 L28 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="moonMinus">月球-</div>
+<div class="sc-desc" data-i18n="moonMinusDesc">隨機落子 · 輕鬆入門</div>
+<div class="diff-dots"><i></i></div>
+</button>
+<button type="button" class="select-card diff-card" data-diff="moon">
+<div class="diff-planet-slot" data-diff-planet="moon"></div>
+<svg class="diff-ico c-easy" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M12 24 L20 15 L28 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="moon">月球</div>
+<div class="sc-desc" data-i18n="moonDesc">隨機為主 · 新手友好</div>
+<div class="diff-dots"><i></i></div>
+</button>
+<button type="button" class="select-card diff-card" data-diff="moon+">
+<div class="diff-planet-slot" data-diff-planet="moon"></div>
+<svg class="diff-ico c-easy" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M12 24 L20 15 L28 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="moonPlus">月球+</div>
+<div class="sc-desc" data-i18n="moonPlusDesc">偶爾進攻 · 略懂規則</div>
+<div class="diff-dots"><i></i><i></i></div>
+</button>
+<button type="button" class="select-card diff-card" data-diff="earth-">
+<div class="diff-planet-slot" data-diff-planet="earth"></div>
+<svg class="diff-ico c-normal" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M20 11 L29 20 L20 29 L11 20 Z" fill="none" stroke-width="2.5" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="earthMinus">地球-</div>
+<div class="sc-desc" data-i18n="earthMinusDesc">簡單貪心 · 初級挑戰</div>
+<div class="diff-dots"><i></i><i></i></div>
+</button>
+<button type="button" class="select-card diff-card" data-diff="earth">
+<div class="diff-planet-slot" data-diff-planet="earth"></div>
+<svg class="diff-ico c-normal" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M20 11 L29 20 L20 29 L11 20 Z" fill="none" stroke-width="2.5" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="earth">地球</div>
+<div class="sc-desc" data-i18n="earthDesc">貪心策略 · 有一定挑戰</div>
+<div class="diff-dots"><i></i><i></i></div>
+</button>
+<button type="button" class="select-card diff-card" data-diff="earth+">
+<div class="diff-planet-slot" data-diff-planet="earth"></div>
+<svg class="diff-ico c-normal" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M20 11 L29 20 L20 29 L11 20 Z" fill="none" stroke-width="2.5" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="earthPlus">地球+</div>
+<div class="sc-desc" data-i18n="earthPlusDesc">會算兩步 · 中級對手</div>
+<div class="diff-dots"><i></i><i></i><i></i></div>
+</button>
+<button type="button" class="select-card diff-card" data-diff="sun-">
+<div class="diff-planet-slot" data-diff-planet="sun"></div>
+<svg class="diff-ico c-hard" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M20 10 L28.7 15 L28.7 25 L20 30 L11.3 25 L11.3 15 Z" fill="none" stroke-width="2.5" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="sunMinus">太陽-</div>
+<div class="sc-desc" data-i18n="sunMinusDesc">深度搜索 · 高手向</div>
+<div class="diff-dots"><i></i><i></i><i></i></div>
+</button>
+<button type="button" class="select-card diff-card" data-diff="sun">
+<div class="diff-planet-slot" data-diff-planet="sun"></div>
+<svg class="diff-ico c-hard" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M20 10 L28.7 15 L28.7 25 L20 30 L11.3 25 L11.3 15 Z" fill="none" stroke-width="2.5" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="sun">太陽</div>
+<div class="sc-desc" data-i18n="sunDesc">Minimax 最優解 · 幾乎不敗</div>
+<div class="diff-dots"><i></i><i></i><i></i></div>
+</button>
+<button type="button" class="select-card diff-card" data-diff="sun+">
+<div class="diff-planet-slot" data-diff-planet="sun"></div>
+<svg class="diff-ico c-hard" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M20 10 L28.7 15 L28.7 25 L20 30 L11.3 25 L11.3 15 Z" fill="none" stroke-width="2.5" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="sunPlus">太陽+</div>
+<div class="sc-desc" data-i18n="sunPlusDesc">深層運算 · 難以取勝</div>
+<div class="diff-dots"><i></i><i></i><i></i></div>
+</button>
+<button type="button" class="select-card diff-card diff-master hidden" data-diff="master" id="diffMaster" style="display:none!important" aria-hidden="true">
+<svg class="diff-ico c-master" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><path d="M14 22 L20 13 L26 22 M16 18 H24 M17 27 H23" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<div class="sc-name" data-i18n="diff_master">大師</div>
+<div class="sc-desc" data-i18n="masterDesc">引擎級 · 特級大師水平</div>
+<div class="diff-dots"><i></i><i></i><i></i><i></i></div>
+</button>
+<button type="button" class="select-card diff-card hidden" data-diff="custom" id="diffCustom" style="display:none!important" aria-hidden="true">
+<svg class="diff-ico c-normal" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke-width="2"/><line x1="8" y1="20" x2="32" y2="20"/><line x1="20" y1="8" x2="20" y2="32"/></svg>
+<div class="sc-name" data-i18n="customDiff">自訂</div>
+<div class="sc-desc" data-i18n="customDiffHint">調整 AI 強度</div>
+<div class="diff-dots"><i></i><i></i><i></i></div>
+</button>
+</div>
+<div class="custom-row hidden" id="customDiffRow" style="display:none!important" aria-hidden="true">
+<div class="custom-row-hint"><span data-i18n="customDiff">自訂</span> · <span data-i18n="customDiffHint">調整 AI 強度</span></div>
+<div class="custom-row-ctrl">
+<span data-i18n="diffLevel">等級</span>
+<input type="range" id="customSlider" min="1" max="100" value="50" style="flex:1">
+<b id="customSliderVal">50</b>
+</div>
+<div class="custom-row-ctrl" style="opacity:.7">
+<span data-i18n="searchDepth">搜索深度</span><span id="customDepthVal">mid</span>
+</div>
+</div>
+<div class="timer-mode-row" id="timerModeGroup">
+<span class="tm-label" data-i18n="timerMode">計時</span>
+<button class="tm-btn is-on" id="tm-unlimited" type="button" data-tm="unlimited" data-i18n="unlimited">無限制</button>
+<button class="tm-btn" id="tm-blitz" type="button" data-tm="blitz" data-i18n="blitz">快棋10'</button>
+<button class="tm-btn" id="tm-rapid" type="button" data-tm="rapid" data-i18n="rapid">快棋5'</button>
+<button class="tm-btn" id="tm-bullet" type="button" data-tm="bullet" data-i18n="bullet">子彈3'</button>
+<button class="tm-btn" id="tm-bullet1" type="button" data-tm="bullet1" data-i18n="bullet1">子彈1'</button>
+<button class="tm-btn" id="tm-custom" type="button" data-tm="custom" data-i18n="customTimer">自訂</button>
+<button class="tm-btn" id="tm-fischer" type="button" data-tm="fischer" data-i18n="fischer">菲舍爾</button>
+</div>
+<div class="persona-row" id="personaGroup">
+<span class="tm-label" data-i18n="aiPersona">AI 性格</span>
+<button class="persona-btn is-on" type="button" data-persona="balanced" data-i18n="personaBalanced">均衡智者</button>
+<button class="persona-btn" type="button" data-persona="aggressive" data-i18n="personaAggressive">烈焰狂攻</button>
+<button class="persona-btn" type="button" data-persona="defensive" data-i18n="personaDefensive">玄冰鐵壁</button>
+<button class="persona-btn" type="button" data-persona="tricky" data-i18n="personaTricky">星靈詭道</button>
+</div>
+<div class="diff-expand-bar">
+<button class="diff-expand-toggle" id="btnToggleDiffDetails" type="button">
+<span id="txtToggleDiffDetails" data-i18n="expandDetails">展開詳細設定</span>
+<span id="icoToggleDiffDetails">▾</span>
+</button>
+<button class="diff-expand-toggle" id="btnDiffTutorial" type="button">
+<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+<span data-i18n="detailedTutorial">詳細教學</span>
+</button>
+</div>
+<div style="display:flex;justify-content:center;margin:20px 0 10px;width:100%">
+<button class="r-btn r-menu" id="btnDiffBottomBack" type="button" data-i18n="back" style="max-width:240px">← 返回</button>
+</div>
+</div>
+
+
+<div class="view" id="view-game">
+<div class="game-top">
+<button class="top-back" id="btnGameBack" type="button" data-i18n="back">← 返回</button>
+<h2 class="game-h" id="gameHeader"></h2>
+<div class="gt-btns">
+<button class="mini-btn" id="btnQuestFirst" type="button" style="display:none" data-i18n="first">先手</button>
+<button class="mini-btn" id="btnHint" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></span><span data-i18n="hint">提示</span></button>
+<button class="mini-btn" id="btnUndo" type="button" data-i18n="undo">↶ 悔棋</button>
+<button class="mini-btn" id="btnGameRestart" type="button" data-i18n="restart">↻ 重开</button>
+<button class="mini-btn" id="btnTopWhyMove" type="button" title="AI 深度點評與復盤"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span data-i18n="whyBtnShort">為什麼</span></button>
+<button class="mini-btn nexus-glow-pill" id="btnInGameNexus" type="button" title="蒼穹星樞中心 v6.21.0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span>星樞</span></button>
+<button class="mini-btn" id="btnMoreTools" type="button" title="More Tools"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg></span><span data-i18n="moreTools">工具</span></button>
+</div>
+</div>
+<div class="more-tools-drawer" id="moreToolsDrawer">
+<button class="mini-btn" id="btnRedo" type="button" data-i18n="redo">↷ 重做</button>
+<button class="mini-btn" id="btnGameTutorial" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span data-i18n="tutorialShort">教學</span></button>
+<button class="mini-btn" id="btnTopGameStats" type="button" title="單棋統計"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span data-i18n="statsBtnShort">統計</span></button>
+<button class="mini-btn" id="btnTopShareCode" type="button" title="分享短碼"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span data-i18n="sharePosition">分享</span></button>
+<button class="mini-btn" id="btnGameStarShop" type="button"><span class="ic ic-gold"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l1.65 3.35 3.7.54-2.68 2.61.63 3.68L12 14.94l-3.3 1.74.63-3.68-2.68-2.61 3.7-.54L12 6.5z"/></svg></span><span data-i18n="starShop">星幣工坊</span> (<span id="gameCoinVal">0</span>)</button>
+<button class="mini-btn" id="btnToggleCoords" type="button" title="Coordinates"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></span><span data-i18n="toggleCoords">座標</span></button>
+<button class="mini-btn" id="btnFlipBoard" type="button" title="Flip"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span><span data-i18n="flipBoard">翻轉</span></button>
+<button class="mini-btn" id="btnHeatmap" type="button" title="Heatmap"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg></span><span data-i18n="heatmap">熱圖</span></button>
+<button class="mini-btn" id="btnCoachVision" type="button" title="Coach Vision"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span><span data-i18n="coachVision">星瞳教練</span></button>
+<button class="mini-btn" id="btnSandbox" type="button" title="Sandbox"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span data-i18n="sandboxMode">沙盒擺盤</span></button>
+<button class="mini-btn" id="btnNotes" type="button" title="Notes"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span data-i18n="gameNotes">筆記</span></button>
+<button class="mini-btn" id="btnShare" type="button" title="Share"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span data-i18n="sharePosition">分享</span></button>
+<button class="mini-btn" id="btnExportPNG" type="button" data-i18n="exportPNG" aria-label="Export board image"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span data-i18n="exportPNG">匯出圖片</span></button>
+<button class="mini-btn" id="btnShortcuts" type="button" title="Shortcuts"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span data-i18n="shortcuts">快捷鍵</span></button>
+</div>
+
+<div class="planet-opponent-bar" id="planetOpponentBar">
+<div class="planet-avatar-wrap" id="planetAvatarWrap" aria-label="Planet Opponent"></div>
+<div class="planet-reaction-bubble" id="planetReactionBubble" aria-live="polite"></div>
+</div>
+<div class="sandbox-bar" id="sandboxBar">
+<span class="sbx-tag" data-i18n="sandboxMode">沙盒擺盤</span>
+<button class="sbx-btn is-on" type="button" data-sbx="p1" data-i18n="sbxPlaceP1">放置先手</button>
+<button class="sbx-btn" type="button" data-sbx="p2" data-i18n="sbxPlaceP2">放置後手</button>
+<button class="sbx-btn" type="button" data-sbx="erase" data-i18n="sbxErase">清除格子</button>
+<button class="sbx-btn" type="button" id="btnSbxTurn" data-i18n="sbxSwitchTurn">切換行棋方</button>
+<button class="sbx-btn" type="button" id="btnSbxClearAll" data-i18n="sbxClearBoard">清空棋盤</button>
+<button class="sbx-btn" type="button" id="btnSbxDone" data-i18n="sbxResume">完成並繼續</button>
+</div>
+<div class="quest-stage-banner" id="questStageBanner">
+<div class="qsb-left">
+<div class="qsb-title" id="qsbTitle"></div>
+<div class="qsb-desc" id="qsbDesc"></div>
+</div>
+<div class="qsb-stars" id="qsbStars">☆☆☆</div>
+</div>
+<div class="tut-practice-bar" id="tutPracticeBar">
+<div class="tpb-text"><span class="tpb-step" id="tpbStep">1/3</span><span id="tpbMsg"></span></div>
+<button class="mini-btn" id="btnTutNextStep" type="button" data-i18n="nextGuide">下一步</button>
+<button class="mini-btn" id="btnTutExit" type="button" data-i18n="Close">✕</button>
+</div>
+<div class="turn-pill" id="turnPill"><span class="pill-dot"></span><span id="pillText"></span></div>
+<div class="timer-bar" id="timerBar"><span class="timer-ring" id="ringWrapP1"><svg viewBox="0 0 34 34"><circle class="ring-bg" cx="17" cy="17" r="14"/><circle class="ring-fg" id="ringFgP1" cx="17" cy="17" r="14"/></svg><span class="timer-p1" id="timerP1">00:00</span></span><span class="timer-sep">·</span><span class="timer-ring" id="ringWrapP2"><svg viewBox="0 0 34 34"><circle class="ring-bg" cx="17" cy="17" r="14"/><circle class="ring-fg" id="ringFgP2" cx="17" cy="17" r="14"/></svg><span class="timer-p2" id="timerP2">00:00</span></span></div>
+<div class="diff-badge" id="diffBadge"></div>
+<div class="eval-row-wrap">
+<div class="eval-bar" id="evalBar">
+<div class="eval-fill" id="evalFill"></div>
+<span class="eval-label" id="evalLabel">0.0</span>
+</div>
+<button type="button" class="tactical-radar-pill" id="tacticalRadarPill" title="Tactical Radar">50%</button>
+<button type="button" class="tactical-radar-pill smart-guide-pill" id="btnSmartGuidePill" title="開啟/關閉三步實戰引導">✦ 引導</button>
+</div>
+<div class="arrows" id="colArrows"></div>
+<div class="replay-bar hidden" id="replayBar">
+<button class="mini-btn" id="replayPrev" type="button">◀</button>
+<input type="range" id="replaySlider" min="0" max="1" value="0" step="1" style="width:120px">
+<span class="replay-pos" id="replayPos">1/1</span>
+<button class="mini-btn" id="replayNext" type="button">▶</button>
+<button class="mini-btn" id="replayPlay" type="button" data-i18n="replayPlay">播放</button>
+<button class="mini-btn replay-spd" data-spd="2000" type="button">0.5x</button>
+<button class="mini-btn replay-spd is-on" data-spd="1000" type="button">1x</button>
+<button class="mini-btn replay-spd" data-spd="500" type="button">2x</button>
+<button class="mini-btn replay-spd" data-spd="250" type="button">4x</button>
+<button class="mini-btn" id="btnAiCommentary" type="button" data-i18n="commentaryOff">AI講解</button>
+<button class="mini-btn" id="replayExit" type="button" data-i18n="exitReplay">退出回放</button>
+</div>
+<div class="replay-commentary hidden" id="replayCommentary"></div>
+<div class="board-box">
+<div class="board-viewport" id="boardViewport">
+<canvas id="board"></canvas>
+</div>
+<div class="thinking" id="thinking" data-i18n-html="thinking">AI 思考中<span>...</span></div>
+</div>
+<div class="zoom-bar">
+<button class="zoom-btn" id="zoomOut" type="button" aria-label="zoom out">−</button>
+<span class="zoom-val" id="zoomVal">100%</span>
+<button class="zoom-btn" id="zoomIn" type="button" aria-label="zoom in">+</button>
+</div>
+<div class="scoreboard">
+<div class="sb-col"><span class="sb-dot p1c"></span><span id="sbP1Name">玩家</span><b id="scoreP1">0</b></div>
+<div class="sb-col"><span data-i18n="draw">平局</span><b id="scoreDraw">0</b></div>
+<div class="sb-col"><span class="sb-dot p2c"></span><span id="sbP2Name">AI</span><b id="scoreP2">0</b></div>
+</div>
+<div class="history-panel" id="historyPanel">
+<div class="history-header" id="historyToggle">
+<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></svg></span>
+<span data-i18n="moveHistory">走子歷史</span>
+<span class="history-count" id="historyCount">0</span>
+</div>
+<div class="history-list" id="historyList"></div>
+</div>
+<div class="game-bottom-back-wrap" style="display:flex;justify-content:center;margin:18px 0 10px;width:100%">
+<button class="r-btn r-menu" id="btnGameBottomBack" type="button" data-i18n="back" style="max-width:220px">← 返回</button>
+</div>
+</div>
+
+
+<div class="view" id="view-quest">
+<button class="top-back" id="btnQuestBack" type="button" data-i18n="back">← 返回</button>
+<h2 class="view-title"><span id="questViewGameName"></span><span data-i18n="questPickSuffix"> · 選擇關卡</span></h2>
+<div class="quest-game-pills" id="questGamePills"></div>
+<div class="q-tabs">
+<button class="q-tab" id="qTabMain" type="button" data-i18n="questMainTab">主線闖關</button>
+<button class="q-tab" id="qTabVar" type="button" data-i18n="questVarTab">變種玩法</button>
+</div>
+<div class="q-progress-line"><span class="qe-star">★</span> <span id="questProgress">0 / 90</span></div>
+<div class="q-list" id="questList"></div>
+<div style="display:flex;justify-content:center;margin:16px 0 24px;width:100%">
+<button class="r-btn r-menu" id="btnQuestBottomBack" type="button" data-i18n="back" style="max-width:240px">← 返回</button>
+</div>
+</div>
+
+
+<div class="view" id="view-theme">
+<button class="top-back" id="btnThemeBack" type="button" data-i18n="back">← 返回</button>
+<h2 class="view-title" data-i18n="theme">主題</h2>
+<div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:4px 0 8px;flex-wrap:wrap"><p class="theme-hint" data-i18n="themeHint" style="margin:0">點擊預覽主題，再次點擊應用</p><button class="coin-pill-bar" id="btnThemeCoinShop" type="button"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l1.65 3.35 3.7.54-2.68 2.61.63 3.68L12 14.94l-3.3 1.74.63-3.68-2.68-2.61 3.7-.54L12 6.5z"/></svg><span id="themeCoinVal">0</span> · <span data-i18n="starShop">星幣工坊</span></button></div>
+<div class="theme-grid" id="themeGrid"></div>
+<div style="display:flex;justify-content:center;margin:24px 0 16px;width:100%">
+<button class="r-btn r-menu" id="btnThemeBottomBack" type="button" data-i18n="back" style="max-width:240px">← 返回</button>
+</div>
+</div>
+
+</div>
+
+
+<div class="overlay" id="overlay">
+<div class="result-box settlement-modal" id="resultBoxModal">
+<div class="res-header">
+<button class="top-back" id="btnResultBackBoard" type="button" data-i18n="backToBoard">← 返回棋盤</button>
+</div>
+<div class="res-hero">
+<div class="result-ico" id="resultIco">
+<svg viewBox="0 0 24 24"><path d="M12 2 L14.6 9.4 L22 12 L14.6 14.6 L12 22 L9.4 14.6 L2 12 L9.4 9.4 Z"/></svg>
+</div>
+<h2 id="resultText"></h2>
+<p class="result-sub" id="resultSub"></p>
+<div class="res-stats-strip" id="resultStatsStrip"></div>
+</div>
+<div class="result-coin-reward hidden" id="resultCoinBox"></div>
+<div class="res-actions">
+<button class="r-btn r-primary" id="btnAgain" type="button">
+<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></span>
+<span data-i18n="again">再来一局</span>
+</button>
+<button class="r-btn r-primary q-btn hidden" id="btnNextLevel" type="button">
+<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/><line x1="19" y1="4" x2="19" y2="20"/></svg></span>
+<span data-i18n="nextLevel">下一關</span>
+</button>
+<div class="res-tool-row" id="resultToolRow">
+<button class="r-btn r-secondary hidden" id="btnReplay" type="button">
+<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
+<span data-i18n="replay">回放</span>
+</button>
+<button class="r-btn r-secondary" id="btnAnalysis" type="button">
+<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-4 3 3 5-6"/></svg></span>
+<span data-i18n="analysis">對局分析</span>
+</button>
+</div>
+<button class="r-btn r-secondary q-btn hidden" id="btnBackToQuest" type="button" data-i18n="backToQuest">返回關卡選擇</button>
+<button class="r-btn r-secondary q-btn hidden" id="btnBackToPuzzle" type="button" data-i18n="backToPuzzles">返回殘局選擇</button>
+<button class="r-btn r-secondary q-btn hidden" id="btnBackToTactic" type="button" data-i18n="backToTactics">返回戰術訓練</button>
+<button class="r-btn r-secondary q-btn hidden" id="btnBackToTsumego" type="button" data-i18n="backToTsumego">返回圍棋死活題</button>
+<button class="r-btn r-secondary q-btn hidden" id="btnBackToXqPuzzle" type="button" data-i18n="backToXqPuzzles">返回象棋殘局</button>
+<button class="r-btn r-menu" id="btnResultMenu" type="button" data-i18n="toMenu">返回主菜单</button>
+</div>
+</div>
+</div>
+
+
+<div class="overlay" id="ruleOverlay">
+<div class="result-box rule-box">
+<div style="display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:6px">
+<button class="top-back" id="btnRuleBack" type="button" data-i18n="back" style="margin:0">← 返回</button>
+<h2 id="ruleTitle" style="margin:0;font-size:1.3rem"></h2>
+<span style="width:64px"></span>
+</div>
+<div class="tut-game-tabs" id="tutGameTabs"></div>
+<div class="rule-content" id="ruleContent" style="max-height:58vh"></div>
+<div style="display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap">
+<button class="r-btn" id="btnStartInteractiveTut" type="button" data-i18n="interactiveTut" style="margin:0;flex:1;min-width:140px">互動演練教學</button>
+<button class="r-btn r-menu" id="btnRuleClose" type="button" data-i18n="gotIt" style="margin:0;flex:1;min-width:110px">明白了</button>
+</div>
+</div>
+</div>
+
+
+<div class="overlay" id="genModal" role="dialog" aria-modal="true">
+<div class="result-box gen-box">
+<div class="gen-head">
+<button class="top-back" id="genModalBack" type="button" data-i18n="back">← 返回</button>
+<h2 id="genModalTitle"></h2>
+<button class="gen-close" id="genModalClose" type="button" aria-label="Close">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+</button>
+</div>
+<div class="gen-body" id="genModalBody"></div>
+<div class="gen-foot" id="genModalFoot">
+<button class="r-btn r-menu" id="genModalFootBack" type="button" data-i18n="back">← 返回</button>
+</div>
+</div>
+</div>
+
+<script src="js/01-game.js"></script>
+</body>
+</html>
+
