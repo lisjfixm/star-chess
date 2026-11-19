@@ -1,0 +1,222 @@
+{
+  "entities": {
+    "CloudSaveBundle": {
+      "title": "CloudSaveBundle",
+      "description": "Authenticated user's synchronized Star Chess progression snapshot containing native key-value entries and summary metrics.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Authentication UID."
+        },
+        "label": {
+          "type": "string",
+          "description": "Human-readable save label such as Primary Sync or Checkpoint."
+        },
+        "schemaVersion": {
+          "type": "string",
+          "description": "Star Chess save schema version tag (e.g. v7)."
+        },
+        "entries": {
+          "type": "object",
+          "description": "Native map of starchess storage keys to their serialized string values."
+        },
+        "starCoins": {
+          "type": "integer",
+          "description": "Total Star Coins balance."
+        },
+        "eloPeak": {
+          "type": "integer",
+          "description": "Highest ELO rating across games."
+        },
+        "achievementsCount": {
+          "type": "integer",
+          "description": "Count of unlocked achievements."
+        },
+        "gamesPlayed": {
+          "type": "integer",
+          "description": "Total completed matches."
+        },
+        "preferredLanguage": {
+          "type": "string",
+          "enum": ["en", "zh-Hant", "zh-Hans", "ja"],
+          "description": "User interface language code."
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "Origin device label for multi-device sync visibility."
+        },
+        "clientSavedAtMs": {
+          "type": "integer",
+          "description": "Client millisecond timestamp when snapshot was captured."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp written via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp written via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "label",
+        "schemaVersion",
+        "entries",
+        "starCoins",
+        "eloPeak",
+        "achievementsCount",
+        "gamesPlayed",
+        "preferredLanguage",
+        "deviceName",
+        "clientSavedAtMs",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "GameStatistic": {
+      "title": "GameStatistic",
+      "description": "Per-game aggregate statistics tracking wins, losses, draws, and total play duration in seconds for one of the 26 supported Star Chess games.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Authentication UID."
+        },
+        "gameId": {
+          "type": "string",
+          "enum": [
+            "ttt", "c4", "gomoku", "c6", "checkers", "go", "jungle", "chess",
+            "reversi", "xiangqi", "draughts", "hex", "pente", "dots", "morris",
+            "mancala", "ataxx", "breakthrough", "shogi", "banqi", "uttt",
+            "qubic", "loa", "amazons", "yavalath", "snakes"
+          ],
+          "description": "Identifier of one of the 26 supported games."
+        },
+        "wins": {
+          "type": "integer",
+          "description": "Total wins recorded for this game."
+        },
+        "losses": {
+          "type": "integer",
+          "description": "Total losses recorded for this game."
+        },
+        "draws": {
+          "type": "integer",
+          "description": "Total draws recorded for this game."
+        },
+        "playDurationSeconds": {
+          "type": "integer",
+          "description": "Cumulative play duration in seconds for this game."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp written via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp written via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "gameId",
+        "wins",
+        "losses",
+        "draws",
+        "playDurationSeconds",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "Public non-PII global leaderboard ranking profile aggregating total wins, losses, draws, and play duration across all 26 Star Chess games.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Authentication UID."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Non-PII public player display name."
+        },
+        "totalWins": {
+          "type": "integer",
+          "description": "Cumulative wins across all 26 supported games."
+        },
+        "totalLosses": {
+          "type": "integer",
+          "description": "Cumulative losses across all 26 supported games."
+        },
+        "totalDraws": {
+          "type": "integer",
+          "description": "Cumulative draws across all 26 supported games."
+        },
+        "totalPlayDurationSeconds": {
+          "type": "integer",
+          "description": "Cumulative play time in seconds across all 26 supported games."
+        },
+        "gamesPlayedCount": {
+          "type": "integer",
+          "description": "Number of distinct games played out of 26."
+        },
+        "favoriteTheme": {
+          "type": "string",
+          "enum": [
+            "default", "nebula_purple", "solar_gold", "aurora_emerald", "supernova_crimson"
+          ],
+          "description": "Selected cosmic visual palette key."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server creation timestamp written via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server update timestamp written via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "displayName",
+        "totalWins",
+        "totalLosses",
+        "totalDraws",
+        "totalPlayDurationSeconds",
+        "gamesPlayedCount",
+        "favoriteTheme",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/cloudSaves/{saveId}": {
+      "schema": {
+        "$ref": "#/entities/CloudSaveBundle"
+      },
+      "description": "Per-user isolated Star Chess cloud save bundles and checkpoints."
+    },
+    "/users/{userId}/gameStats/{gameId}": {
+      "schema": {
+        "$ref": "#/entities/GameStatistic"
+      },
+      "description": "Per-user isolated statistics across the 26 supported Star Chess games."
+    },
+    "/leaderboard/{userId}": {
+      "schema": {
+        "$ref": "#/entities/LeaderboardEntry"
+      },
+      "description": "Global non-PII leaderboard ranking authenticated players by total wins across the 26 supported games."
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Star Chess",
+  "description": "26-game cosmic tabletop strategy suite with 290+ puzzles, Story Chronicles, offline Room saves, and cloud sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,247 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidLanguage(lang) {
+      return lang is string && (lang == 'en' || lang == 'zh-Hant' || lang == 'zh-Hans' || lang == 'ja');
+    }
+
+    function isValidCosmicTheme(theme) {
+      return theme is string &&
+             theme in ['default', 'nebula_purple', 'solar_gold', 'aurora_emerald', 'supernova_crimson'];
+    }
+
+    function isValidGameId(gameId) {
+      return gameId is string &&
+             gameId in [
+               'ttt', 'c4', 'gomoku', 'c6', 'checkers', 'go', 'jungle', 'chess',
+               'reversi', 'xiangqi', 'draughts', 'hex', 'pente', 'dots', 'morris',
+               'mancala', 'ataxx', 'breakthrough', 'shogi', 'banqi', 'uttt',
+               'qubic', 'loa', 'amazons', 'yavalath', 'snakes'
+             ];
+    }
+
+    function isValidCloudSave(data, userId) {
+      return data.userId is string &&
+             data.userId == userId &&
+             data.userId.size() >= 1 &&
+             data.userId.size() <= 128 &&
+             data.label is string &&
+             data.label.size() >= 1 &&
+             data.label.size() <= 80 &&
+             data.schemaVersion is string &&
+             data.schemaVersion.size() >= 1 &&
+             data.schemaVersion.size() <= 16 &&
+             data.entries is map &&
+             data.entries.size() <= 200 &&
+             data.starCoins is int &&
+             data.starCoins >= 0 &&
+             data.starCoins <= 1000000000 &&
+             data.eloPeak is int &&
+             data.eloPeak >= 0 &&
+             data.eloPeak <= 10000 &&
+             data.achievementsCount is int &&
+             data.achievementsCount >= 0 &&
+             data.achievementsCount <= 1000 &&
+             data.gamesPlayed is int &&
+             data.gamesPlayed >= 0 &&
+             data.gamesPlayed <= 1000000 &&
+             isValidLanguage(data.preferredLanguage) &&
+             data.deviceName is string &&
+             data.deviceName.size() >= 1 &&
+             data.deviceName.size() <= 80 &&
+             data.clientSavedAtMs is int &&
+             data.clientSavedAtMs >= 0;
+    }
+
+    function isValidGameStat(data, userId, gameId) {
+      return data.userId is string &&
+             data.userId == userId &&
+             data.userId.size() >= 1 &&
+             data.userId.size() <= 128 &&
+             data.gameId is string &&
+             data.gameId == gameId &&
+             isValidGameId(data.gameId) &&
+             data.wins is int &&
+             data.wins >= 0 &&
+             data.wins <= 1000000 &&
+             data.losses is int &&
+             data.losses >= 0 &&
+             data.losses <= 1000000 &&
+             data.draws is int &&
+             data.draws >= 0 &&
+             data.draws <= 1000000 &&
+             data.playDurationSeconds is int &&
+             data.playDurationSeconds >= 0 &&
+             data.playDurationSeconds <= 100000000;
+    }
+
+    function isValidLeaderboardEntry(data, userId) {
+      return data.userId is string &&
+             data.userId == userId &&
+             data.userId.size() >= 1 &&
+             data.userId.size() <= 128 &&
+             data.displayName is string &&
+             data.displayName.size() >= 1 &&
+             data.displayName.size() <= 40 &&
+             !data.displayName.matches('.*@.*') &&
+             data.totalWins is int &&
+             data.totalWins >= 0 &&
+             data.totalWins <= 26000000 &&
+             data.totalLosses is int &&
+             data.totalLosses >= 0 &&
+             data.totalLosses <= 26000000 &&
+             data.totalDraws is int &&
+             data.totalDraws >= 0 &&
+             data.totalDraws <= 26000000 &&
+             data.totalPlayDurationSeconds is int &&
+             data.totalPlayDurationSeconds >= 0 &&
+             data.totalPlayDurationSeconds <= 1000000000 &&
+             data.gamesPlayedCount is int &&
+             data.gamesPlayedCount >= 0 &&
+             data.gamesPlayedCount <= 26 &&
+             isValidCosmicTheme(data.favoriteTheme);
+    }
+
+    match /users/{userId}/cloudSaves/{saveId} {
+      allow get: if isOwner(userId) && isValidId(saveId);
+      allow list: if isOwner(userId);
+
+      allow create: if isOwner(userId) &&
+                       isValidId(saveId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'label', 'schemaVersion', 'entries',
+                         'starCoins', 'eloPeak', 'achievementsCount', 'gamesPlayed',
+                         'preferredLanguage', 'deviceName', 'clientSavedAtMs',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'label', 'schemaVersion', 'entries',
+                         'starCoins', 'eloPeak', 'achievementsCount', 'gamesPlayed',
+                         'preferredLanguage', 'deviceName', 'clientSavedAtMs',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().createdAt is timestamp &&
+                       incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       isValidCloudSave(incoming(), userId);
+
+      allow update: if isOwner(userId) &&
+                       isValidId(saveId) &&
+                       isValidCloudSave(incoming(), userId) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'label', 'schemaVersion', 'entries',
+                         'starCoins', 'eloPeak', 'achievementsCount', 'gamesPlayed',
+                         'preferredLanguage', 'deviceName', 'clientSavedAtMs',
+                         'updatedAt'
+                       ]);
+
+      allow delete: if isOwner(userId) && isValidId(saveId);
+    }
+
+    match /users/{userId}/gameStats/{gameId} {
+      allow get: if isOwner(userId) && isValidGameId(gameId);
+      allow list: if isOwner(userId);
+
+      allow create: if isOwner(userId) &&
+                       isValidGameId(gameId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'gameId', 'wins', 'losses', 'draws',
+                         'playDurationSeconds', 'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'gameId', 'wins', 'losses', 'draws',
+                         'playDurationSeconds', 'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().createdAt is timestamp &&
+                       incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       isValidGameStat(incoming(), userId, gameId);
+
+      allow update: if isOwner(userId) &&
+                       isValidGameId(gameId) &&
+                       isValidGameStat(incoming(), userId, gameId) &&
+                       incoming().userId == existing().userId &&
+                       incoming().gameId == existing().gameId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'wins', 'losses', 'draws', 'playDurationSeconds', 'updatedAt'
+                       ]);
+
+      allow delete: if isOwner(userId) && isValidGameId(gameId);
+    }
+
+    // Global non-PII leaderboard: authenticated players can read bounded rankings,
+    // and each player can strictly write/update/delete only their own ranking document.
+    match /leaderboard/{userId} {
+      allow get: if isSignedIn() && isValidId(userId);
+      allow list: if isSignedIn() && request.query.limit <= 50;
+
+      allow create: if isOwner(userId) &&
+                       isValidId(userId) &&
+                       incoming().keys().hasAll([
+                         'userId', 'displayName', 'totalWins', 'totalLosses', 'totalDraws',
+                         'totalPlayDurationSeconds', 'gamesPlayedCount', 'favoriteTheme',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().keys().hasOnly([
+                         'userId', 'displayName', 'totalWins', 'totalLosses', 'totalDraws',
+                         'totalPlayDurationSeconds', 'gamesPlayedCount', 'favoriteTheme',
+                         'createdAt', 'updatedAt'
+                       ]) &&
+                       incoming().createdAt is timestamp &&
+                       incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       isValidLeaderboardEntry(incoming(), userId);
+
+      allow update: if isOwner(userId) &&
+                       isValidId(userId) &&
+                       isValidLeaderboardEntry(incoming(), userId) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'displayName', 'totalWins', 'totalLosses', 'totalDraws',
+                         'totalPlayDurationSeconds', 'gamesPlayedCount', 'favoriteTheme',
+                         'updatedAt'
+                       ]);
+
+      allow delete: if isOwner(userId) && isValidId(userId);
+    }
+  }
+}
