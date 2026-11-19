@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Star Chess</string>
+    <string name="default_web_client_id"></string>
     <string name="nav_arena">Arena</string>
     <string name="nav_nexus">Nexus</string>
     <string name="nav_trials">Trials</string>
