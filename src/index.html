@@ -148,7 +148,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <div class="menu-cat-tabs v616-cat-tabs" id="menuCatTabs">
 <button class="cat-tab" data-cat="line" type="button" data-i18n="catLineTab">連線 (10)</button>
 <button class="cat-tab" data-cat="territory" type="button" data-i18n="catTerritoryTab">占地 (5)</button>
-<button class="cat-tab" data-cat="capture" type="button" data-i18n="catCaptureTab">吃子 (6)</button>
+<button class="cat-tab" data-cat="capture" type="button" data-i18n="catCaptureTab">吃子 (7)</button>
 <button class="cat-tab" data-cat="strategy" type="button" data-i18n="catStrategyTab">策略 (5)</button>
 <button class="cat-tab cat-fav-star" data-cat="fav" type="button"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:3px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span data-i18n="catFavShort">收藏</span></button>
 <button class="cat-tab active" data-cat="all" type="button" data-i18n="catAll">全部</button>
@@ -157,7 +157,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <div class="menu-filter-bar">
 <div class="menu-search-wrap">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-<input type="search" id="gameSearchInput" class="menu-search-inp" placeholder="搜尋 26 種星海棋藝..." aria-label="Search games">
+<input type="search" id="gameSearchInput" class="menu-search-inp" placeholder="搜尋 27 種星海棋藝..." aria-label="Search games">
 </div>
 <div class="v616-cols-seg" id="gridColsSeg" role="group" aria-label="排列模式切換">
 <button type="button" class="menu-view-btn col-mode-btn" id="btnGridCol1" data-cols="1" title="單個一排 (1列)">
@@ -338,6 +338,22 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 </svg>
 </div>
 <div class="gc-txt"><div class="gc-name" data-i18n="name.chess">国际象棋</div><div class="gc-desc" data-i18n="desc.chess">星辰王座 · 将杀对决</div></div>
+<div class="gc-elo"></div>
+<div class="gc-arrow">→</div>
+</button>
+
+<button type="button" class="game-card" data-game="wizard3d">
+<div class="gc-ico">
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="8" y="8" width="48" height="48" rx="4"/>
+<path d="M32 14 L32 20"/>
+<path d="M24 26 Q32 22 40 26 L38 34 L26 34 Z"/>
+<path d="M26 34 L38 34 L36 42 L28 42 Z"/>
+<path d="M24 42 L40 42 L38 48 L26 48 Z"/>
+<path d="M20 20 L44 20" opacity=".5"/>
+</svg>
+</div>
+<div class="gc-txt"><div class="gc-name" data-i18n="name.wizard3d">巫師棋 3D</div><div class="gc-desc" data-i18n="desc.wizard3d">聖殿戰場 · 3D 將殺對決</div></div>
 <div class="gc-elo"></div>
 <div class="gc-arrow">→</div>
 </button>
@@ -1049,6 +1065,38 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 </div>
 </div>
 </div>
+
+<div class="overlay" id="wizardOverlay" role="dialog" aria-modal="true">
+<div class="wizard-frame">
+<div class="wizard-head">
+<button class="top-back" id="wizardClose" type="button">← 返回</button>
+<h2 id="wizardTitle" data-i18n="name.wizard3d">巫師棋 3D</h2>
+<span class="wizard-head-spacer"></span>
+</div>
+<iframe id="wizardFrame" title="巫師棋 3D" allow="fullscreen; gyroscope; accelerometer; xr-spatial-tracking"></iframe>
+</div>
+</div>
+
+<script>
+(function () {
+  var WIZARD_URL = "https://lisjfixm.github.io/wizard-chess-3d/";
+  var ov = document.getElementById("wizardOverlay"),
+      fr = document.getElementById("wizardFrame"),
+      close = document.getElementById("wizardClose");
+  function openWizard3d() {
+    if (fr && !fr.getAttribute("src")) fr.src = WIZARD_URL;
+    ov && ov.classList.add("active");
+  }
+  function closeWizard3d() {
+    ov && ov.classList.remove("active");
+    if (fr) fr.src = "about:blank";
+  }
+  window.openWizard3d = openWizard3d;
+  close && close.addEventListener("click", closeWizard3d);
+  ov && ov.addEventListener("click", function (ev) { if (ev.target === ov) closeWizard3d(); });
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && ov && ov.classList.contains("active")) closeWizard3d(); });
+})();
+</script>
 
 <script src="js/01-game.js"></script>
 </body>

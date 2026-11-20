@@ -91,8 +91,14 @@ class StarChessWebController(
                     request: WebResourceRequest?,
                 ): Boolean {
                     val uri = request?.url ?: return true
-                    // Keep navigation confined inside our offline Star Chess bundle
-                    return !(uri.scheme == "https" && uri.host == "starchess.local")
+                    val host = uri.host
+                    val allowed = uri.scheme == "https" && (
+                        host == "starchess.local" ||
+                        (host == "lisjfixm.github.io" && uri.path?.startsWith("/wizard-chess-3d/") == true)
+                    )
+                    // Keep navigation confined inside our offline Star Chess bundle,
+                    // except the embedded Wizard Chess 3D page.
+                    return !allowed
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
