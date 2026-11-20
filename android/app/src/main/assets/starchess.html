@@ -438,7 +438,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <div class="menu-cat-tabs v616-cat-tabs" id="menuCatTabs">
 <button class="cat-tab" data-cat="line" type="button" data-i18n="catLineTab">連線 (10)</button>
 <button class="cat-tab" data-cat="territory" type="button" data-i18n="catTerritoryTab">占地 (5)</button>
-<button class="cat-tab" data-cat="capture" type="button" data-i18n="catCaptureTab">吃子 (7)</button>
+<button class="cat-tab" data-cat="capture" type="button" data-i18n="catCaptureTab">吃子 (6)</button>
 <button class="cat-tab" data-cat="strategy" type="button" data-i18n="catStrategyTab">策略 (5)</button>
 <button class="cat-tab cat-fav-star" data-cat="fav" type="button"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:3px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span data-i18n="catFavShort">收藏</span></button>
 <button class="cat-tab active" data-cat="all" type="button" data-i18n="catAll">全部</button>
@@ -447,7 +447,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <div class="menu-filter-bar">
 <div class="menu-search-wrap">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-<input type="search" id="gameSearchInput" class="menu-search-inp" placeholder="搜尋 27 種星海棋藝..." aria-label="Search games">
+<input type="search" id="gameSearchInput" class="menu-search-inp" placeholder="搜尋 26 種星海棋藝..." aria-label="Search games">
 </div>
 <div class="v616-cols-seg" id="gridColsSeg" role="group" aria-label="排列模式切換">
 <button type="button" class="menu-view-btn col-mode-btn" id="btnGridCol1" data-cols="1" title="單個一排 (1列)">
@@ -628,21 +628,6 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 </svg>
 </div>
 <div class="gc-txt"><div class="gc-name" data-i18n="name.chess">国际象棋</div><div class="gc-desc" data-i18n="desc.chess">星辰王座 · 将杀对决</div></div>
-<div class="gc-elo"></div>
-<div class="gc-arrow">→</div>
-</button>
-<button type="button" class="game-card" data-game="wizard3d">
-<div class="gc-ico">
-<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-<rect x="8" y="8" width="48" height="48" rx="4"/>
-<path d="M32 14 L32 20"/>
-<path d="M24 26 Q32 22 40 26 L38 34 L26 34 Z"/>
-<path d="M26 34 L38 34 L36 42 L28 42 Z"/>
-<path d="M24 42 L40 42 L38 48 L26 48 Z"/>
-<path d="M20 20 L44 20" opacity=".5"/>
-</svg>
-</div>
-<div class="gc-txt"><div class="gc-name" data-i18n="name.wizard3d">巫師棋 3D</div><div class="gc-desc" data-i18n="desc.wizard3d">聖殿戰場 · 3D 將殺對決</div></div>
 <div class="gc-elo"></div>
 <div class="gc-arrow">→</div>
 </button>
@@ -982,6 +967,13 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <div class="sc-name" data-i18n="modeSpectate">AI 觀戰</div>
 <div class="sc-desc" data-i18n="modeSpectatedesc">雙 AI 對弈 · 自動觀賞</div>
 </button>
+</div>
+<div class="custom-row hidden" id="wizardEntryRow">
+<label class="toggle-line">
+<span data-i18n="name.wizard3d">巫師棋 3D</span>
+<span class="toggle-desc" data-i18n="desc.wizard3d">聖殿戰場 · 3D 將殺對決</span>
+</label>
+<button class="mini-btn" id="btnWizard3d" type="button" data-i18n="wizardEnter">進入 3D</button>
 </div>
 <button class="rule-btn" id="btnRules" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span data-i18n="rules">規則說明</span></button>
 
@@ -1608,6 +1600,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
       "desc.chess": "Throne of stars · checkmate",
       "name.wizard3d": "Wizard Chess 3D",
       "desc.wizard3d": "Cathedral arena · 3D checkmate duels",
+      "wizardEnter": "Open 3D",
       "name.reversi": "Reversi",
       "desc.reversi": "Flip the stars · seize the corners",
       jg: {
@@ -2035,6 +2028,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
       "desc.chess": "星辰王座 · 將殺對決",
       "name.wizard3d": "巫師棋 3D",
       "desc.wizard3d": "聖殿戰場 · 3D 將殺對決",
+      "wizardEnter": "進入 3D",
       "name.reversi": "黑白棋",
       "desc.reversi": "翻轉星辰 · 佔角制勝",
       jg: {
@@ -2461,6 +2455,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
       "desc.chess": "星辰王座 · 将杀对决",
       "name.wizard3d": "巫师棋 3D",
       "desc.wizard3d": "圣殿战场 · 3D 将杀对决",
+      "wizardEnter": "进入 3D",
       "name.reversi": "黑白棋",
       "desc.reversi": "翻转星辰 · 占角制胜",
       jg: {
@@ -2887,6 +2882,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
       "desc.chess": "星の王座 · チェックメイト",
       "name.wizard3d": "ウィザードチェス 3D",
       "desc.wizard3d": "聖堂アリーナ · 3D チェス対決",
+      "wizardEnter": "3D へ",
       "name.reversi": "オセロ",
       "desc.reversi": "星を返して · 隅を制す",
       jg: {
@@ -4905,6 +4901,8 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
     t && (t.style.display = "", "function" == typeof window.updateQuestEntryForGame ? window.updateQuestEntryForGame(e) : "ttt" === e && (v("qeCleared").textContent = Jr(Wr)));
     var a = v("chess960Row");
     a && a.classList.toggle("hidden", "chess" !== e);
+    var w = v("wizardEntryRow");
+    w && w.classList.toggle("hidden", "chess" !== e);
     var r = v("chk960");
     r && (r.checked = S.chess960), We("view-mode"), function(e) {
       try {
@@ -14358,10 +14356,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
   function of() {
     for (var e = document.querySelectorAll(".game-card"), r = 0; r < e.length; r++) !function(e) {
       e.addEventListener("click", (function(t) {
-        t.preventDefault();
-        var g = e.getAttribute("data-game");
-        if ("wizard3d" === g) { "function" == typeof window.openWizard3d && window.openWizard3d(); return; }
-        Je(g);
+        t.preventDefault(), Je(e.getAttribute("data-game"));
       }));
     }(e[r]);
     for (var n = document.querySelectorAll(".select-card[data-mode]"), i = 0; i < n.length; i++) !function(e) {
@@ -14369,6 +14364,10 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
         t.preventDefault(), Qe(e.getAttribute("data-mode"));
       }));
     }(n[i]);
+    var wb = v("btnWizard3d");
+    wb && wb.addEventListener("click", (function(t) {
+      t.preventDefault(), "function" == typeof window.openWizard3d && window.openWizard3d();
+    }));
     for (var o = document.querySelectorAll(".diff-card"), s = 0; s < o.length; s++) !function(e) {
       e.addEventListener("click", (function(t) {
         t.preventDefault(), Ze(e.getAttribute("data-diff"));
@@ -17864,8 +17863,8 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
       en: {
         master: "Master",
         Close: "✕",
-        catAll: "All (27)",
-        searchPlaceholder: "Search 27 board games...",
+        catAll: "All (26)",
+        searchPlaceholder: "Search 26 board games...",
         menuEmptyState: "No board games in this category",
         "name.ataxx": "Star Ataxx",
         "desc.ataxx": "Clone & jump · Assimilate neighbors",
@@ -17950,8 +17949,8 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
       "zh-Hant": {
         master: "大師",
         Close: "✕",
-        catAll: "全部 (27)",
-        searchPlaceholder: "搜尋 27 種星海棋藝...",
+        catAll: "全部 (26)",
+        searchPlaceholder: "搜尋 26 種星海棋藝...",
         menuEmptyState: "此分類暫無棋藝",
         "name.ataxx": "星際同化棋",
         "desc.ataxx": "分裂躍遷 · 鄰格同化",
@@ -22951,14 +22950,14 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
       document.head.appendChild(Zt), window.GAME_CATS_V616 = {
         line: [ "ttt", "c4", "gomoku", "c6", "hex", "pente", "morris", "qubic", "uttt", "yavalath" ],
         territory: [ "go", "reversi", "dots", "ataxx", "amazons" ],
-        capture: [ "chess", "wizard3d", "xiangqi", "shogi", "banqi", "jungle", "draughts" ],
+        capture: [ "chess", "xiangqi", "shogi", "banqi", "jungle", "draughts" ],
         strategy: [ "checkers", "mancala", "breakthrough", "loa", "snakes" ]
       }, window.GAME_CATS_V616) Vd[d] = window.GAME_CATS_V616[d];
       var Xt = {
         "zh-Hant": {
           catLineTab: "連線 (10)",
           catTerritoryTab: "占地 (5)",
-          catCaptureTab: "吃子 (7)",
+          catCaptureTab: "吃子 (6)",
           catStrategyTab: "策略 (5)",
           catFavShort: "收藏",
           colMode1: "單個一排",
@@ -22974,7 +22973,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
         en: {
           catLineTab: "Connect (10)",
           catTerritoryTab: "Territory (5)",
-          catCaptureTab: "Capture (7)",
+          catCaptureTab: "Capture (6)",
           catStrategyTab: "Strategy (5)",
           catFavShort: "Fav",
           colMode1: "1 / Row",
@@ -22989,7 +22988,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
         ja: {
           catLineTab: "連珠 (10)",
           catTerritoryTab: "陣取り (5)",
-          catCaptureTab: "捕獲 (7)",
+          catCaptureTab: "捕獲 (6)",
           catStrategyTab: "戦略 (5)",
           catFavShort: "お気に入り",
           colMode1: "1列表示",

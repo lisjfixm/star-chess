@@ -218,6 +218,7 @@
       "desc.chess": "Throne of stars · checkmate",
       "name.wizard3d": "Wizard Chess 3D",
       "desc.wizard3d": "Cathedral arena · 3D checkmate duels",
+      "wizardEnter": "Open 3D",
       "name.reversi": "Reversi",
       "desc.reversi": "Flip the stars · seize the corners",
       jg: {
@@ -645,6 +646,7 @@
       "desc.chess": "星辰王座 · 將殺對決",
       "name.wizard3d": "巫師棋 3D",
       "desc.wizard3d": "聖殿戰場 · 3D 將殺對決",
+      "wizardEnter": "進入 3D",
       "name.reversi": "黑白棋",
       "desc.reversi": "翻轉星辰 · 佔角制勝",
       jg: {
@@ -1071,6 +1073,7 @@
       "desc.chess": "星辰王座 · 将杀对决",
       "name.wizard3d": "巫师棋 3D",
       "desc.wizard3d": "圣殿战场 · 3D 将杀对决",
+      "wizardEnter": "进入 3D",
       "name.reversi": "黑白棋",
       "desc.reversi": "翻转星辰 · 占角制胜",
       jg: {
@@ -1497,6 +1500,7 @@
       "desc.chess": "星の王座 · チェックメイト",
       "name.wizard3d": "ウィザードチェス 3D",
       "desc.wizard3d": "聖堂アリーナ · 3D チェス対決",
+      "wizardEnter": "3D へ",
       "name.reversi": "オセロ",
       "desc.reversi": "星を返して · 隅を制す",
       jg: {
@@ -3515,6 +3519,8 @@
     t && (t.style.display = "", "function" == typeof window.updateQuestEntryForGame ? window.updateQuestEntryForGame(e) : "ttt" === e && (v("qeCleared").textContent = Jr(Wr)));
     var a = v("chess960Row");
     a && a.classList.toggle("hidden", "chess" !== e);
+    var w = v("wizardEntryRow");
+    w && w.classList.toggle("hidden", "chess" !== e);
     var r = v("chk960");
     r && (r.checked = S.chess960), We("view-mode"), function(e) {
       try {
@@ -12968,10 +12974,7 @@
   function of() {
     for (var e = document.querySelectorAll(".game-card"), r = 0; r < e.length; r++) !function(e) {
       e.addEventListener("click", (function(t) {
-        t.preventDefault();
-        var g = e.getAttribute("data-game");
-        if ("wizard3d" === g) { "function" == typeof window.openWizard3d && window.openWizard3d(); return; }
-        Je(g);
+        t.preventDefault(), Je(e.getAttribute("data-game"));
       }));
     }(e[r]);
     for (var n = document.querySelectorAll(".select-card[data-mode]"), i = 0; i < n.length; i++) !function(e) {
@@ -12979,6 +12982,10 @@
         t.preventDefault(), Qe(e.getAttribute("data-mode"));
       }));
     }(n[i]);
+    var wb = v("btnWizard3d");
+    wb && wb.addEventListener("click", (function(t) {
+      t.preventDefault(), "function" == typeof window.openWizard3d && window.openWizard3d();
+    }));
     for (var o = document.querySelectorAll(".diff-card"), s = 0; s < o.length; s++) !function(e) {
       e.addEventListener("click", (function(t) {
         t.preventDefault(), Ze(e.getAttribute("data-diff"));
@@ -16474,8 +16481,8 @@
       en: {
         master: "Master",
         Close: "✕",
-        catAll: "All (27)",
-        searchPlaceholder: "Search 27 board games...",
+        catAll: "All (26)",
+        searchPlaceholder: "Search 26 board games...",
         menuEmptyState: "No board games in this category",
         "name.ataxx": "Star Ataxx",
         "desc.ataxx": "Clone & jump · Assimilate neighbors",
@@ -16560,8 +16567,8 @@
       "zh-Hant": {
         master: "大師",
         Close: "✕",
-        catAll: "全部 (27)",
-        searchPlaceholder: "搜尋 27 種星海棋藝...",
+        catAll: "全部 (26)",
+        searchPlaceholder: "搜尋 26 種星海棋藝...",
         menuEmptyState: "此分類暫無棋藝",
         "name.ataxx": "星際同化棋",
         "desc.ataxx": "分裂躍遷 · 鄰格同化",
@@ -21561,14 +21568,14 @@
       document.head.appendChild(Zt), window.GAME_CATS_V616 = {
         line: [ "ttt", "c4", "gomoku", "c6", "hex", "pente", "morris", "qubic", "uttt", "yavalath" ],
         territory: [ "go", "reversi", "dots", "ataxx", "amazons" ],
-        capture: [ "chess", "wizard3d", "xiangqi", "shogi", "banqi", "jungle", "draughts" ],
+        capture: [ "chess", "xiangqi", "shogi", "banqi", "jungle", "draughts" ],
         strategy: [ "checkers", "mancala", "breakthrough", "loa", "snakes" ]
       }, window.GAME_CATS_V616) Vd[d] = window.GAME_CATS_V616[d];
       var Xt = {
         "zh-Hant": {
           catLineTab: "連線 (10)",
           catTerritoryTab: "占地 (5)",
-          catCaptureTab: "吃子 (7)",
+          catCaptureTab: "吃子 (6)",
           catStrategyTab: "策略 (5)",
           catFavShort: "收藏",
           colMode1: "單個一排",
@@ -21584,7 +21591,7 @@
         en: {
           catLineTab: "Connect (10)",
           catTerritoryTab: "Territory (5)",
-          catCaptureTab: "Capture (7)",
+          catCaptureTab: "Capture (6)",
           catStrategyTab: "Strategy (5)",
           catFavShort: "Fav",
           colMode1: "1 / Row",
@@ -21599,7 +21606,7 @@
         ja: {
           catLineTab: "連珠 (10)",
           catTerritoryTab: "陣取り (5)",
-          catCaptureTab: "捕獲 (7)",
+          catCaptureTab: "捕獲 (6)",
           catStrategyTab: "戦略 (5)",
           catFavShort: "お気に入り",
           colMode1: "1列表示",
