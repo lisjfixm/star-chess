@@ -1,3 +1,10 @@
+# WebView JavascriptInterface 必須保留，否則 bridge 方法會被 R8 移除
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+-keep class com.example.engine.** { *; }
+-keepattributes *Annotation*,JavascriptInterface
+
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.

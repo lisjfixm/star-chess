@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import android.webkit.JavascriptInterface
+import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebSettings
@@ -20,6 +21,10 @@ import java.lang.ref.WeakReference
 
 private const val LOCAL_ORIGIN = "https://starchess.local"
 private const val ENTRY_URL = "$LOCAL_ORIGIN/index.html"
+private const val ONLINE_HOST = "lisjfixm.github.io"
+private const val ONLINE_SITE_PATH = "/star-chess/"
+private const val ONLINE_ENTRY = "https://$ONLINE_HOST$ONLINE_SITE_PATH"
+private const val WIZARD_PATH = "/wizard-chess-3d/"
 private const val TAG = "StarChessWeb"
 
 class StarChessWebController(
@@ -35,6 +40,12 @@ class StarChessWebController(
     private var webViewRef: WeakReference<WebView>? = null
     @Volatile
     private var cachedInjectedHtmlBytes: ByteArray? = null
+
+    /** 線上站點載入失敗時，改用內建離線版本（本局生命週期內不再回頭）。
+     *  首次啟動時的目標來源見 [initialEntryUrl]。
+     */
+    @Volatile
+    private var offlineFallbackActive: Boolean = false
 
     @SuppressLint("SetJavaScriptEnabled")
     fun createOrReuseWebView(context: Context): WebView {
@@ -92,26 +103,125 @@ class StarChessWebController(
                 ): Boolean {
                     val uri = request?.url ?: return true
                     val host = uri.host
+                    val path = uri.path ?: ""
                     val allowed = uri.scheme == "https" && (
                         host == "starchess.local" ||
-                        (host == "lisjfixm.github.io" && uri.path?.startsWith("/wizard-chess-3d/") == true)
+                        (host == ONLINE_HOST && (
+                            path.startsWith(ONLINE_SITE_PATH) ||
+                            path.startsWith(WIZARD_PATH)
+                        ))
                     )
-                    // Keep navigation confined inside our offline Star Chess bundle,
-                    // except the embedded Wizard Chess 3D page.
+                    // 站內導航留在 WebView；外部連結仍交給系統處理
                     return !allowed
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
+                    injectNativeShell(view)
                     installNavigationObserver(view)
+                }
+
+                override fun onReceivedError(
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    error: WebResourceError?,
+                ) {
+                    super.onReceivedError(view, request, error)
+                    if (request?.isForMainFrame == true && !offlineFallbackActive) {
+                        // 線上站點不可用（離線 / 被攔）→ 退回內建離線版本，仍可玩
+                        Log.w(TAG, "Online entry unavailable, falling back to bundled HTML")
+                        offlineFallbackActive = true
+                        view?.loadUrl(ENTRY_URL)
+                    }
                 }
             }
 
-            loadUrl(ENTRY_URL)
+            val entry = if (offlineFallbackActive) ENTRY_URL else ONLINE_ENTRY
+            loadUrl(entry)
         }
 
         webViewRef = WeakReference(webView)
         return webView
+    }
+
+    /** 原生外殼對網頁樣式的覆寫：隱藏與原生重複的語言/音效控件。 */
+    private fun overlayCss(): String = """
+        .lang-switch, #btnSound, #btnBgmToggle { display: none !important; }
+        body { padding-top: 8px !important; padding-bottom: 16px !important; }
+    """.trimIndent()
+
+    /** 原生 ↔ 網頁存檔橋接：載入初值、鉤住 localStorage，讓存檔即時同步到 DataStore。 */
+    private fun bridgeScript(): String = """
+        (function() {
+          try {
+            var bridge = window.StarChessAndroid;
+            if (!bridge) return;
+            var initialJson = bridge.getInitialStorageJson();
+            if (initialJson) {
+              var map = JSON.parse(initialJson);
+              Object.keys(map).forEach(function(k) {
+                if (localStorage.getItem(k) === null) {
+                  localStorage.setItem(k, map[k]);
+                }
+              });
+            }
+            var _set = Storage.prototype.setItem;
+            var _rem = Storage.prototype.removeItem;
+            var _clr = Storage.prototype.clear;
+            Storage.prototype.setItem = function(k, v) {
+              _set.call(this, k, v);
+              if (this === window.localStorage && String(k).indexOf("starchess.") === 0) {
+                try { bridge.onStorageSet(String(k), String(v)); } catch (e) {}
+              }
+            };
+            Storage.prototype.removeItem = function(k) {
+              _rem.call(this, k);
+              if (this === window.localStorage && String(k).indexOf("starchess.") === 0) {
+                try { bridge.onStorageRemove(String(k)); } catch (e) {}
+              }
+            };
+            Storage.prototype.clear = function() {
+              _clr.call(this);
+              if (this === window.localStorage) {
+                try { bridge.onStorageClear(); } catch (e) {}
+              }
+            };
+            setTimeout(function() {
+              try {
+                for (var i = 0; i < localStorage.length; i++) {
+                  var key = localStorage.key(i);
+                  if (key && key.indexOf("starchess.") === 0) {
+                    bridge.onStorageSet(key, localStorage.getItem(key) || "");
+                  }
+                }
+              } catch (e) {}
+            }, 450);
+          } catch (e) {}
+        })();
+    """.trimIndent()
+
+    /** 線上頁面無法預先插入 HTML，改於載入完成後以 JS 注入同樣的樣式與橋接。 */
+    private fun injectNativeShell(webView: WebView?) {
+        webView ?: return
+        val css = JSONObject.quote(overlayCss())
+        val bridge = bridgeScript()
+        webView.evaluateJavascript(
+            """
+            (function() {
+              try {
+                if (!window.__starchessNativeShell) {
+                  window.__starchessNativeShell = true;
+                  var st = document.createElement('style');
+                  st.id = 'starchess-native-shell-overrides';
+                  st.textContent = $css;
+                  (document.head || document.documentElement).appendChild(st);
+                }
+                $bridge
+              } catch (e) {}
+            })();
+            """.trimIndent(),
+            null,
+        )
     }
 
     private fun loadInjectedHtmlBytes(): ByteArray {
@@ -122,62 +232,11 @@ class StarChessWebController(
                 it.readText()
             }
             val injection = buildString {
-                append(
-                    """
-                    <style id="starchess-native-shell-overrides">
-                    .lang-switch, #btnSound, #btnBgmToggle { display: none !important; }
-                    body { padding-top: 8px !important; padding-bottom: 16px !important; }
-                    </style>
-                    <script>
-                    (function() {
-                      try {
-                        var bridge = window.StarChessAndroid;
-                        if (!bridge) return;
-                        var initialJson = bridge.getInitialStorageJson();
-                        if (initialJson) {
-                          var map = JSON.parse(initialJson);
-                          Object.keys(map).forEach(function(k) {
-                            if (localStorage.getItem(k) === null) {
-                              localStorage.setItem(k, map[k]);
-                            }
-                          });
-                        }
-                        var _set = Storage.prototype.setItem;
-                        var _rem = Storage.prototype.removeItem;
-                        var _clr = Storage.prototype.clear;
-                        Storage.prototype.setItem = function(k, v) {
-                          _set.call(this, k, v);
-                          if (this === window.localStorage && String(k).indexOf("starchess.") === 0) {
-                            try { bridge.onStorageSet(String(k), String(v)); } catch (e) {}
-                          }
-                        };
-                        Storage.prototype.removeItem = function(k) {
-                          _rem.call(this, k);
-                          if (this === window.localStorage && String(k).indexOf("starchess.") === 0) {
-                            try { bridge.onStorageRemove(String(k)); } catch (e) {}
-                          }
-                        };
-                        Storage.prototype.clear = function() {
-                          _clr.call(this);
-                          if (this === window.localStorage) {
-                            try { bridge.onStorageClear(); } catch (e) {}
-                          }
-                        };
-                        setTimeout(function() {
-                          try {
-                            for (var i = 0; i < localStorage.length; i++) {
-                              var key = localStorage.key(i);
-                              if (key && key.indexOf("starchess.") === 0) {
-                                bridge.onStorageSet(key, localStorage.getItem(key) || "");
-                              }
-                            }
-                          } catch (e) {}
-                        }, 450);
-                      } catch (e) {}
-                    })();
-                    </script>
-                    """.trimIndent()
-                )
+                append("<style id=\"starchess-native-shell-overrides\">\n")
+                append(overlayCss())
+                append("\n</style>\n<script>\n")
+                append(bridgeScript())
+                append("\n</script>")
             }
             val headIdx = rawHtml.indexOf("<head>", ignoreCase = true)
             val injected = if (headIdx >= 0) {
