@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="星之棋">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2305051a'/%3E%3Cpath d='M50 15 L61 38 L86 40 L67 56 L73 81 L50 67 L27 81 L33 56 L14 40 L39 38 Z' fill='%234dd0e1'/%3E%3C/svg%3E">
 <link rel="manifest" href='data:application/json,%7B%22name%22%3A%22%E6%98%9F%E4%B9%8B%E6%A3%8B%22%2C%22short_name%22%3A%22%E6%98%9F%E4%B9%8B%E6%A3%8B%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2305051a%22%2C%22theme_color%22%3A%22%2305051a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data:image/svg+xml,%253Csvg%2520xmlns%253D%2527http%253A//www.w3.org/2000/svg%2527%2520viewBox%253D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%253D%2527100%2527%2520height%253D%2527100%2527%2520rx%253D%252720%2527%2520fill%253D%2527%252305051a%2527/%253E%253Cpath%2520d%253D%2527M50%252015%2520L61%252038%2520L86%252040%2520L67%252056%2520L73%252081%2520L50%252067%2520L27%252081%2520L33%252056%2520L14%252040%2520L39%252038%2520Z%2527%2520fill%253D%2527%25234dd0e1%2527/%253E%253C/svg%3E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image/svg+xml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D'>
-<title>星之棋 v6.22.0 · 蒼穹星宮篇</title>
+<title>星之棋 v6.23.0 · 蒼穹星宮篇</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2305051a'/%3E%3Cpath d='M50 15 L61 38 L86 40 L67 56 L73 81 L50 67 L27 81 L33 56 L14 40 L39 38 Z' fill='%234dd0e1'/%3E%3C/svg%3E">
 <style>
 /* ===== style block 1 ===== */
@@ -305,7 +305,7 @@ body{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}
 #wizardFrame{flex:1;width:100%;border:0;background:#05051a}
 @media (max-width:600px){.wizard-frame{height:94vh;border-radius:14px}}
 
-/* ===== v6.22.0 UI/UX polish layer (HTML/CSS worker; no gameplay / JS wiring change) ===== */
+/* ===== v6.23.0 UI/UX polish layer (HTML/CSS worker; no gameplay / JS wiring change) ===== */
 
 /* --- B-U10: column tiering — ≤520 single column; 521–640 double; >640 default --- */
 @media (min-width:521px) and (max-width:640px){
@@ -505,7 +505,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <div class="hrb-right">
 <button class="coin-pill-bar" id="btnHeroCoin" type="button" title="星幣" data-i18n-title="starCoins"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l1.65 3.35 3.7.54-2.68 2.61.63 3.68L12 14.94l-3.3 1.74.63-3.68-2.68-2.61 3.7-.54L12 6.5z"/></svg><span id="hrbCoinVal">0</span></button>
 <button class="hrb-pill" id="btnOpenBook" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span data-i18n="openingBook">開局百科</span></button>
-<button class="hrb-pill nexus-hero-btn" id="btnAstralNexusHub" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span id="lblAstralNexusBtn">星樞聖殿 v6.22.0</span></button>
+<button class="hrb-pill nexus-hero-btn" id="btnAstralNexusHub" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span id="lblAstralNexusBtn">星樞聖殿 v6.23.0</span></button>
 </div>
 </div>
 
@@ -1003,7 +1003,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 </div>
 
 <p class="foot-hint" data-i18n="footHint">选择一种棋艺，开启星空对决</p>
-<p class="version-tag">v6.22.0 · 蒼穹星宮篇</p>
+<p class="version-tag">v6.23.0 · 蒼穹星宮篇</p>
 </div>
 
 
@@ -1217,7 +1217,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <button class="mini-btn" id="btnUndo" type="button" data-i18n="undo">↶ 悔棋</button>
 <button class="mini-btn" id="btnGameRestart" type="button" data-i18n="restart">↻ 重开</button>
 <button class="mini-btn" id="btnTopWhyMove" type="button" title="AI 深度點評與復盤" data-i18n-title="whyBtnShort"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span data-i18n="whyBtnShort">為什麼</span></button>
-<button class="mini-btn nexus-glow-pill" id="btnInGameNexus" type="button" title="蒼穹星樞中心 v6.22.0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span>星樞</span></button>
+<button class="mini-btn nexus-glow-pill" id="btnInGameNexus" type="button" title="蒼穹星樞中心 v6.23.0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span>星樞</span></button>
 <button class="mini-btn" id="btnMoreTools" type="button" title="工具" data-i18n-title="moreTools"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg></span><span data-i18n="moreTools">工具</span></button>
 </div>
 </div>
@@ -3700,7 +3700,7 @@ var __T2S_MAP = null;
   function d() {
     document.documentElement.lang = o;
     try {
-      document.title = l("logo") + " v6.22.0";
+      document.title = l("logo") + " v6.23.0";
     } catch (e) {}
     for (var e = document.querySelectorAll("[data-i18n]"), t = 0; t < e.length; t++) e[t].textContent = l(e[t].getAttribute("data-i18n"));
     for (var a = document.querySelectorAll("[data-i18n-alt]"), r = 0; r < a.length; r++) a[r].setAttribute("alt", l(a[r].getAttribute("data-i18n-alt")));
@@ -4718,7 +4718,8 @@ var __T2S_MAP = null;
     return e;
   }
   function Le() {
-    for (var e = '<div class="ach-grid">', t = 0; t < C.length; t++) {
+    var au = C.filter(function(a) { return !!S.achievements[a.id]; }).length;
+    for (var e = '<div style="margin-bottom:10px;font-weight:800;color:#fde047;font-size:.86rem">' + l("achProgress").replace("{n}", au).replace("{total}", C.length) + '</div><div class="ach-grid">', t = 0; t < C.length; t++) {
       var a = C[t], r = S.achievements[a.id];
       e += '<div class="ach-card' + (r ? " got" : "") + '"><div class="ach-big">' + w[a.icon] + '</div><div class="ach-name">' + l("ach_" + a.id) + '</div><div class="ach-desc">' + l("achd_" + a.id) + "</div>" + (r ? '<div class="ach-date">' + new Date(r).toLocaleDateString() + "</div>" : '<div class="ach-lock">' + w.lock + "</div>") + "</div>";
     }
@@ -4983,8 +4984,13 @@ var __T2S_MAP = null;
         void 0 !== t.passN && (S.passN = t.passN), void 0 !== t.rvPass && (S.rvPass = t.rvPass), 
         t.cap && (S.cap = t.cap), void 0 !== t.usedUndo && (S.usedUndo = t.usedUndo), void 0 !== t.gameNotes && (S.gameNotes = t.gameNotes), 
         t.uttt && (S.uttt = t.uttt), t.banqi && (S.banqi = t.banqi), t.shogi && (S.shogi = t.shogi), 
-        t.loa && (S.loa = t.loa), t.amazons && (S.amazons = t.amazons), t.drSize && (S.drSize = t.drSize), 
-        void 0 !== t.drBackwardCap && (S.drBackwardCap = t.drBackwardCap), t.dotsSize && (S.dotsSize = t.dotsSize), 
+        t.loa && (S.loa = t.loa), t.amazons && (S.amazons = t.amazons), t.drSize && (S.drSize = t.drSize),
+        t.ataxx && (S.ataxx = JSON.parse(JSON.stringify(t.ataxx))), t.breakthrough && (S.breakthrough = JSON.parse(JSON.stringify(t.breakthrough))),
+        t.checkers && (S.checkers = JSON.parse(JSON.stringify(t.checkers))), t.draughts && (S.draughts = JSON.parse(JSON.stringify(t.draughts))),
+        t.jungle && (S.jungle = JSON.parse(JSON.stringify(t.jungle))), t.go && (S.go = JSON.parse(JSON.stringify(t.go))),
+        t.hexTiles && (S.hexTiles = JSON.parse(JSON.stringify(t.hexTiles))), void 0 !== t.lastP1 && (S.lastP1 = t.lastP1),
+        void 0 !== t.lastAny && (S.lastAny = t.lastAny),
+        void 0 !== t.drBackwardCap && (S.drBackwardCap = t.drBackwardCap), t.dotsSize && (S.dotsSize = t.dotsSize),
         S.savedSnapshots = t.snapshots || null, void 0 !== t.goLast && (to = t.goLast || null), S.chess960 = !!t.chess960, S.ch960 = t.ch960 ? JSON.parse(JSON.stringify(t.ch960)) : null, 
         S.v616ActivePuzzle = null, S.over = !1, S.win = null, S.replay = !1, "chess" === S.game && vs(), !0;
       } catch (e) {
@@ -5434,14 +5440,14 @@ var __T2S_MAP = null;
       Rt();
     }() : "c4" === S.game ? function() {
       Ot(360, 360);
-      for (var a = Zt - 9, r = Zt - 9, n = 4 * Qt + 18, i = 4 * Qt + 18, o = S.c4Drop, s = 0; s < 4; s++) for (var l = 0; l < 4; l++) if (S.grid[s][l] !== e) {
+      for (var a = Zt - 9, r = Zt - 9, n = 4 * Qt + 18, i = 4 * Qt + 18, o = S.c4Drop, s = 0; s < 4; s++) { var c4Row = S.grid[s]; if (!c4Row) continue; for (var l = 0; l < 4; l++) if (c4Row[l] !== e) {
         var c = $t(l), d = ea(s);
         if (o && o.r === s && o.c === l) {
           var f = aa(), u = r - 8;
           d = u + (ea(s) - u) * f * f;
         }
-        ra(c, d, S.grid[s][l], !1, 1, Yt);
-      }
+        ra(c, d, c4Row[l], !1, 1, Yt);
+      } }
       m.save(), m.shadowColor = "rgba(77,208,225,.4)", m.shadowBlur = 18;
       var v = m.createLinearGradient(0, r, 0, r + i);
       v.addColorStop(0, "#2d2275"), v.addColorStop(1, "#120d38"), m.beginPath(), m.moveTo(a + 16, r), 
@@ -5513,7 +5519,9 @@ var __T2S_MAP = null;
         m.strokeStyle = "rgba(255,215,0,.9)", m.lineWidth = 2, m.stroke();
       }
       for (e = 0; e < 9; e++) for (r = 0; r < 7; r++) {
-        var d = S.grid[e][r];
+        var jgRow = S.grid[e];
+        if (!jgRow) continue;
+        var d = jgRow[r];
         d && (S.animMove && "jungle" === S.animMove.game && e === S.animMove.tr && r === S.animMove.tc || ts(e, r, d));
       }
       if (S.animMove && "jungle" === S.animMove.game) {
@@ -5534,11 +5542,13 @@ var __T2S_MAP = null;
       if (as.sel) for (var l = 0; l < as.moves.length; l++) {
         var c = as.moves[l];
         i = ll(c.tc, 8) * rs + rs / 2, o = sl(c.tr, 8) * rs + rs / 2;
-        m.beginPath(), m.arc(i, o, S.grid[c.tr][c.tc] ? .42 * rs : 8, 0, 7), S.grid[c.tr][c.tc] ? (m.strokeStyle = "rgba(255,215,0,.9)", 
+        m.beginPath(), m.arc(i, o, S.grid[c.tr] && S.grid[c.tr][c.tc] ? .42 * rs : 8, 0, 7), S.grid[c.tr] && S.grid[c.tr][c.tc] ? (m.strokeStyle = "rgba(255,215,0,.9)", 
         m.lineWidth = 2.5, m.stroke()) : (m.fillStyle = "rgba(255,215,0,.3)", m.fill());
       }
       for (var d = 0; d < 8; d++) for (var f = 0; f < 8; f++) {
-        var u = S.grid[d][f];
+        var chRow = S.grid[d];
+        if (!chRow) continue;
+        var u = chRow[f];
         u && (S.animMove && d === S.animMove.tr && f === S.animMove.tc || S.animCastle && d === S.animCastle.tr && f === S.animCastle.tc || hl(d, f, u));
       }
       if (S.animMove) {
@@ -5593,7 +5603,7 @@ var __T2S_MAP = null;
       }
       if (jl.sel) for (var l = 0; l < jl.moves.length; l++) {
         var c = jl.moves[l], d = Fl + ll(c.tc, 9) * Gl, f = Fl + sl(c.tr, 10) * Gl;
-        m.beginPath(), m.arc(d, f, S.grid[c.tr][c.tc] ? .42 * Gl : 7, 0, 2 * Math.PI), m.fillStyle = "rgba(255,215,0,.28)", 
+        m.beginPath(), m.arc(d, f, S.grid[c.tr] && S.grid[c.tr][c.tc] ? .42 * Gl : 7, 0, 2 * Math.PI), m.fillStyle = "rgba(255,215,0,.28)", 
         m.fill(), m.strokeStyle = "#ffd700", m.lineWidth = 2, m.stroke();
       }
       var u = $l(t, S.grid), v = $l(a, S.grid);
@@ -5609,7 +5619,9 @@ var __T2S_MAP = null;
         m.fillText(p, o, s + 1);
       }
       for (var g = 0; g < 10; g++) for (var h = 0; h < 9; h++) {
-        var y = S.grid[g][h];
+        var xqRow = S.grid[g];
+        if (!xqRow) continue;
+        var y = xqRow[h];
         y && (S.animMove && "xiangqi" === S.animMove.game && g === S.animMove.tr && h === S.animMove.tc || p(g, h, y, 0));
       }
       if (S.animMove && "xiangqi" === S.animMove.game) {
@@ -5634,7 +5646,9 @@ var __T2S_MAP = null;
       m.moveTo(r.x - 24, r.y - 6), m.lineTo(i.x - 24, i.y + 6), m.stroke(), m.beginPath(), 
       m.moveTo(n.x + 24, n.y - 6), m.lineTo(o.x + 24, o.y + 6), m.stroke(), m.restore();
       for (var s = S.history.length ? S.history[S.history.length - 1] : null, l = 0; l < Sc; l++) for (var c = 0; c < Sc; c++) {
-        var d = Pc(l, c), f = S.grid[l][c];
+        var hxRow = S.grid[l];
+        if (!hxRow) continue;
+        var d = Pc(l, c), f = hxRow[c];
         m.beginPath();
         for (var u = 0; u < 6; u++) {
           var v = Math.PI / 6 + u * Math.PI / 3, p = d.x + wc * Math.cos(v), g = d.y + wc * Math.sin(v);
@@ -5677,15 +5691,15 @@ var __T2S_MAP = null;
           }
         } else if ("gomoku" === n || "c6" === n || "pente" === n) {
           var l = Math.round((r.x - sa) / oa), c = Math.round((r.y - sa) / oa);
-          c >= 0 && c < 15 && l >= 0 && l < 15 && S.grid[c][l] === e && (m.fillStyle = i, 
+          c >= 0 && c < 15 && l >= 0 && l < 15 && S.grid[c] && S.grid[c][l] === e && (m.fillStyle = i, 
           m.beginPath(), m.arc(sa + l * oa, sa + c * oa, 12, 0, 2 * Math.PI), m.fill());
         } else if ("go" === n) {
           var d = Math.round((r.x - Zi) / Xi), f = Math.round((r.y - Zi) / Xi);
-          f >= 0 && f < Qi && d >= 0 && d < Qi && S.grid[f][d] === e && (m.fillStyle = i, 
+          f >= 0 && f < Qi && d >= 0 && d < Qi && S.grid[f] && S.grid[f][d] === e && (m.fillStyle = i, 
           m.beginPath(), m.arc(Zi + d * Xi, Zi + f * Xi, .4 * Xi, 0, 2 * Math.PI), m.fill());
         } else if ("hex" === n) for (var u = 0; u < Sc; u++) for (var v = 0; v < Sc; v++) {
           var p = Pc(u, v);
-          Math.hypot(r.x - p.x, r.y - p.y) < .85 * wc && S.grid[u][v] === e && (m.fillStyle = i, 
+          Math.hypot(r.x - p.x, r.y - p.y) < .85 * wc && S.grid[u] && S.grid[u][v] === e && (m.fillStyle = i, 
           m.beginPath(), m.arc(p.x, p.y, .62 * wc, 0, 2 * Math.PI), m.fill());
         } else if ("morris" === n && S.morris) {
           var g = Yc(r.x, r.y);
@@ -6118,18 +6132,19 @@ var __T2S_MAP = null;
   var oa = 32, sa = 28;
   function la() {
     Ot(560, 560), m.strokeStyle = "rgba(125,249,255,.3)", m.lineWidth = 1;
+    if (!S.grid || !S.grid.length) { Rt(); return; }
     for (var a = 0; a < 15; a++) m.beginPath(), m.moveTo(sa, sa + a * oa), m.lineTo(sa + 14 * oa, sa + a * oa), 
     m.stroke(), m.beginPath(), m.moveTo(sa + a * oa, sa), m.lineTo(sa + a * oa, sa + 14 * oa), 
     m.stroke();
     m.fillStyle = "rgba(255,215,0,.6)";
     for (var r = [ [ 3, 3 ], [ 3, 11 ], [ 7, 7 ], [ 11, 3 ], [ 11, 11 ] ], n = 0; n < r.length; n++) m.beginPath(), 
     m.arc(sa + r[n][1] * oa, sa + r[n][0] * oa, 4, 0, 2 * Math.PI), m.fill();
-    for (var i = 0; i < 15; i++) for (var o = 0; o < 15; o++) S.grid[i][o] !== e && ca(sa + o * oa, sa + i * oa, S.grid[i][o], Wt("g" + i + "_" + o));
-    if (S.gkForbidden && S.gkForbiddenHint && S.turn === t && !S.over) for (var s = 0; s < 15; s++) for (var l = 0; l < 15; l++) S.grid[s][l] === e && Ha(s, l, t) && (m.save(), 
+    for (var i = 0; i < 15; i++) { var laRow = S.grid[i]; if (!laRow) continue; for (var o = 0; o < 15; o++) { var laCell = laRow[o]; if (laCell === undefined) continue; laCell !== e && ca(sa + o * oa, sa + i * oa, laCell, Wt("g" + i + "_" + o)); } }
+    if (S.gkForbidden && S.gkForbiddenHint && S.turn === t && !S.over) for (var s = 0; s < 15; s++) { var gkRow = S.grid[s]; if (!gkRow) continue; for (var l = 0; l < 15; l++) { var gkCell = gkRow[l]; if (gkCell === undefined) continue; gkCell === e && Ha(s, l, t) && (m.save(), 
     m.strokeStyle = "rgba(255,70,70,.75)", m.lineWidth = 1.6, m.setLineDash([ 3, 3 ]), 
     m.beginPath(), m.arc(sa + l * oa, sa + s * oa, .3 * oa, 0, 2 * Math.PI), m.stroke(), 
     m.globalAlpha = .18, m.fillStyle = "#ff4646", m.beginPath(), m.arc(sa + l * oa, sa + s * oa, .3 * oa, 0, 2 * Math.PI), 
-    m.fill(), m.restore());
+    m.fill(), m.restore()); } }
     if (S.history.length && !S.win) {
       var c = S.history[S.history.length - 1];
       m.strokeStyle = c.player === t ? "#ff6b6b" : "#ffd700", m.lineWidth = 2, m.beginPath(), 
@@ -6425,11 +6440,11 @@ var __T2S_MAP = null;
       Aa(r, a, S.turn);
     }(r) : "gomoku" === S.game ? function(t, a) {
       var r = Math.round((t - sa) / oa), n = Math.round((a - sa) / oa);
-      if (n < 0 || n >= 15 || r < 0 || r >= 15 || S.grid[n][r] !== e) return;
+      if (n < 0 || n >= 15 || r < 0 || r >= 15 || !Array.isArray(S.grid) || !S.grid[n] || S.grid[n][r] !== e) return;
       Ia(n, r, S.turn) && ur();
     }(r, n) : "c6" === S.game ? function(t, a) {
       var r = Math.round((t - sa) / oa), n = Math.round((a - sa) / oa);
-      if (n < 0 || n >= 15 || r < 0 || r >= 15 || S.grid[n][r] !== e) return;
+      if (n < 0 || n >= 15 || r < 0 || r >= 15 || !Array.isArray(S.grid) || !S.grid[n] || S.grid[n][r] !== e) return;
       qe(n, r, S.turn), ur();
     }(r, n) : "checkers" === S.game ? function(e, r) {
       var n = zi(e, r);
@@ -6455,8 +6470,9 @@ var __T2S_MAP = null;
         }
       }
     }(r, n) : "go" === S.game ? function(e, t) {
+      if (!Number.isFinite(e) || !Number.isFinite(t)) return;
       var a = Math.round((e - Zi) / Xi), r = Math.round((t - Zi) / Xi);
-      if (r < 0 || r >= Qi || a < 0 || a >= Qi) return;
+      if (!Number.isFinite(a) || !Number.isFinite(r) || r < 0 || r >= Qi || a < 0 || a >= Qi) return;
       oo({
         r: r,
         c: a
@@ -6481,7 +6497,7 @@ var __T2S_MAP = null;
     }(r, n) : "chess" === S.game ? function(e, t) {
       var a = il(e, t);
       if (!a) return;
-      var r = a.r, n = a.c, i = S.grid[r][n];
+      var r = a.r, n = a.c, i = S.grid[r] ? S.grid[r][n] : undefined;
       if (null == as.sel) i && i.p === S.turn && (as.sel = [ r, n ], as.moves = Ns(r, n), 
       Ct()); else {
         var o = as.sel[0], s = as.sel[1];
@@ -6518,7 +6534,7 @@ var __T2S_MAP = null;
     }(r, n) : "xiangqi" === S.game ? function(e, t) {
       var a = Math.round((e - Fl) / Gl), r = Math.round((t - Fl) / Gl);
       if (r < 0 || r > 9 || a < 0 || a > 8) return;
-      var n = cl(r, 10), i = dl(a, 9), o = S.grid[n][i];
+      var n = cl(r, 10), i = dl(a, 9), o = S.grid[n] ? S.grid[n][i] : undefined;
       if (jl.sel) {
         var s = jl.sel[0], l = jl.sel[1];
         if (s === n && l === i) return jl.sel = null, jl.moves = [], void Ct();
@@ -6533,11 +6549,11 @@ var __T2S_MAP = null;
       }
       if (!r) return;
       var c = r[0], d = r[1];
-      if (S.grid[c][d] !== e) return;
+      if (!S.grid[c] || S.grid[c][d] !== e) return;
       Ac(c, d, S.turn), S.over || ur();
     }(r, n) : "pente" === S.game ? function(t, a) {
       var r = Math.round((t - sa) / oa), n = Math.round((a - sa) / oa);
-      if (n < 0 || n >= 15 || r < 0 || r >= 15 || S.grid[n][r] !== e) return;
+      if (n < 0 || n >= 15 || r < 0 || r >= 15 || !Array.isArray(S.grid) || !S.grid[n] || S.grid[n][r] !== e) return;
       _c(n, r, S.turn) && ur();
     }(r, n) : "dots" === S.game ? function(e, t) {
       var a = Wc(e, t);
@@ -6556,7 +6572,7 @@ var __T2S_MAP = null;
     }(r, n) : "ataxx" === S.game ? function(e, t) {
       var a = Math.floor(e / yd), r = Math.floor(t / yd);
       if (r < 0 || r >= md || a < 0 || a >= md) return;
-      var n = cl(r, md), i = dl(a, md), o = S.grid[n][i];
+      var n = cl(r, md), i = dl(a, md), o = S.grid[n] ? S.grid[n][i] : undefined;
       if (kd.sel) {
         var s = kd.sel[0], l = kd.sel[1];
         if (s === n && l === i) return kd.sel = null, kd.moves = [], void Ct();
@@ -6567,7 +6583,7 @@ var __T2S_MAP = null;
     }(r, n) : "breakthrough" === S.game && function(e, t) {
       var a = Math.floor(e / Bd), r = Math.floor(t / Bd);
       if (r < 0 || r >= qd || a < 0 || a >= qd) return;
-      var n = cl(r, qd), i = dl(a, qd), o = S.grid[n][i];
+      var n = cl(r, qd), i = dl(a, qd), o = S.grid[n] ? S.grid[n][i] : undefined;
       if (Ed.sel) {
         var s = Ed.sel[0], l = Ed.sel[1];
         if (s === n && l === i) return Ed.sel = null, Ed.moves = [], void Ct();
@@ -7314,6 +7330,15 @@ var __T2S_MAP = null;
         shogi: S.shogi,
         loa: S.loa,
         amazons: S.amazons,
+        ataxx: S.ataxx,
+        breakthrough: S.breakthrough,
+        checkers: S.checkers,
+        draughts: S.draughts,
+        jungle: S.jungle,
+        go: S.go,
+        hexTiles: S.hexTiles,
+        lastP1: S.lastP1,
+        lastAny: S.lastAny,
         drSize: S.drSize,
         drBackwardCap: S.drBackwardCap,
         dotsSize: S.dotsSize,
@@ -7355,6 +7380,15 @@ var __T2S_MAP = null;
         shogi: S.shogi,
         loa: S.loa,
         amazons: S.amazons,
+        ataxx: S.ataxx,
+        breakthrough: S.breakthrough,
+        checkers: S.checkers,
+        draughts: S.draughts,
+        jungle: S.jungle,
+        go: S.go,
+        hexTiles: S.hexTiles,
+        lastP1: S.lastP1,
+        lastAny: S.lastAny,
         drSize: S.drSize,
         drBackwardCap: S.drBackwardCap,
         dotsSize: S.dotsSize,
@@ -8830,7 +8864,7 @@ var __T2S_MAP = null;
     for (var o = [], s = -4; s <= 4; s++) if (0 !== s) {
       var l = t + s * r, c = a + s * n;
       if (In(l, c)) {
-        var d = S.grid[l][c];
+        var d = S.grid[l] ? S.grid[l][c] : undefined;
         o.push(d === i ? "1" : d === e ? "0" : "2");
       } else o.push("2");
     } else o.push("1");
@@ -8845,13 +8879,14 @@ var __T2S_MAP = null;
     return (i >= 2 || i >= 1 && o >= 1 || o >= 2) && (n += qn.LIVE_FOUR), n;
   }
   function On(t) {
-    for (var a = {}, r = !1, n = 0; n < 15; n++) for (var i = 0; i < 15; i++) if (S.grid[n][i] !== e) {
+    if (!Array.isArray(S.grid) || !S.grid.length) return [ { row: 7, col: 7 } ];
+    for (var a = {}, r = !1, n = 0; n < 15; n++) { var onRow = S.grid[n]; if (!onRow) continue; for (var i = 0; i < 15; i++) if (onRow[i] !== e) {
       r = !0;
       for (var o = -t; o <= t; o++) for (var s = -t; s <= t; s++) {
         var l = n + o, c = i + s;
-        In(l, c) && S.grid[l][c] === e && (a[15 * l + c] = !0);
+        In(l, c) && S.grid[l] && S.grid[l][c] === e && (a[15 * l + c] = !0);
       }
-    }
+    } }
     if (!r) return [ {
       row: 7,
       col: 7
@@ -8864,7 +8899,16 @@ var __T2S_MAP = null;
     return d;
   }
   function Rn() {
-    for (var e = 0, r = 0, n = 0; n < 15; n++) for (var i = 0; i < 15; i++) S.grid[n][i] === a ? e += Hn(n, i, a) : S.grid[n][i] === t && (r += Hn(n, i, t));
+    if (!S.grid || !S.grid.length) return 0;
+    for (var e = 0, r = 0, n = 0; n < 15; n++) {
+      var rnRow = S.grid[n];
+      if (!rnRow) continue;
+      for (var i = 0; i < 15; i++) {
+        var rnCell = rnRow[i];
+        if (rnCell === undefined) continue;
+        rnCell === a ? e += Hn(n, i, a) : rnCell === t && (r += Hn(n, i, t));
+      }
+    }
     return e - r * ("aggressive" === S.aiPersona ? .88 : "defensive" === S.aiPersona ? 1.42 : Bn);
   }
   var Dn = function() {
@@ -9238,7 +9282,7 @@ var __T2S_MAP = null;
       return i;
     }
     if ("c4" === n) {
-      for (var s = 0, l = 0; l < 4; l++) for (var c = 0; c < 4; c++) S.grid[l][c] === t ? s++ : S.grid[l][c] === a && s--;
+      for (var s = 0, l = 0; l < 4; l++) { var c4eRow = S.grid[l]; if (!c4eRow) continue; for (var c = 0; c < 4; c++) c4eRow[c] === t ? s++ : c4eRow[c] === a && s--; }
       return s;
     }
     if ("checkers" === n) return (Ri(a) - Ri(t)) / 10;
@@ -9247,10 +9291,10 @@ var __T2S_MAP = null;
       return d.black - (d.white + f);
     }
     if ("jungle" === n) {
-      for (var u = 0, v = 0, p = 0; p < 9; p++) for (var g = 0; g < 7; g++) {
-        var h = S.grid[p][g];
+      for (var u = 0, v = 0, p = 0; p < 9; p++) { var jeRow = S.grid[p]; if (!jeRow) continue; for (var g = 0; g < 7; g++) {
+        var h = jeRow[g];
         h && (h.p === t ? u += h.t : v += h.t);
-      }
+      } }
       return u - v;
     }
     if ("reversi" === n) {
@@ -9857,13 +9901,17 @@ var __T2S_MAP = null;
     }));
   }
   function no(t, a) {
+    if (!Array.isArray(S.grid) || !S.grid[t] || S.grid[t][a] === undefined) return {
+      cells: [],
+      lib: {}
+    };
     for (var r = S.grid[t][a], n = [], i = {}, o = {}, s = [ [ t, a ] ]; s.length; ) {
       var l = s.pop(), c = l[0], d = l[1], f = c * Qi + d;
       if (!o[f]) {
         o[f] = 1, n.push(l);
         for (var u = 0; u < 4; u++) {
           var v = c + eo[u][0], p = d + eo[u][1];
-          v < 0 || v >= Qi || p < 0 || p >= Qi || (S.grid[v][p] === e ? i[v * Qi + p] = 1 : S.grid[v][p] === r && s.push([ v, p ]));
+          v < 0 || v >= Qi || p < 0 || p >= Qi || (!S.grid[v] || S.grid[v][p] === undefined) || (S.grid[v][p] === e ? i[v * Qi + p] = 1 : S.grid[v][p] === r && s.push([ v, p ]));
         }
       }
     }
@@ -9873,13 +9921,16 @@ var __T2S_MAP = null;
     };
   }
   function io(r, n, i) {
+    if (!Array.isArray(S.grid) || !S.grid[r] || S.grid[r][n] === undefined) return {
+      ok: !1
+    };
     if (S.grid[r][n] !== e) return {
       ok: !1
     };
     S.grid[r][n] = i;
     for (var o = i === t ? a : t, s = [], l = {}, c = 0; c < 4; c++) {
       var d = r + eo[c][0], f = n + eo[c][1];
-      if (!(d < 0 || d >= Qi || f < 0 || f >= Qi || l[d * Qi + f] || S.grid[d][f] !== o)) {
+      if (!(d < 0 || d >= Qi || f < 0 || f >= Qi || l[d * Qi + f] || !S.grid[d] || S.grid[d][f] !== o)) {
         for (var u = no(d, f), v = 0; v < u.cells.length; v++) l[u.cells[v][0] * Qi + u.cells[v][1]] = 1;
         if (0 === Object.keys(u.lib).length) for (v = 0; v < u.cells.length; v++) {
           var p = u.cells[v];
@@ -9958,23 +10009,24 @@ var __T2S_MAP = null;
   }
   function lo() {
     var r, n, i = 0, o = 0, s = {};
-    for (r = 0; r < Qi; r++) for (n = 0; n < Qi; n++) S.grid[r][n] === t ? i++ : S.grid[r][n] === a && o++;
-    for (r = 0; r < Qi; r++) for (n = 0; n < Qi; n++) {
-      var l = r * Qi + n;
-      if (S.grid[r][n] === e && !s[l]) {
+    if (!S.grid || !S.grid.length) return { black: 0, white: 0 };
+    for (r = 0; r < Qi; r++) { var loRow = S.grid[r]; if (!loRow) continue; for (n = 0; n < Qi; n++) { var loCell = loRow[n]; loCell === t ? i++ : loCell === a && o++; } }
+    for (r = 0; r < Qi; r++) { var loRow2 = S.grid[r]; if (!loRow2) continue; for (n = 0; n < Qi; n++) {
+      var l = r * Qi + n, loCell2 = loRow2[n];
+      if (loCell2 === e && !s[l]) {
         for (var c = [ [ r, n ] ], d = [], f = {}; c.length; ) {
           var u = c.pop(), v = u[0], p = u[1], g = v * Qi + p;
           if (!s[g]) {
             s[g] = 1, d.push(u);
             for (var h = 0; h < 4; h++) {
               var m = v + eo[h][0], y = p + eo[h][1];
-              m < 0 || m >= Qi || y < 0 || y >= Qi || (S.grid[m][y] === e ? c.push([ m, y ]) : f[S.grid[m][y]] = 1);
+              m < 0 || m >= Qi || y < 0 || y >= Qi || (function(nb) { var nbRow = S.grid[m]; if (!nbRow) return; var nbCell = nbRow[y]; nbCell === e ? c.push([ m, y ]) : f[nbCell] = 1; })();
             }
           }
         }
         1 === Object.keys(f).length && (f[t] ? i += d.length : o += d.length);
       }
-    }
+    } }
     return {
       black: i,
       white: o
@@ -10112,7 +10164,7 @@ var __T2S_MAP = null;
     var o = i === t ? a : t, s = 0, savedLibs = 0;
     for (var c0 = 0; c0 < 4; c0++) {
       var d0 = r + eo[c0][0], f0 = n + eo[c0][1];
-      if (d0 >= 0 && d0 < Qi && f0 >= 0 && f0 < Qi && S.grid[d0][f0] === i) {
+      if (d0 >= 0 && d0 < Qi && f0 >= 0 && f0 < Qi && S.grid[d0] && S.grid[d0][f0] === i) {
         var g0 = no(d0, f0), libs0 = Object.keys(g0.lib).length;
         1 === libs0 && (savedLibs += g0.cells.length);
       }
@@ -10123,17 +10175,17 @@ var __T2S_MAP = null;
     1 === l.ownLibs && 0 === l.capt.length ? s -= 36 : savedLibs > 0 && l.ownLibs >= 2 && (s += 22 + 6 * savedLibs);
     for (var c = 0; c < 4; c++) {
       var d = r + eo[c][0], f = n + eo[c][1];
-      if (!(d < 0 || d >= Qi || f < 0 || f >= Qi)) if (S.grid[d][f] === o) {
+      if (!(d < 0 || d >= Qi || f < 0 || f >= Qi)) if (S.grid[d] && S.grid[d][f] === o) {
         var u = no(d, f), v = Object.keys(u.lib).length;
         1 === v ? s += 18 + 3 * u.cells.length : 2 === v ? s += 7 : 3 === v && (s += 2);
-      } else if (S.grid[d][f] === i) {
+      } else if (S.grid[d] && S.grid[d][f] === i) {
         l.ownLibs >= 3 && (s += 3);
       }
     }
     var diagOwn = 0, diagOpp = 0;
     for (var dr = -1; dr <= 1; dr += 2) for (var dc = -1; dc <= 1; dc += 2) {
       var rr = r + dr, cc = n + dc;
-      rr >= 0 && rr < Qi && cc >= 0 && cc < Qi && (S.grid[rr][cc] === i ? diagOwn++ : S.grid[rr][cc] === o && diagOpp++);
+      rr >= 0 && rr < Qi && cc >= 0 && cc < Qi && S.grid[rr] && (S.grid[rr][cc] === i ? diagOwn++ : S.grid[rr][cc] === o && diagOpp++);
     }
     s += 2 * diagOwn + diagOpp;
     S.grid[r][n] = e;
@@ -10146,11 +10198,11 @@ var __T2S_MAP = null;
   function po(e, r, n) {
     for (var i = n === t ? a : t, o = 0; o < 4; o++) {
       var s = e + eo[o][0], l = r + eo[o][1];
-      if (!(s < 0 || s >= Qi || l < 0 || l >= Qi) && S.grid[s][l] === i) return !1;
+      if (!(s < 0 || s >= Qi || l < 0 || l >= Qi) && S.grid[s] && S.grid[s][l] === i) return !1;
     }
     for (var c = 0, d = 0, f = -1; f <= 1; f += 2) for (var u = -1; u <= 1; u += 2) {
       var v = e + f, p = r + u;
-      v < 0 || v >= Qi || p < 0 || p >= Qi ? d++ : (d++, S.grid[v][p] === i && c++);
+      v < 0 || v >= Qi || p < 0 || p >= Qi ? d++ : (d++, S.grid[v] && S.grid[v][p] === i && c++);
     }
     return c <= (d >= 4 ? 1 : 0);
   }
@@ -10173,10 +10225,11 @@ var __T2S_MAP = null;
     !0);
   }
   function yo(t) {
-    for (var a = [], r = 0; r < Qi; r++) for (var n = 0; n < Qi; n++) S.grid[r][n] === e && r * Qi + n !== S.ko && ho(r, n, t) && a.push({
+    for (var a = [], r = 0; r < Qi; r++) { var yoRow = S.grid[r]; if (!yoRow) continue; for (var n = 0; n < Qi; n++) yoRow[n] === e && r * Qi + n !== S.ko && ho(r, n, t) && a.push({
       r: r,
       c: n
     });
+    }
     return a;
   }
   function bo(e) {
@@ -10196,10 +10249,10 @@ var __T2S_MAP = null;
     return d.white + so() > d.black;
   }
   function xo(r) {
-    for (var n = r === t ? a : t, i = [], o = 0; o < Qi; o++) for (var s = 0; s < Qi; s++) if (S.grid[o][s] === e && !po(o, s, r)) {
+    for (var n = r === t ? a : t, i = [], o = 0; o < Qi; o++) { var xoRow = S.grid[o]; if (!xoRow) continue; for (var s = 0; s < Qi; s++) if (xoRow[s] === e && !po(o, s, r)) {
       for (var l = 0, c = 0, d = 0; d < 4; d++) {
         var f = o + eo[d][0], u = s + eo[d][1];
-        f >= 0 && f < Qi && u >= 0 && u < Qi && (S.grid[f][u] === r ? l++ : S.grid[f][u] === n && c++);
+        f >= 0 && f < Qi && u >= 0 && u < Qi && S.grid[f] && (S.grid[f][u] === r ? l++ : S.grid[f][u] === n && c++);
       }
       var v = 1.2 * l + .9 * c + .5 * Math.random(), p = 0 === o || o === Qi - 1 || 0 === s || s === Qi - 1 ? .3 : 0;
       i.push({
@@ -10207,6 +10260,7 @@ var __T2S_MAP = null;
         c: s,
         score: v + p
       });
+    }
     }
     return i.sort((function(e, t) {
       return t.score - e.score;
@@ -10231,9 +10285,10 @@ var __T2S_MAP = null;
       S.grid = go(r), S.ko = n;
     }
     function topCands(player) {
-      for (var list = [], rr = 0; rr < Qi; rr++) for (var cc = 0; cc < Qi; cc++) if (S.grid[rr][cc] === 0 && rr * Qi + cc !== S.ko) {
+      for (var list = [], rr = 0; rr < Qi; rr++) { var tcRow = S.grid[rr]; if (!tcRow) continue; for (var cc = 0; cc < Qi; cc++) if (tcRow[cc] === 0 && rr * Qi + cc !== S.ko) {
         var sc = vo(rr, cc, player);
         null !== sc && sc > -25 && list.push({ r: rr, c: cc, s: sc });
+      }
       }
       list.sort((function(e, t) { return e.s - t.s; }));
       return list.length > 14 ? list.slice(list.length - 14) : list;
@@ -10272,7 +10327,7 @@ var __T2S_MAP = null;
     return { r: x.r, c: x.c };
   }
   function Mo(r) {
-    for (var n = null, i = 0, o = r === t ? a : t, s = 0; s < Qi; s++) for (var l = 0; l < Qi; l++) if (S.grid[s][l] === e && s * Qi + l !== S.ko) {
+    for (var n = null, i = 0, o = r === t ? a : t, s = 0; s < Qi; s++) { var moRow = S.grid[s]; if (!moRow) continue; for (var l = 0; l < Qi; l++) if (moRow[l] === e && s * Qi + l !== S.ko) {
       var c = io(s, l, r);
       if (c.ok) {
         c.capt.length > i && (i = c.capt.length, n = {
@@ -10282,12 +10337,13 @@ var __T2S_MAP = null;
         for (var d = 0; d < c.capt.length; d++) S.grid[c.capt[d][0]][c.capt[d][1]] = o;
       }
     }
+    }
     return n;
   }
   function Co(e) {
-    for (var vis = {}, a = 0; a < Qi; a++) for (var r = 0; r < Qi; r++) {
+    for (var vis = {}, a = 0; a < Qi; a++) { var coRow = S.grid[a]; if (!coRow) continue; for (var r = 0; r < Qi; r++) {
       var n = a * Qi + r;
-      if (S.grid[a][r] === e && !vis[n]) {
+      if (coRow[r] === e && !vis[n]) {
         var i = no(a, r);
         i.cells.forEach((function(pt) {
           vis[pt[0] * Qi + pt[1]] = 1;
@@ -10295,7 +10351,7 @@ var __T2S_MAP = null;
         var o = Object.keys(i.lib);
         if (1 === o.length) {
           var s = +o[0], l = Math.floor(s / Qi), c = s % Qi;
-          if (l * Qi + c !== S.ko && 0 === S.grid[l][c]) {
+          if (l * Qi + c !== S.ko && S.grid[l] && 0 === S.grid[l][c]) {
             var sim = io(l, c, e);
             if (sim.ok) {
               var newGrp = no(l, c), newLibs = Object.keys(newGrp.lib).length;
@@ -10308,17 +10364,19 @@ var __T2S_MAP = null;
         }
       }
     }
+    }
     return null;
   }
   function To() {
     var r = S.hinting || "spectate" === S.mode ? S.turn : a, n = function(t) {
-      for (var a = [], r = 0; r < Qi; r++) for (var n = 0; n < Qi; n++) if (S.grid[r][n] === e && r * Qi + n !== S.ko) {
+      for (var a = [], r = 0; r < Qi; r++) { var toRow = S.grid[r]; if (!toRow) continue; for (var n = 0; n < Qi; n++) if (toRow[n] === e && r * Qi + n !== S.ko) {
         var i = vo(r, n, t);
         null !== i && a.push({
           r: r,
           c: n,
           s: i
         });
+      }
       }
       return a;
     }(r);
@@ -10440,10 +10498,11 @@ var __T2S_MAP = null;
     m.fillStyle = "rgba(255,215,0,.85)";
     for (var i = 0; i < n.length; i++) m.beginPath(), m.arc(Zi + n[i][0] * Xi, Zi + n[i][1] * Xi, 3.4, 0, 7), 
     m.fill();
-    for (var o = 0; o < Qi; o++) for (var s = 0; s < Qi; s++) S.grid[o][s] !== e && Io(o, s, S.grid[o][s]);
+    if (!S.grid || !S.grid.length) { Rt(); return; }
+    for (var o = 0; o < Qi; o++) { var boRow = S.grid[o]; if (!boRow) continue; for (var s = 0; s < Qi; s++) { var boCell = boRow[s]; if (boCell === undefined) continue; boCell !== e && Io(o, s, boCell); } }
     if (to) {
       var l = Zi + to.c * Xi, c = Zi + to.r * Xi;
-      m.beginPath(), m.arc(l, c, 5, 0, 7), m.strokeStyle = S.grid[to.r][to.c] === t ? "#000" : "#fff", 
+      m.beginPath(), m.arc(l, c, 5, 0, 7), m.strokeStyle = S.grid[to.r] && S.grid[to.r][to.c] === t ? "#000" : "#fff", 
       m.lineWidth = 1.6, m.stroke();
     }
     Rt();
@@ -10499,7 +10558,7 @@ var __T2S_MAP = null;
     for (var a = S.grid[e][t], r = a.p, n = [], i = [ [ 1, 0 ], [ -1, 0 ], [ 0, 1 ], [ 0, -1 ] ], o = 0; o < 4; o++) {
       var s = e + i[o][0], l = t + i[o][1];
       if (Wo(s, l)) {
-        var c = No(s, l), d = Go(s, l), f = S.grid[s][l];
+        var c = No(s, l), d = Go(s, l), f = S.grid[s] ? S.grid[s][l] : undefined;
         d !== r && (c ? 1 === a.t && (0 === f || f.p !== r && Vo(e, t, s, l)) && n.push([ s, l ]) : (0 === f || f.p !== r && Vo(e, t, s, l)) && n.push([ s, l ]));
       }
     }
@@ -10509,7 +10568,7 @@ var __T2S_MAP = null;
         for (var m = !1; Wo(g, h) && No(g, h); ) S.grid[g][h] && 1 === S.grid[g][h].t && (m = !0), 
         g += v, h += p;
         if (Wo(g, h) && !m) if (Go(g, h) !== r) {
-          var y = S.grid[g][h];
+          var y = S.grid[g] ? S.grid[g][h] : undefined;
           (0 === y || y.p !== r && Vo(e, t, g, h)) && n.push([ g, h ]);
         }
       }
@@ -11643,8 +11702,8 @@ var __T2S_MAP = null;
     return o;
   }
   function Gs(e) {
-    for (var t = [], a = 0; a < 8; a++) for (var r = 0; r < 8; r++) {
-      var n = S.grid[a][r];
+    for (var t = [], a = 0; a < 8; a++) { var gsRow = S.grid[a]; if (!gsRow) continue; for (var r = 0; r < 8; r++) {
+      var n = gsRow[r];
       if (n && n.p === e) for (var i = Ns(a, r), o = 0; o < i.length; o++) t.push({
         fr: a,
         fc: r,
@@ -11653,14 +11712,16 @@ var __T2S_MAP = null;
         flag: i[o].flag
       });
     }
+    }
     return t;
   }
   function Fs() {
     if (S.ch.half >= 100) return !0;
     if (function() {
-      for (var e = [], a = [], r = -1, n = -1, i = 0; i < 8; i++) for (var o = 0; o < 8; o++) {
-        var s = S.grid[i][o];
+      for (var e = [], a = [], r = -1, n = -1, i = 0; i < 8; i++) { var fsRow = S.grid[i]; if (!fsRow) continue; for (var o = 0; o < 8; o++) {
+        var s = fsRow[o];
         s && "K" !== s.t && ((s.p === t ? e : a).push(s.t), "B" === s.t && (s.p === t ? r = (i + o) % 2 : n = (i + o) % 2));
+      }
       }
       if (0 === e.length && 0 === a.length) return !0;
       if (0 === e.length && 1 === a.length && ("N" === a[0] || "B" === a[0])) return !0;
@@ -12106,18 +12167,15 @@ var __T2S_MAP = null;
   function gl() {
     if (S.showHeatmap && S.moveHeatmap) {
       var e, t, a = S.moveHeatmap, r = a.length, n = a[0] ? a[0].length : 1, i = 1;
-      for (e = 0; e < r; e++) for (t = 0; t < n; t++) {
-        var o = a[e][t].p1 + a[e][t].p2;
-        o > i && (i = o);
-      }
-      for (m.save(), e = 0; e < r; e++) for (t = 0; t < n; t++) {
-        var s = a[e][t], l = s.p1 + s.p2;
+      for (e = 0; e < r; e++) { var hmRow = a[e]; if (!hmRow) continue; for (t = 0; t < n; t++) { var hmCell = hmRow[t]; if (!hmCell) continue; var o = hmCell.p1 + hmCell.p2; o > i && (i = o); } }
+      for (m.save(), e = 0; e < r; e++) { var hmRow2 = a[e]; if (!hmRow2) continue; for (t = 0; t < n; t++) {
+        var s = hmRow2[t], l = s && s.p1 + s.p2;
         if (l) {
           var c = pl(e, t);
           c && (m.globalAlpha = .18 + l / i * .55, m.fillStyle = "hsl(" + 220 * (1 - l / i) + ",85%,55%)", 
           m.beginPath(), m.arc(c.x, c.y, c.r, 0, 2 * Math.PI), m.fill());
         }
-      }
+      } }
       m.restore();
     }
   }
@@ -12132,11 +12190,11 @@ var __T2S_MAP = null;
     S.rvPass = !1, b(bl, bl), v("colArrows").innerHTML = "", fl(ml, ml);
   }
   function Ml(e) {
-    for (var r = 0, n = 0, i = 0; i < ml; i++) for (var o = 0; o < ml; o++) e[i][o] === t ? r++ : e[i][o] === a && n++;
+    for (var r = 0, n = 0, i = 0; i < ml; i++) { var mlRow = e[i]; if (!mlRow) continue; for (var o = 0; o < ml; o++) { var mlCell = mlRow[o]; mlCell === t ? r++ : mlCell === a && n++; } }
     return [ r, n ];
   }
   function Cl(t) {
-    for (var a = 0, r = 0; r < ml; r++) for (var n = 0; n < ml; n++) t[r][n] === e && a++;
+    for (var a = 0, r = 0; r < ml; r++) { var clRow = t[r]; if (!clRow) continue; for (var n = 0; n < ml; n++) clRow[n] === e && a++; }
     return a;
   }
   function Tl(r, n, i, o) {
@@ -12225,10 +12283,10 @@ var __T2S_MAP = null;
       m.stroke(), m.globalAlpha = 1, m.fillStyle = l, m.beginPath(), m.arc(d, f, 4.5, 0, 2 * Math.PI), 
       m.fill();
     }
-    for (var u = S.history.length ? S.history[S.history.length - 1] : null, v = 0; v < ml; v++) for (var p = 0; p < ml; p++) if (S.grid[v][p] !== e) {
+    for (var u = S.history.length ? S.history[S.history.length - 1] : null, v = 0; v < ml; v++) { var rvRow = S.grid[v]; if (!rvRow) continue; for (var p = 0; p < ml; p++) if (rvRow[p] !== e) {
       var g = u && u.row === v && u.col === p;
-      ra(ll(p, ml) * yl + yl / 2, sl(v, ml) * yl + yl / 2, S.grid[v][p], g, Wt("rv" + v + "_" + p), null, Il(v, p));
-    }
+      ra(ll(p, ml) * yl + yl / 2, sl(v, ml) * yl + yl / 2, rvRow[p], g, Wt("rv" + v + "_" + p), null, Il(v, p));
+    } }
     Rt(), El() && "function" == typeof requestAnimationFrame && requestAnimationFrame(Ct);
   }
   function zl(e, t, a, r) {
@@ -12504,17 +12562,19 @@ var __T2S_MAP = null;
     P: [ [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ], [ 2, 0, 4, 0, 8, 0, 4, 0, 2 ], [ 6, 0, 10, 0, 14, 0, 10, 0, 6 ], [ 18, 24, 30, 38, 42, 38, 30, 24, 18 ], [ 28, 36, 46, 58, 64, 58, 46, 36, 28 ], [ 34, 44, 56, 72, 80, 72, 56, 44, 34 ], [ 36, 48, 60, 78, 86, 78, 60, 48, 36 ], [ 18, 24, 30, 40, 44, 40, 30, 24, 18 ] ]
   };
   function nc() {
-    for (var e = 0, grid = S.grid, r = 0, n = 0, k1r = 9, k1c = 4, k2r = 0, k2c = 4, i = S.aiPersona || "balanced", o = "aggressive" === i ? 1.28 : "defensive" === i ? .85 : 1, s = "defensive" === i ? 1.3 : "aggressive" === i ? .88 : 1, l = 0; l < 10; l++) for (var c = 0; c < 9; c++) {
-      var d = grid[l][c];
+    for (var e = 0, grid = S.grid, r = 0, n = 0, k1r = 9, k1c = 4, k2r = 0, k2c = 4, i = S.aiPersona || "balanced", o = "aggressive" === i ? 1.28 : "defensive" === i ? .85 : 1, s = "defensive" === i ? 1.3 : "aggressive" === i ? .88 : 1, l = 0; l < 10; l++) { var ncRow = grid[l]; if (!ncRow) continue; for (var c = 0; c < 9; c++) {
+      var d = ncRow[c];
       if (d) {
         "K" === d.t && (d.p === t ? (k1r = l, k1c = c) : (k2r = l, k2c = c));
         var f = Ul[d.t] || 100, u = d.p === a ? l : 9 - l;
         rc[d.t] && (f += rc[d.t][u][c] * o), "A" !== d.t && "B" !== d.t || (d.p === a ? n++ : r++, 
         f += 12 * s), e += d.p === a ? f : -f;
       }
-    }
+    } }
     for (var row = 0; row < 10; row++) {
-      var p1c = grid[row][k1c], p2c = grid[row][k2c];
+      var ncRow2 = grid[row];
+      if (!ncRow2) continue;
+      var p1c = ncRow2[k1c], p2c = ncRow2[k2c];
       p1c && p1c.p === a && ("R" === p1c.t || "C" === p1c.t) && (e += 28 * o);
       p2c && p2c.p === t && ("R" === p2c.t || "C" === p2c.t) && (e -= 28 * o);
     }
@@ -12881,14 +12941,14 @@ var __T2S_MAP = null;
   }
   function xc(e) {
     e = e || S.grid;
-    for (var u = e.length || 8, r = 0, n = S.aiPersona || "balanced", i = "aggressive" === n ? 195 : 175, o = "defensive" === n ? 16 : 8, s = 0; s < u; s++) for (var l = 0; l < u; l++) {
-      var c = e[s][l];
+    for (var u = e.length || 8, r = 0, n = S.aiPersona || "balanced", i = "aggressive" === n ? 195 : 175, o = "defensive" === n ? 16 : 8, s = 0; s < u; s++) { var xcRow = e[s]; if (!xcRow) continue; for (var l = 0; l < u; l++) {
+      var c = xcRow[l];
       if (c) {
         var d = c.k ? i : 100 + (c.p === a ? 6 * s : 6 * (u - 1 - s));
         l >= 2 && l <= u - 3 && s >= 2 && s <= u - 3 && (d += 8), !c.k && (c.p === a && 0 === s || c.p === t && s === u - 1) && (d += o), 
         r += c.p === a ? d : -d;
       }
-    }
+    } }
     return r;
   }
   function kc() {
@@ -12902,7 +12962,9 @@ var __T2S_MAP = null;
       m.fill(), m.strokeStyle = "#ffd700", m.lineWidth = 2, m.stroke();
     }
     for (var d = 0; d < 8; d++) for (var f = 0; f < 8; f++) {
-      var u = S.grid[d][f];
+      var drRow = S.grid[d];
+      if (!drRow) continue;
+      var u = drRow[f];
       if (u && (!S.animMove || "draughts" !== S.animMove.game || d !== S.animMove.tr || f !== S.animMove.tc)) {
         var v = ll(f, 8) * fc + fc / 2, p = sl(d, 8) * fc + fc / 2, g = e && e.tr === d && e.tc === f, h = Wt("drcrown" + d + "_" + f);
         ra(v, p, u.p, g, h, .38 * fc), u.k && (m.fillStyle = "#ffd700", m.font = "bold 18px serif", 
@@ -12974,15 +13036,15 @@ var __T2S_MAP = null;
     r = r || S.grid;
     for (var n = [], i = 0; i < Sc * Sc; i++) n.push(999);
     for (var o = [], s = 0; s < Sc; s++) {
-      var l = e === t ? 0 : s, c = e === t ? s : 0;
-      if (r[l][c] !== (e === t ? a : t)) {
-        var d = r[l][c] === e ? 0 : 1, f = l * Sc + c;
+      var l = e === t ? 0 : s, c = e === t ? s : 0, qcRow = r[l];
+      if (qcRow && qcRow[c] !== (e === t ? a : t)) {
+        var d = qcRow[c] === e ? 0 : 1, f = l * Sc + c;
         n[f] = d, 0 === d ? o.unshift(f) : o.push(f);
       }
     }
     for (;o.length; ) for (var u = o.shift(), v = Math.floor(u / Sc), p = u % Sc, g = 0; g < 6; g++) {
       var h = v + Tc[g][0], m = p + Tc[g][1];
-      if (!(h < 0 || h >= Sc || m < 0 || m >= Sc) && r[h][m] !== (e === t ? a : t)) {
+      if (!(h < 0 || h >= Sc || m < 0 || m >= Sc) && r[h] && r[h][m] !== (e === t ? a : t)) {
         var y = r[h][m] === e ? 0 : 1, b = h * Sc + m;
         n[u] + y < n[b] && (n[b] = n[u] + y, 0 === y ? o.unshift(b) : o.push(b));
       }
@@ -12994,18 +13056,18 @@ var __T2S_MAP = null;
     return x;
   }
   function Bc() {
-    for (var r = S.hinting || "spectate" === S.mode ? S.turn : a, n = r === t ? a : t, i = [], o = 0; o < Sc; o++) for (var s = 0; s < Sc; s++) S.grid[o][s] === e && i.push({
+    for (var r = S.hinting || "spectate" === S.mode ? S.turn : a, n = r === t ? a : t, i = [], o = 0; o < Sc; o++) { var bcRow = S.grid[o]; if (!bcRow) continue; for (var s = 0; s < Sc; s++) bcRow[s] === e && i.push({
       r: o,
       c: s
-    });
+    }); }
     if (!i.length) return null;
     if ("easy" === S.diff && Math.random() < .65) return i[Math.floor(Math.random() * i.length)];
     var l = (Sc - 1) / 2, c = S.aiPersona || "balanced", d = [ [ -1, 2, -1, 1, 0, 1 ], [ 1, -2, 1, -1, 0, -1 ], [ -2, 1, -1, 0, -1, 1 ], [ 2, -1, 1, 0, 1, -1 ], [ 1, 1, 0, 1, 1, 0 ], [ -1, -1, 0, -1, -1, 0 ] ], f = S.history.length ? S.history[S.history.length - 1] : null;
-    if (f && f.player === n && "easy" !== S.diff) for (var u = 0; u < Sc; u++) for (var v = 0; v < Sc; v++) if (S.grid[u][v] === r) for (var p = 0; p < d.length; p++) {
+    if (f && f.player === n && "easy" !== S.diff) for (var u = 0; u < Sc; u++) for (var v = 0; v < Sc; v++) if (S.grid[u] && S.grid[u][v] === r) for (var p = 0; p < d.length; p++) {
       var g = d[p], h = u + g[0], m = v + g[1];
-      if (!(h < 0 || h >= Sc || m < 0 || m >= Sc || S.grid[h][m] !== r)) {
+      if (!(h < 0 || h >= Sc || m < 0 || m >= Sc || !S.grid[h] || S.grid[h][m] !== r)) {
         var y = u + g[2], b = v + g[3], x = u + g[4], k = v + g[5];
-        if (f.r === y && f.c === b && S.grid[x][k] === e) return {
+        if (f.r === y && f.c === b && S.grid[x] && S.grid[x][k] === e) return {
           r: x,
           c: k
         };
@@ -13024,7 +13086,7 @@ var __T2S_MAP = null;
       if (S.grid[M.r][M.c] = e, P) return M;
       for (var L = T * ("defensive" === c ? 24 : "aggressive" === c ? 17 : 20) - C * ("aggressive" === c ? 24 : "defensive" === c ? 17 : 20) - .9 * (Math.abs(M.r - l) + Math.abs(M.c - l)), A = 0; A < d.length; A++) {
         var q = M.r + d[A][0], B = M.c + d[A][1];
-        q >= 0 && q < Sc && B >= 0 && B < Sc && S.grid[q][B] === r && (L += 3.5);
+        q >= 0 && q < Sc && B >= 0 && B < Sc && S.grid[q] && S.grid[q][B] === r && (L += 3.5);
       }
       M.sc = L;
     }
@@ -13079,7 +13141,7 @@ var __T2S_MAP = null;
       capWin: !0,
       player: i
     }, i), !0;
-    for (var f = 0, u = 0; u < 15; u++) for (var v = 0; v < 15; v++) S.grid[u][v] === e && f++;
+    for (var f = 0, u = 0; u < 15; u++) { var geRow = S.grid[u]; if (!geRow) continue; for (var v = 0; v < 15; v++) geRow[v] === e && f++; }
     return 0 === f ? (xr(), !0) : (S.turn = S.turn === t ? a : t, da(), Ct(), !0);
   }
   function zc() {
@@ -13650,14 +13712,14 @@ var __T2S_MAP = null;
   }
   function wd(r) {
     r = r || S.grid;
-    for (var n = 0, i = 0, o = 0, s = 0; s < md; s++) for (var l = 0; l < md; l++) r[s][l] === t ? n++ : r[s][l] === a ? i++ : r[s][l] === e && o++;
+    for (var n = 0, i = 0, o = 0, s = 0; s < md; s++) { var wdRow = r[s]; if (!wdRow) continue; for (var l = 0; l < md; l++) { var wdCell = wdRow[l]; wdCell === t ? n++ : wdCell === a ? i++ : wdCell === e && o++; } }
     return [ n, i, o ];
   }
   function Md(t, a, r) {
     r = r || S.grid;
     for (var n = [], i = -2; i <= 2; i++) for (var o = -2; o <= 2; o++) if (0 !== i || 0 !== o) {
       var s = t + i, l = a + o;
-      if (s >= 0 && s < md && l >= 0 && l < md && r[s][l] === e) {
+      if (s >= 0 && s < md && l >= 0 && l < md && r[s] && r[s][l] === e) {
         var c = Math.max(Math.abs(i), Math.abs(o));
         n.push({
           fr: t,
@@ -13755,9 +13817,11 @@ var __T2S_MAP = null;
   function Ad() {
     Ot(bd, bd);
     for (var e = 0; e < md; e++) for (var r = 0; r < md; r++) {
-      var n = cl(e, md), i = dl(r, md), o = kd.last && (kd.last.fr === n && kd.last.fc === i || kd.last.tr === n && kd.last.tc === i);
+      var n = cl(e, md), i = dl(r, md), adRow = S.grid[n];
+      if (!adRow) continue;
+      var o = kd.last && (kd.last.fr === n && kd.last.fc === i || kd.last.tr === n && kd.last.tc === i);
       if (m.fillStyle = (n + i) % 2 == 1 ? o ? "#282d6e" : "#141840" : o ? "#323882" : "#1e2356", 
-      m.fillRect(r * yd + 1, e * yd + 1, yd - 2, yd - 2), S.grid[n][i] === xd) {
+      m.fillRect(r * yd + 1, e * yd + 1, yd - 2, yd - 2), adRow[i] === xd) {
         var s = r * yd + yd / 2, l = e * yd + yd / 2;
         m.save(), m.fillStyle = "rgba(120,140,190,.28)", m.strokeStyle = "rgba(160,190,255,.55)", 
         m.lineWidth = 1.8, m.beginPath();
@@ -13773,10 +13837,10 @@ var __T2S_MAP = null;
       m.beginPath(), m.arc(g, h, p.jump ? 12 : 9, 0, 2 * Math.PI), m.fillStyle = p.jump ? "rgba(255,215,0,.22)" : "rgba(0,230,160,.28)", 
       m.fill(), m.strokeStyle = p.jump ? "#ffd700" : "#00e6a0", m.lineWidth = 2, m.stroke();
     }
-    for (var y = 0; y < md; y++) for (var b = 0; b < md; b++) {
-      var x = S.grid[y][b];
+    for (var y = 0; y < md; y++) { var axRow = S.grid[y]; if (!axRow) continue; for (var b = 0; b < md; b++) {
+      var x = axRow[b];
       if (x === t || x === a) ra(ll(b, md) * yd + yd / 2, sl(y, md) * yd + yd / 2, x, kd.last && kd.last.tr === y && kd.last.tc === b, Wt("ax" + y + "_" + b), .38 * yd);
-    }
+    } }
     kd.sel && (m.strokeStyle = "#ffd700", m.lineWidth = 2.6, m.strokeRect(ll(kd.sel[1], md) * yd + 3, sl(kd.sel[0], md) * yd + 3, yd - 6, yd - 6)), 
     Rt();
   }
@@ -13792,11 +13856,11 @@ var __T2S_MAP = null;
   }
   function zd(e) {
     e = e || S.grid;
-    for (var r = 0, n = 0, i = 0; i < qd; i++) for (var o = 0; o < qd; o++) e[i][o] === t ? r++ : e[i][o] === a && n++;
+    for (var r = 0, n = 0, i = 0; i < qd; i++) { var zdRow = e[i]; if (!zdRow) continue; for (var o = 0; o < qd; o++) { var zdCell = zdRow[o]; zdCell === t ? r++ : zdCell === a && n++; } }
     return [ r, n ];
   }
   function Hd(r, n, i) {
-    var o = (i = i || S.grid)[r][n];
+    i = i || S.grid; var hdRow = i && i[r], o = hdRow ? hdRow[n] : void 0;
     if (o !== t && o !== a) return [];
     var s = r + (o === t ? -1 : 1), l = [];
     if (s < 0 || s >= qd) return l;
@@ -13854,13 +13918,13 @@ var __T2S_MAP = null;
   }
   function Dd(e) {
     e = e || S.grid;
-    for (var t = 0, r = [ 0, 4, 10, 20, 38, 70, 140, 2500 ], n = 0; n < qd; n++) for (var i = 0; i < qd; i++) {
-      var o = e[n][i];
+    for (var t = 0, r = [ 0, 4, 10, 20, 38, 70, 140, 2500 ], n = 0; n < qd; n++) { var ddRow = e[n]; if (!ddRow) continue; for (var i = 0; i < qd; i++) {
+      var o = ddRow[i];
       if (o) {
         var s = 50 + r[o === a ? n : qd - 1 - n] + (i >= 2 && i <= 5 ? 4 : 0);
         t += o === a ? s : -s;
       }
-    }
+    } }
     return t;
   }
   function Nd() {
@@ -13931,7 +13995,9 @@ var __T2S_MAP = null;
       m.strokeStyle = "#ffd700", m.lineWidth = 1.8, m.stroke());
     }
     for (var p = 0; p < qd; p++) for (var g = 0; g < qd; g++) {
-      var h = S.grid[p][g];
+      var btRow = S.grid[p];
+      if (!btRow) continue;
+      var h = btRow[g];
       if (h === t || h === a) {
         var y = ll(g, qd) * Bd + Bd / 2, b = sl(p, qd) * Bd + Bd / 2;
         ra(y, b, h, Ed.last && Ed.last.tr === p && Ed.last.tc === g, Wt("bt" + p + "_" + g), .37 * Bd);
@@ -13988,16 +14054,17 @@ var __T2S_MAP = null;
             sc: kl[x.r][x.c] + 4 * x.n
           });
         } else if ("hex" === r) {
-          for (var k = 0; k < Sc; k++) for (var w = 0; w < Sc; w++) if (S.grid[k][w] === e) {
-            S.grid[k][w] = n;
+          for (var k = 0; k < Sc; k++) { var hxRow = S.grid[k]; if (!hxRow) continue; for (var w = 0; w < Sc; w++) if (hxRow[w] === e) {
+            hxRow[w] = n;
             var M = qc(n, S.grid), C = qc(i, S.grid);
-            S.grid[k][w] = e;
+            hxRow[w] = e;
             var T = Pc(k, w);
             o.push({
               x: T.x,
               y: T.y,
               sc: 20 * (C - M) - (Math.abs(k - 4) + Math.abs(w - 4))
             });
+          }
           }
         } else if ("morris" === r && S.morris) {
           var P = S.morris, L = S.grid;
@@ -14044,7 +14111,7 @@ var __T2S_MAP = null;
         } else if ("ataxx" === r) for (var W = Cd(n, S.grid), V = 0; V < W.length; V++) {
           for (var j = W[V], U = 0, K = -1; K <= 1; K++) for (var J = -1; J <= 1; J++) {
             var Q = j.tr + K, Z = j.tc + J;
-            Q >= 0 && Q < md && Z >= 0 && Z < md && S.grid[Q][Z] === i && U++;
+            Q >= 0 && Q < md && Z >= 0 && Z < md && S.grid[Q] && S.grid[Q][Z] === i && U++;
           }
           o.push({
             x: ll(j.tc, md) * yd + yd / 2,
@@ -15915,7 +15982,57 @@ var __T2S_MAP = null;
         hd_singularity_d: "time-frozen event horizon, shattered dimensional shards, violet gravity waves & reverse-flowing starlight.",
         hd_singularity_c1: "Win 1 match on Hard/Master difficulty (or clear 1 Odyssey stage)",
         hd_singularity_c2: "Play at least 4 different board games",
-        hd_singularity_c3: "Unlock at least 2 Special Backgrounds"
+        hd_singularity_c3: "Unlock at least 2 Special Backgrounds",
+        dailyPickLabel: "Today's Featured Game: ",
+        dailyPickSub: "Randomly picked from all games; the tactic analysis appears after a wrong move.",
+        dailyStreakLabel: "Correct Streak",
+        dailyStreakUnit: "days",
+        dailyTierLabel: "Choose today's challenge tier:",
+        dailyStartBtn: "Start today's challenge",
+        storyStripTitle: "Star Chronicle · The lost star-map main campaign",
+        storyActGameLabel: "Trial board: ",
+        storyActObjectiveLabel: "Tactical objective: ",
+        storyPreviewBtn: "Preview dialogue",
+        storyReplayBtn: "✓ Cleared · Replay campaign",
+        storyStartBtn: "Launch this act →",
+        guideBadge: "30-second quick start",
+        guideLaunchBtn: "✦ Launch interactive board guide →",
+        boardSpecLabel: "Board: ",
+        tipLabel: "Key insight: ",
+        hallReplayBtn: "🎬 Replay famous game",
+        cupStripTitle: "Cosmic Crown Cup · Cross-game tournament center",
+        cupGamesLabel: "Schedule: ",
+        cupStartBtn: "Enter this tournament →",
+        bountyStripTitle: "Star Commissions & Grandmaster Bounties",
+        bountyClaimedBtn: "✓ Reward claimed",
+        bountyClaimBtn: "★ Condition met · Claim reward!",
+        bountyLockedBtn: "Claimable when condition is met",
+        trailWorkshopLabel: "✨ Move trail effects (tap to switch trail/capture color):",
+        trailActive: "Active",
+        trailApply: "Apply",
+        examStripTitle: "Current official star rank",
+        examClearedLabel: "Exams passed",
+        examReplayBtn: "✓ Certified · Retry",
+        examStartBtn: "Take the promotion exam",
+        towerStripTitle: "Endless Abyss Tower · Current floor",
+        relicEquipped: "Equipped (tap to remove)",
+        relicEquipBtn: "Equip this relic",
+        labRadarTitle: "Six-dimension strength radar",
+        drillRuleLabel: "✦ Nexus training toggles (take effect in-game):",
+        drillOn: "On",
+        drillOff: "Off",
+        bookmarkSaveBtn: "+ Save current board as bookmark",
+        bookmarkLoadBtn: "Load this position →",
+        openingPlayBtn: "Load to board for practice →",
+        achFilterUnlocked: "Unlocked",
+        achFilterLocked: "Locked",
+        achFilterAll: "All",
+        achFilterFirstWin: "First Win",
+        achFilterStreak3: "3-Win Streak",
+        achFilterElo1200: "Master ELO 1200",
+        achFilterGeneral: "General & Challenges",
+        ownedRatio: "Owned {n}/{total}",
+        achProgress: "Achievements {n}/{total}"
       },
       "zh-Hant": {
         settings: "設定",
@@ -16017,7 +16134,57 @@ var __T2S_MAP = null;
         hd_singularity_d: "時間凝滯的紫晶事件視界、碎裂維度晶體浮島、逆流引力波與雙重坍縮光環。",
         hd_singularity_c1: "在困難或大師難度獲勝 1 局（或通過星海遠征第 1 關）",
         hd_singularity_c2: "體驗過至少 4 種不同的棋藝",
-        hd_singularity_c3: "已解鎖至少 2 款「特殊背景」"
+        hd_singularity_c3: "已解鎖至少 2 款「特殊背景」",
+        dailyPickLabel: "今日推薦棋類：",
+        dailyPickSub: "每日隨機從全棋種精選，答錯自動顯示戰術解析",
+        dailyStreakLabel: "連續答對 Streak",
+        dailyStreakUnit: "天",
+        dailyTierLabel: "選擇今日挑戰難度分級：",
+        dailyStartBtn: "開始今日推薦挑戰",
+        storyStripTitle: "星海編年史 · 蒼穹失落星圖主線戰役",
+        storyActGameLabel: "試煉棋盤：",
+        storyActObjectiveLabel: "戰術目標：",
+        storyPreviewBtn: "預覽對話",
+        storyReplayBtn: "✓ 已通關 · 重溫戰役",
+        storyStartBtn: "出征此幕戰役 →",
+        guideBadge: "30秒極速上手",
+        guideLaunchBtn: "✦ 啟動棋盤動態引導實戰 →",
+        boardSpecLabel: "棋盤規格：",
+        tipLabel: "致勝心法：",
+        hallReplayBtn: "🎬 載入名局鑑賞回放",
+        cupStripTitle: "蒼穹全能王座盃 · 跨棋種系列賽中心",
+        cupGamesLabel: "賽程項目：",
+        cupStartBtn: "開啟此系列賽爭霸 →",
+        bountyStripTitle: "星象委託與宗師懸賞令",
+        bountyClaimedBtn: "✓ 已領取賞金",
+        bountyClaimBtn: "★ 條件已達成 · 立即領取賞金！",
+        bountyLockedBtn: "達成條件後即可領取",
+        trailWorkshopLabel: "✨ 落子星軌光效工坊（點擊立即切換落子與吃子星芒色彩）：",
+        trailActive: "使用中",
+        trailApply: "套用",
+        examStripTitle: "當前星海官方認證段位",
+        examClearedLabel: "已通過段位考核",
+        examReplayBtn: "✓ 已獲證書 · 再次挑戰",
+        examStartBtn: "立即參加升段檢定",
+        towerStripTitle: "無盡星淵試煉塔 · 當前層數",
+        relicEquipped: "已裝備 (點擊卸下)",
+        relicEquipBtn: "裝備此星遺物",
+        labRadarTitle: "玩家六維棋力星圖診斷",
+        drillRuleLabel: "✦ 星樞特訓法則開關（對局中即時生效）：",
+        drillOn: "已開啟",
+        drillOff: "關閉",
+        bookmarkSaveBtn: "+ 保存當前盤面為書籤",
+        bookmarkLoadBtn: "載入此局面 →",
+        openingPlayBtn: "載入棋盤實戰演練 →",
+        achFilterUnlocked: "已解鎖",
+        achFilterLocked: "未解鎖",
+        achFilterAll: "全部",
+        achFilterFirstWin: "首勝成就",
+        achFilterStreak3: "三連勝成就",
+        achFilterElo1200: "大師 ELO 1200",
+        achFilterGeneral: "綜合與挑戰",
+        ownedRatio: "已擁有 {n}/{total}",
+        achProgress: "成就 {n}/{total}"
       },
       "zh-Hans": {},
       ja: {}
@@ -16927,7 +17094,7 @@ var __T2S_MAP = null;
         var r = y[a], n = S.starItems && S.starItems[r.id] || 0;
         t += '<div class="shop-card"><div><div class="sc-head"><span class="sc-title">' + l("item_" + r.id) + "</span>" + ("sealBreaker" !== r.id ? '<span class="sc-count">' + l("shopOwned") + " ×" + n + "</span>" : "") + '</div><div class="sc-desc2" style="margin-top:4px">' + l("item_" + r.id + "_d") + '</div></div><div class="sc-foot"><span class="sc-price">' + me + " " + r.price + '</span><div style="display:flex;gap:6px">' + (n > 0 && "sealBreaker" !== r.id ? '<button type="button" class="mini-btn shop-use-item" data-item="' + r.id + '" style="padding:4px 10px;min-height:30px;font-size:.76rem;border-color:#00e6a0;color:#00e6a0">' + l("shopUse") + "</button>" : "") + '<button type="button" class="mini-btn shop-buy-item" data-item="' + r.id + '" data-price="' + r.price + '" style="padding:4px 10px;min-height:30px;font-size:.76rem;border-color:#ffd700;color:#ffd700">' + l("shopBuy") + "</button></div></div></div>";
       }
-      t += "</div>", t += '<div class="shop-sec-title">' + w.palette + "<span>" + l("shopTabFx") + "</span></div>", 
+      t += "</div>", t += '<div class="shop-sec-title">' + w.palette + "<span>" + l("shopTabFx") + " · " + l("ownedRatio").replace("{n}", A.filter(function(x){ return !(!S.ownedDropFx || !S.ownedDropFx[x.id]); }).length).replace("{total}", A.length) + "</span></div>",
       t += '<div class="shop-grid">';
       for (var i = 0; i < A.length; i++) {
         var o = A[i], s = !(!S.ownedDropFx || !S.ownedDropFx[o.id]), c = S.activeDropFx === o.id;
@@ -17404,7 +17571,7 @@ var __T2S_MAP = null;
       vt();
       var e = v("genModalBody");
       if (e) {
-        for (var t = '<div class="shop-sec-title">' + w.shield + "<span>" + l("shopTabFrames") + '</span></div><div class="shop-grid">', a = 0; a < Xe.length; a++) {
+        for (var t = '<div class="shop-sec-title">' + w.shield + "<span>" + l("shopTabFrames") + " · " + l("ownedRatio").replace("{n}", Xe.filter(function(x){ return !(!S.ownedFrames || !S.ownedFrames[x.id]); }).length).replace("{total}", Xe.length) + '</span></div><div class="shop-grid">', a = 0; a < Xe.length; a++) {
           var r = Xe[a], n = !(!S.ownedFrames || !S.ownedFrames[r.id]), i = S.activeFrame === r.id;
           t += '<div class="shop-card' + (n ? " owned" : "") + (i ? " active-fx" : "") + '"><div><div class="sc-head"><span class="sc-title">' + l("frame_" + r.id) + '</span></div><div class="sc-desc2" style="margin-top:4px">' + l("frame_" + r.id + "_d") + '</div></div><div class="sc-foot"><span class="sc-price">' + (n ? l("shopOwned") : me + " " + r.price) + "</span>", 
           t += i ? '<button type="button" class="mini-btn" disabled style="padding:4px 10px;min-height:30px;font-size:.76rem">' + l("shopEquipped") + "</button>" : n ? '<button type="button" class="mini-btn shop-equip-frame" data-frame="' + r.id + '" style="padding:4px 10px;min-height:30px;font-size:.76rem;border-color:#4dd0e1;color:#4dd0e1">' + l("shopEquip") + "</button>" : '<button type="button" class="mini-btn shop-buy-frame" data-frame="' + r.id + '" data-price="' + r.price + '" style="padding:4px 10px;min-height:30px;font-size:.76rem;border-color:#ffd700;color:#ffd700">' + l("shopBuy") + "</button>", 
@@ -17779,7 +17946,7 @@ var __T2S_MAP = null;
       }
       if ("gomoku" === i || "c6" === i || "pente" === i) {
         var d = Math.round((r - sa) / oa), f = Math.round((n - sa) / oa);
-        return f < 0 || f >= 15 || d < 0 || d >= 15 || S.grid[f][d] !== e ? null : {
+        return f < 0 || f >= 15 || d < 0 || d >= 15 || !S.grid[f] || S.grid[f][d] !== e ? null : {
           key: i + "_" + f + "_" + d,
           x: sa + d * oa,
           y: sa + f * oa,
@@ -17788,7 +17955,7 @@ var __T2S_MAP = null;
       }
       if ("go" === i) {
         var u = Math.round((r - Zi) / Xi), v = Math.round((n - Zi) / Xi);
-        return v < 0 || v >= Qi || u < 0 || u >= Qi || S.grid[v][u] !== e ? null : {
+        return v < 0 || v >= Qi || u < 0 || u >= Qi || !S.grid[v] || S.grid[v][u] !== e ? null : {
           key: "go_" + v + "_" + u,
           x: Zi + u * Xi,
           y: Zi + v * Xi,
@@ -18297,7 +18464,7 @@ var __T2S_MAP = null;
       Ba();
       var e = v("genModalBody");
       if (e) {
-        for (var t = '<div class="shop-sec-title">' + w.queen + "<span>" + l("shopTabSkins") + '</span></div><div class="shop-grid">', a = 0; a < La.length; a++) {
+        for (var t = '<div class="shop-sec-title">' + w.queen + "<span>" + l("shopTabSkins") + " · " + l("ownedRatio").replace("{n}", La.filter(function(x){ return !(!S.ownedSkins || !S.ownedSkins[x.id]); }).length).replace("{total}", La.length) + '</span></div><div class="shop-grid">', a = 0; a < La.length; a++) {
           var r = La[a], n = !(!S.ownedSkins || !S.ownedSkins[r.id]), i = S.pieceSkin === r.id;
           t += '<div class="shop-card' + (n ? " owned" : "") + (i ? " active-fx" : "") + '"><div><div class="sc-head"><span class="sc-title">' + l("skin_" + r.id) + '</span></div><div class="sc-desc2" style="margin-top:4px">' + l("skin_" + r.id + "_d") + '</div></div><div class="sc-foot"><span class="sc-price">' + (n ? l("shopOwned") : me + " " + r.price) + "</span>", 
           t += i ? '<button type="button" class="mini-btn" disabled style="padding:4px 10px;min-height:30px;font-size:.76rem">' + l("shopEquipped") + "</button>" : n ? '<button type="button" class="mini-btn shop-equip-skin" data-skin="' + r.id + '" style="padding:4px 10px;min-height:30px;font-size:.76rem;border-color:#4dd0e1;color:#4dd0e1">' + l("shopEquip") + "</button>" : '<button type="button" class="mini-btn shop-buy-skin" data-skin="' + r.id + '" data-price="' + r.price + '" style="padding:4px 10px;min-height:30px;font-size:.76rem;border-color:#ffd700;color:#ffd700">' + l("shopBuy") + "</button>", 
@@ -20108,9 +20275,9 @@ var __T2S_MAP = null;
       var e = performance.now(), r = S.axAnim, n = r ? e - r.start : 0;
       r && n >= r.totalDur && (S.axAnim = null, r = null);
       for (var i = 0; i < md; i++) for (var o = 0; o < md; o++) {
-        var s = cl(i, md), l = dl(o, md), c = kd.last && (kd.last.fr === s && kd.last.fc === l || kd.last.tr === s && kd.last.tc === l);
-        if (m.fillStyle = (s + l) % 2 == 1 ? c ? "#282d6e" : "#141840" : c ? "#323882" : "#1e2356", 
-        m.fillRect(o * yd + 1, i * yd + 1, yd - 2, yd - 2), S.grid[s][l] === xd) {
+        var s = cl(i, md), l = dl(o, md), axRow = S.grid[s]; if (!axRow) continue; var c = kd.last && (kd.last.fr === s && kd.last.fc === l || kd.last.tr === s && kd.last.tc === l);
+        if (m.fillStyle = (s + l) % 2 == 1 ? c ? "#282d6e" : "#141840" : c ? "#323882" : "#1e2356",
+        m.fillRect(o * yd + 1, i * yd + 1, yd - 2, yd - 2), axRow[l] === xd) {
           var d = o * yd + yd / 2, f = i * yd + yd / 2;
           m.save(), m.fillStyle = "rgba(120,140,190,.28)", m.strokeStyle = "rgba(160,190,255,.55)", 
           m.lineWidth = 1.8, m.beginPath();
@@ -20752,7 +20919,7 @@ var __T2S_MAP = null;
           m.save();
           for (var r = 0; r < t.length; r++) {
             var n = t[r][0], i = t[r][1];
-            if (S.grid[n][i] === e) {
+            if (S.grid[n] && S.grid[n][i] === e) {
               var o = ll(i, 8) * yl + yl / 2, s = sl(n, 8) * yl + yl / 2, l = Tl(S.grid, n, i, S.turn).length > 0;
               m.strokeStyle = l ? "#ffd700" : "rgba(255,215,0,0.32)", m.lineWidth = l ? 2.6 : 1.3, 
               l ? m.setLineDash([]) : m.setLineDash([ 3, 3 ]), m.beginPath(), m.arc(o, s, .36 * yl, 0, 2 * Math.PI), 
@@ -20763,7 +20930,7 @@ var __T2S_MAP = null;
           m.setLineDash([]);
           for (var c = 0; c < a.length; c++) {
             var d = a[c][0], f = a[c][1], u = a[c][2], v = a[c][3];
-            if (S.grid[u][v] === e && S.grid[d][f] === e && Tl(S.grid, d, f, S.turn).length > 0) {
+            if (S.grid[u] && S.grid[u][v] === e && S.grid[d] && S.grid[d][f] === e && Tl(S.grid, d, f, S.turn).length > 0) {
               var p = ll(f, 8) * yl + yl / 2, g = sl(d, 8) * yl + yl / 2;
               m.strokeStyle = "rgba(244,63,94,0.65)", m.lineWidth = 1.6, m.beginPath(), m.arc(p, g, 9, 0, 2 * Math.PI), 
               m.stroke();
@@ -20840,7 +21007,7 @@ var __T2S_MAP = null;
       lo = function() {
         var e = A();
         if ("territory" === S.goScoreRule) {
-          for (var r = 0, n = 0, i = 0; i < Qi; i++) for (var o = 0; o < Qi; o++) S.grid[i][o] === t ? r++ : S.grid[i][o] === a && n++;
+          for (var r = 0, n = 0, i = 0; i < Qi; i++) { var goRow = S.grid[i]; if (!goRow) continue; for (var o = 0; o < Qi; o++) goRow[o] === t ? r++ : goRow[o] === a && n++; }
           return {
             black: Math.max(0, e.black - r) + (S.cap && S.cap.p1 || 0),
             white: Math.max(0, e.white - n) + (S.cap && S.cap.p2 || 0)
@@ -20998,14 +21165,15 @@ var __T2S_MAP = null;
             m.arc(d * fc + fc / 2, c * fc + fc / 2, .2 * fc, 0, 2 * Math.PI), m.fill();
           }
         }
-        for (var f = 0; f < e; f++) for (var u = 0; u < e; u++) {
-          var v = S.grid[f][u];
+        for (var f = 0; f < e; f++) { var drRow = S.grid[f]; if (!drRow) continue; for (var u = 0; u < e; u++) {
+          var v = drRow[u];
           if (v) {
             var p = ll(u, e) * fc + fc / 2, g = sl(f, e) * fc + fc / 2;
             ra(p, g, v.p, !1, Wt("dr" + f + "_" + u), .38 * fc), v.k && (m.fillStyle = "#ffd700", 
             m.font = "bold " + Math.round(.36 * fc) + "px sans-serif", m.textAlign = "center", 
             m.textBaseline = "middle", m.fillText("♛", p, g));
           }
+        }
         }
         Rt();
       }, S.dotsSize = 5;
@@ -21397,13 +21565,13 @@ var __T2S_MAP = null;
           3: 3,
           2: 10,
           1: 4
-        }, a = 0, r = 0; r < 4; r++) for (var n = 0; n < 8; n++) {
-          var i = S.grid[r][n];
+        }, a = 0, r = 0; r < 4; r++) { var bqEvalRow = S.grid[r]; if (!bqEvalRow) continue; for (var n = 0; n < 8; n++) {
+          var i = bqEvalRow[n];
           if (i && i.up) {
             var o = t[i.rank] || 2;
             i.color === e.p1Color ? a -= o : a += o;
           }
-        }
+        } }
         return a;
       }
       function ie() {
@@ -21412,10 +21580,10 @@ var __T2S_MAP = null;
         m.fillStyle = "#ffd700", m.font = "700 12px sans-serif", m.textAlign = "center";
         var t = S.banqi && S.banqi.p1Color ? "P1: " + (1 === S.banqi.p1Color ? l("banqiRed") : l("banqiBlack")) + "   |   P2: " + (1 === S.banqi.p1Color ? l("banqiBlack") : l("banqiRed")) : l("banqiUnassigned");
         m.fillText(t, 280, 16);
-        for (var a = 0; a < 4; a++) for (var r = 0; r < 8; r++) {
+        for (var a = 0; a < 4; a++) { var bqRow = S.grid[a]; if (!bqRow) continue; for (var r = 0; r < 8; r++) {
           var n = 16 + r * e, i = 28 + a * e;
           m.strokeStyle = "rgba(125,249,255,.32)", m.lineWidth = 1.4, m.strokeRect(n, i, e, e);
-          var o = S.grid[a][r];
+          var o = bqRow[r];
           if (o) {
             var s = n + 33, c = i + 33;
             if (o.up) {
@@ -21428,7 +21596,7 @@ var __T2S_MAP = null;
             m.fill(), m.strokeStyle = "#818cf8", m.lineWidth = 2, m.stroke(), m.fillStyle = "rgba(255,215,0,.7)", 
             ia(s, c, 5, 10, 4);
           }
-        }
+        } }
         if (S.banqi && S.banqi.sel) {
           var f = S.banqi.sel[0], u = S.banqi.sel[1];
           m.strokeStyle = "#ffd700", m.lineWidth = 3, m.strokeRect(16 + u * e + 2, 28 + f * e + 2, 62, 62);
@@ -21588,7 +21756,7 @@ var __T2S_MAP = null;
         return i;
       }
       function he(e) {
-        for (var a = S.grid, r = S.shogi, n = [], i = 0; i < 9; i++) for (var o = 0; o < 9; o++) if (a[i][o] && a[i][o].p === e) for (var s = pe(i, o, a), l = 0; l < s.length; l++) n.push(s[l]);
+        for (var a = S.grid, r = S.shogi, n = [], i = 0; i < 9; i++) { var heRow = a[i]; if (!heRow) continue; for (var o = 0; o < 9; o++) if (heRow[o] && heRow[o].p === e) for (var s = pe(i, o, a), l = 0; l < s.length; l++) n.push(s[l]); }
         for (var c = e === t ? r.hand1 : r.hand2, d = 0; d < oe.length; d++) {
           var f = oe[d];
           if (c[f] > 0) for (var u = ge(f, e, a), v = 0; v < u.length; v++) n.push(u[v]);
@@ -21678,8 +21846,8 @@ var __T2S_MAP = null;
           m.fillStyle = "rgba(77,208,225,.32)", m.beginPath(), m.arc(27 + u.tc * e + 27, 67 + u.tr * e + 27, 9, 0, 2 * Math.PI), 
           m.fill();
         }
-        for (var v = 0; v < 9; v++) for (var p = 0; p < 9; p++) {
-          var g = S.grid[v][p];
+        for (var v = 0; v < 9; v++) { var sgRow = S.grid[v]; if (!sgRow) continue; for (var p = 0; p < 9; p++) {
+          var g = sgRow[p];
           if (g) {
             var h = 27 + p * e + 27, y = 67 + v * e + 27, b = 0 === g.t.indexOf("+");
             m.save(), m.translate(h, y), g.p === a && m.rotate(Math.PI), m.fillStyle = g.p === t ? "#112a46" : "#3b1246", 
@@ -21689,7 +21857,7 @@ var __T2S_MAP = null;
             m.font = "bold 20px serif", m.textAlign = "center", m.textBaseline = "middle", m.fillText(se[g.t] || g.t, 0, 2), 
             m.restore();
           }
-        }
+        } }
       }
       function xe() {
         b(520, 520);
@@ -21968,26 +22136,26 @@ var __T2S_MAP = null;
               m.arc(o.tc * e + 32.5, o.tr * e + 32.5, 11, 0, 2 * Math.PI), m.fill();
             }
           }
-          for (var s = 0; s < 8; s++) for (var l = 0; l < 8; l++) S.grid[s][l] && ra(l * e + 32.5, s * e + 32.5, S.grid[s][l], !1, Wt("loa_" + s + "_" + l), 24.05);
+          for (var s = 0; s < 8; s++) { var loaRow = S.grid[s]; if (!loaRow) continue; for (var l = 0; l < 8; l++) loaRow[l] && ra(l * e + 32.5, s * e + 32.5, loaRow[l], !1, Wt("loa_" + s + "_" + l), 24.05); }
         }() : "yavalath" === r ? function() {
           Ot(560, 560);
-          for (var t = 0; t < qe; t++) for (var a = 0; a < qe; a++) {
+          for (var t = 0; t < qe; t++) { var yvRow = S.grid[t]; if (!yvRow) continue; for (var a = 0; a < qe; a++) {
             var r = Ie + a * Be, n = Ie + t * Be, i = r + Be / 2, o = n + Be / 2;
-            m.strokeStyle = "rgba(125,249,255,.26)", m.lineWidth = 1, m.strokeRect(r, n, Be, Be), 
-            S.grid[t][a] !== e && ra(i, o, S.grid[t][a], !1, Wt("yav_" + t + "_" + a), .38 * Be);
-          }
+            m.strokeStyle = "rgba(125,249,255,.26)", m.lineWidth = 1, m.strokeRect(r, n, Be, Be),
+            yvRow[a] !== e && ra(i, o, yvRow[a], !1, Wt("yav_" + t + "_" + a), .38 * Be);
+          } }
         }() : "amazons" === r && function() {
           Ot(520, 520);
-          for (var e = 65, r = S.amazons, n = 0; n < 8; n++) for (var i = 0; i < 8; i++) {
+          for (var e = 65, r = S.amazons, n = 0; n < 8; n++) { var amzRow = S.grid[n]; if (!amzRow) continue; for (var i = 0; i < 8; i++) {
             m.fillStyle = (n + i) % 2 == 1 ? "rgba(15,23,42,.52)" : "rgba(255,255,255,.05)", 
             m.fillRect(i * e, n * e, e, e);
-            var o = S.grid[n][i], s = i * e + 32.5, l = n * e + 32.5;
+            var o = amzRow[i], s = i * e + 32.5, l = n * e + 32.5;
             o === He ? (m.fillStyle = "rgba(244,63,94,.24)", m.fillRect(i * e + 3, n * e + 3, 59, 59), 
             m.strokeStyle = "#fb7185", m.lineWidth = 2.4, m.beginPath(), m.moveTo(s - 12, l - 12), 
             m.lineTo(s + 12, l + 12), m.moveTo(s + 12, l - 12), m.lineTo(s - 12, l + 12), m.stroke()) : o !== t && o !== a || (ra(s, l, o, !1, Wt("amz_" + n + "_" + i), 24.7), 
             m.fillStyle = "#ffd700", m.font = "bold 18px sans-serif", m.textAlign = "center", 
             m.textBaseline = "middle", m.fillText("♛", s, l));
-          }
+          } }
           if (r && r.sel) {
             var c = r.sel[0], d = r.sel[1];
             m.strokeStyle = "arrow" === r.phase ? "#fb7185" : "#ffd700", m.lineWidth = 3, m.strokeRect(d * e + 2, c * e + 2, 61, 61);
@@ -22107,7 +22275,7 @@ var __T2S_MAP = null;
               }
             } else if ("go" === t) for (var x = 19 === Qi ? [ [ 3, 3 ], [ 3, 15 ], [ 15, 3 ], [ 15, 15 ], [ 9, 15 ], [ 15, 9 ], [ 3, 9 ], [ 9, 3 ], [ 9, 9 ] ] : [ [ 2, 2 ], [ 2, 6 ], [ 6, 2 ], [ 6, 6 ], [ 4, 4 ] ], k = 0; k < x.length; k++) {
               var w = x[(k + a) % x.length];
-              if (S.grid[w[0]][w[1]] === e && ho(w[0], w[1], S.turn)) return S.lastOpeningName = "星位定式", 
+              if (S.grid[w[0]] && S.grid[w[0]][w[1]] === e && ho(w[0], w[1], S.turn)) return S.lastOpeningName = "星位定式", 
               {
                 r: w[0],
                 c: w[1]
@@ -22121,15 +22289,15 @@ var __T2S_MAP = null;
         if ("chess" === r && n) {
           var o = function(e) {
             if ("chess" !== S.game || !S.grid) return null;
-            for (var r = [], n = null, i = null, o = 0; o < 8; o++) for (var s = 0; s < 8; s++) {
-              var l = S.grid[o][s];
+            for (var r = [], n = null, i = null, o = 0; o < 8; o++) { var chHintRow = S.grid[o]; if (!chHintRow) continue; for (var s = 0; s < 8; s++) {
+              var l = chHintRow[s];
               l && (r.push({
                 r: o,
                 c: s,
                 p: l.p,
                 t: l.t
               }), "K" === l.t && (l.p === t ? n = [ o, s ] : i = [ o, s ]));
-            }
+            } }
             if (r.length > 5 || !n || !i) return null;
             var c = Gs(e);
             if (!c.length) return null;
@@ -22545,7 +22713,7 @@ var __T2S_MAP = null;
           }));
         }(g[h]);
       }, S.dailyTier = "mid", ue = function() {
-        var e = fe(S.dailyChallenge || {}, new Date), t = le(de()), a = L[t % L.length], r = '<div style="padding:6px"><div style="display:flex;justify-content:space-between;align-items:center;background:rgba(16,22,58,.75);padding:10px 14px;border-radius:10px;border:1px solid var(--line);margin-bottom:12px"><div><div style="font-weight:800;color:#ffd700">今日推薦棋類：' + l("name." + a) + '</div><div style="font-size:.8rem;opacity:.8">每日隨機從全棋種精選，答錯自動顯示戰術解析</div></div><div style="text-align:right"><div style="font-size:.78rem;opacity:.75">連續答對 Streak</div><div style="font-size:1.25rem;font-weight:900;color:#4dd0e1">' + e + ' 天</div></div></div><div style="margin-bottom:12px"><div style="font-size:.85rem;margin-bottom:6px;font-weight:700">選擇今日挑戰難度分級：</div><div style="display:flex;gap:8px"><button type="button" class="mini-btn' + ("easy" === S.dailyTier ? " is-on" : "") + '" data-dtier="easy" style="flex:1">' + l("dailyTierEasy") + '</button><button type="button" class="mini-btn' + ("mid" === S.dailyTier ? " is-on" : "") + '" data-dtier="mid" style="flex:1">' + l("dailyTierMid") + '</button><button type="button" class="mini-btn' + ("hard" === S.dailyTier ? " is-on" : "") + '" data-dtier="hard" style="flex:1">' + l("dailyTierHard") + '</button></div></div><div style="display:flex;gap:8px"><button type="button" class="primary-btn" id="btnLaunchDailyNow" style="flex:1">開始今日推薦挑戰</button><button type="button" class="mini-btn" id="btnOpenEndgameHubFromDaily">' + l("endgameHubBtn") + "</button></div></div>";
+        var e = fe(S.dailyChallenge || {}, new Date), t = le(de()), a = L[t % L.length], r = '<div style="padding:6px"><div style="display:flex;justify-content:space-between;align-items:center;background:rgba(16,22,58,.75);padding:10px 14px;border-radius:10px;border:1px solid var(--line);margin-bottom:12px"><div><div style="font-weight:800;color:#ffd700">' + l("dailyPickLabel") + l("name." + a) + '</div><div style="font-size:.8rem;opacity:.8">' + l("dailyPickSub") + '</div></div><div style="text-align:right"><div style="font-size:.78rem;opacity:.75">' + l("dailyStreakLabel") + '</div><div style="font-size:1.25rem;font-weight:900;color:#4dd0e1">' + e + ' ' + l("dailyStreakUnit") + '</div></div></div><div style="margin-bottom:12px"><div style="font-size:.85rem;margin-bottom:6px;font-weight:700">' + l("dailyTierLabel") + '</div><div style="display:flex;gap:8px"><button type="button" class="mini-btn' + ("easy" === S.dailyTier ? " is-on" : "") + '" data-dtier="easy" style="flex:1">' + l("dailyTierEasy") + '</button><button type="button" class="mini-btn' + ("mid" === S.dailyTier ? " is-on" : "") + '" data-dtier="mid" style="flex:1">' + l("dailyTierMid") + '</button><button type="button" class="mini-btn' + ("hard" === S.dailyTier ? " is-on" : "") + '" data-dtier="hard" style="flex:1">' + l("dailyTierHard") + '</button></div></div><div style="display:flex;gap:8px"><button type="button" class="primary-btn" id="btnLaunchDailyNow" style="flex:1">' + l("dailyStartBtn") + '</button><button type="button" class="mini-btn" id="btnOpenEndgameHubFromDaily">' + l("endgameHubBtn") + "</button></div></div>";
         lf(l("dailyChallenge"), r);
         for (var n = document.querySelectorAll("[data-dtier]"), i = 0; i < n.length; i++) !function(e) {
           e.addEventListener("click", (function() {
@@ -22710,7 +22878,7 @@ var __T2S_MAP = null;
           var x = URL.createObjectURL(new Blob([ new Uint8Array(c) ], {
             type: "image/gif"
           })), k = document.createElement("a");
-          k.href = x, k.download = "starchess-" + (S.game || "replay") + "-v6.22.0.gif", document.body.appendChild(k), 
+          k.href = x, k.download = "starchess-" + (S.game || "replay") + "-v6.23.0.gif", document.body.appendChild(k), 
           k.click(), document.body.removeChild(k), setTimeout((function() {
             URL.revokeObjectURL(x);
           }), 3e3), we("已匯出整盤棋快速回放 GIF 動畫！");
@@ -22868,7 +23036,7 @@ var __T2S_MAP = null;
         var n = r.getContext("2d");
         n.fillStyle = "#12163a", n.fillRect(0, 0, 600, 340), n.strokeStyle = "#38bdf8", 
         n.lineWidth = 3, n.strokeRect(10, 10, 580, 320), n.fillStyle = "#ffd700", n.font = "bold 26px sans-serif", 
-        n.fillText("星之棋 v6.22.0 · 榮耀戰績卡", 32, 52), n.fillStyle = "#ffffff", n.font = "bold 22px sans-serif", 
+        n.fillText("星之棋 v6.23.0 · 榮耀戰績卡", 32, 52), n.fillStyle = "#ffffff", n.font = "bold 22px sans-serif", 
         n.fillText("棋種：" + (l("name." + t.game) || t.game) + "  |  手數：" + (t.moves || 0), 32, 115);
         var i = r.toDataURL("image/png");
         lf(l("battleCardModalTitle"), '<div style="text-align:center;padding:6px"><img src="' + i + '" alt="Battle Card" style="max-width:100%;border-radius:10px;margin-bottom:10px"/><button type="button" class="primary-btn" id="btnDownloadBattleCardPng">下載戰績卡 PNG</button></div>');
@@ -22921,7 +23089,7 @@ var __T2S_MAP = null;
         Pt();
         var e = v("genModalBody");
         if (e && !v("v615SettingsGroup")) {
-          var t = '<div class="v64-group" id="v615SettingsGroup" style="margin-top:12px;padding:12px;background:rgba(14,20,52,.78);border:1px solid var(--line);border-radius:12px"><div style="color:#ffd700;font-weight:800;margin-bottom:8px">v6.22.0 棋盤材質、棋子樣式與無障礙設定</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">' + [ [ "default", "星空" ], [ "wood", l("boardWood") ], [ "marble", l("boardMarble") ], [ "minimal", l("boardMinimal") ], [ "neon", l("boardNeon") ], [ "retro", l("boardRetro") ] ].map((function(e) {
+          var t = '<div class="v64-group" id="v615SettingsGroup" style="margin-top:12px;padding:12px;background:rgba(14,20,52,.78);border:1px solid var(--line);border-radius:12px"><div style="color:#ffd700;font-weight:800;margin-bottom:8px">v6.23.0 棋盤材質、棋子樣式與無障礙設定</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">' + [ [ "default", "星空" ], [ "wood", l("boardWood") ], [ "marble", l("boardMarble") ], [ "minimal", l("boardMinimal") ], [ "neon", l("boardNeon") ], [ "retro", l("boardRetro") ] ].map((function(e) {
             return '<button type="button" class="mini-btn' + (S.boardStyle === e[0] ? " is-on" : "") + '" data-bstyle="' + e[0] + '">' + e[1] + "</button>";
           })).join("") + '</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">' + [ [ "classic", l("pieceCircle") ], [ "square", l("pieceSquare") ], [ "crystal", l("pieceCrystal") ], [ "metal", l("pieceMetal") ], [ "sketch", l("pieceSketch") ] ].map((function(e) {
             return '<button type="button" class="mini-btn' + (S.pieceSkin === e[0] ? " is-on" : "") + '" data-pskin="' + e[0] + '">' + e[1] + "</button>";
@@ -25360,13 +25528,13 @@ var __T2S_MAP = null;
         if (t) {
           var a = S.achFilterCat || "all", r = document.createElement("div");
           r.style.cssText = "display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px";
-          var n = [ [ "all", "全部 (" + C.length + ")" ], [ "unlocked", "已解鎖" ], [ "locked", "未解鎖" ], [ "firstWin", "首勝成就 (16)" ], [ "streak3", "三連勝成就 (16)" ], [ "elo1200", "大師 ELO 1200 (16)" ], [ "general", "綜合與挑戰" ] ];
-          r.innerHTML = n.map((function(e) {
+          var filters = [ [ "all", l("achFilterAll") + " (" + C.length + ")" ], [ "unlocked", l("achFilterUnlocked") ], [ "locked", l("achFilterLocked") ], [ "firstWin", l("achFilterFirstWin") + " (16)" ], [ "streak3", l("achFilterStreak3") + " (16)" ], [ "elo1200", l("achFilterElo1200") + " (16)" ], [ "general", l("achFilterGeneral") ] ];
+          r.innerHTML = filters.map((function(e) {
             return '<button type="button" class="mini-btn' + (a === e[0] ? " is-on" : "") + '" data-ach-f="' + e[0] + '">' + e[1] + "</button>";
           })).join(""), t.insertBefore(r, t.firstChild);
           for (var i = t.querySelectorAll(".ach-card"), o = 0; o < i.length && o < C.length; o++) {
-            var s = C[o], l = !(!S.achievements || !S.achievements[s.id]), c = !0;
-            "unlocked" === a ? c = l : "locked" === a ? c = !l : "firstWin" === a ? c = "firstWin" === s.cat || "firstWin" === s.id : "streak3" === a ? c = "streak3" === s.cat || 0 === s.id.indexOf("streak") : "elo1200" === a ? c = "elo1200" === s.cat || 0 === s.id.indexOf("elo") : "general" === a && (c = !s.cat), 
+            var s = C[o], un = !(!S.achievements || !S.achievements[s.id]), c = !0;
+            "unlocked" === a ? c = un : "locked" === a ? c = !un : "firstWin" === a ? c = "firstWin" === s.cat || "firstWin" === s.id : "streak3" === a ? c = "streak3" === s.cat || 0 === s.id.indexOf("streak") : "elo1200" === a ? c = "elo1200" === s.cat || 0 === s.id.indexOf("elo") : "general" === a && (c = !s.cat), 
             i[o].style.display = c ? "" : "none";
           }
           for (var d = r.querySelectorAll("[data-ach-f]"), f = 0; f < d.length; f++) !function(e) {
@@ -25807,8 +25975,8 @@ var __T2S_MAP = null;
           m.fillStyle = r.dropType ? "rgba(255,215,0,.34)" : "rgba(77,208,225,.34)", m.beginPath(), 
           m.arc(84 + p.tc * e + 24, 44 + p.tr * e + 24, 8.5, 0, 2 * Math.PI), m.fill();
         }
-        for (var g = 0; g < 9; g++) for (var h = 0; h < 9; h++) {
-          var y = S.grid[g][h];
+        for (var g = 0; g < 9; g++) { var sg2Row = S.grid[g]; if (!sg2Row) continue; for (var h = 0; h < 9; h++) {
+          var y = sg2Row[h];
           if (y) {
             var b = 84 + h * e + 24, x = 44 + g * e + 24, k = 0 === y.t.indexOf("+");
             m.save(), m.translate(b, x), y.p === a && m.rotate(Math.PI), m.fillStyle = y.p === t ? "#112a46" : "#3b1246", 
@@ -25818,7 +25986,7 @@ var __T2S_MAP = null;
             m.font = "bold 18px serif", m.textAlign = "center", m.textBaseline = "middle", m.fillText(i[y.t] || y.t, 0, 2), 
             m.restore();
           }
-        }
+        } }
       }, $ = function(e, t, a) {
         var r = a[e][t];
         if (!r || !r.up) return [];
@@ -25902,8 +26070,8 @@ var __T2S_MAP = null;
         }
         m.save(), m.strokeStyle = "rgba(255,215,0,.45)", m.lineWidth = 2, m.setLineDash([ 6, 4 ]), 
         m.beginPath(), m.moveTo(t, 160), m.lineTo(544, 160), m.stroke(), m.restore();
-        for (var u = 0; u < 4; u++) for (var v = 0; v < 8; v++) {
-          var p = S.grid[u][v];
+        for (var u = 0; u < 4; u++) { var bq2Row = S.grid[u]; if (!bq2Row) continue; for (var v = 0; v < 8; v++) {
+          var p = bq2Row[v];
           if (p) {
             var g = t + v * e + 33, h = a + u * e + 33, y = 1, b = !p.up;
             p.flipStart && r - p.flipStart < 300 && (b = (y = (r - p.flipStart) / 300) < .5);
@@ -25919,7 +26087,7 @@ var __T2S_MAP = null;
             }
             m.restore();
           }
-        }
+        } }
         if (S.banqi && S.banqi.sel) {
           var w = S.banqi.sel[0], M = S.banqi.sel[1];
           m.strokeStyle = "#ffd700", m.lineWidth = 3, m.strokeRect(t + M * e + 2, a + w * e + 2, 62, 62);
@@ -25942,7 +26110,7 @@ var __T2S_MAP = null;
       }, window.migrateV6ToV7(), window.exportSaveAsJsonV7 = function() {
         var e = {
           schemaVersion: "v7",
-          gameVersion: "6.22.0",
+          gameVersion: "6.23.0",
           exportedAt: (new Date).toISOString(),
           storage: {}
         };
@@ -26004,7 +26172,7 @@ var __T2S_MAP = null;
           t && t.remove(), v("v616MasterSettingsBox") && v("v616MasterSettingsBox").remove();
           var a = S.game || "gomoku", r = S.boardStyleByGame && S.boardStyleByGame[a] ? S.boardStyleByGame[a] : "global", n = [ [ "default", "預設（透明星空）" ], [ "wood", "經典木紋（棕色線條）" ], [ "marble", "大理石（灰白紋理）" ], [ "mahjong", "麻將牌（綠色絨面）" ], [ "glass", "半透玻璃（淡藍色高光）" ] ], i = document.createElement("div");
           i.id = "v616MasterSettingsBox", i.style.cssText = "margin-bottom:12px;padding:12px;background:rgba(16,24,62,.9);border:1px solid #4dd0e1;border-radius:12px", 
-          i.innerHTML = '<div style="font-weight:800;color:#ffd700;margin-bottom:8px">v6.22.0 音效合成、棋盤材質與 v7 存檔中心</div><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;padding:8px;background:rgba(255,255,255,.04);border-radius:8px"><span style="font-size:.82rem;font-weight:700">WebAudio 音效開關</span><button type="button" class="mini-btn' + (S.soundOn ? " is-on" : "") + '" id="btnV616SoundToggle">' + (S.soundOn ? "已開啟 (ON)" : "已關閉 (OFF)") + '</button><span style="font-size:.82rem">音量</span><input type="range" id="v616VolSlider" min="0" max="100" value="' + Math.round(100 * (S.volume || .8)) + '" style="flex:1;max-width:130px"><b id="v616VolTxt" style="font-size:.8rem;min-width:36px">' + Math.round(100 * (S.volume || .8)) + '%</b></div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px"><button type="button" class="mini-btn" data-test-sfx="place">試聽落子(木質嗒0.1s)</button><button type="button" class="mini-btn" data-test-sfx="capture">試聽吃子(低沉咚0.2s)</button><button type="button" class="mini-btn" data-test-sfx="check">試聽將軍(金屬鏘0.3s)</button><button type="button" class="mini-btn" data-test-sfx="win">試聽勝利(五音階0.8s)</button></div><div style="font-size:.82rem;font-weight:700;color:#4dd0e1;margin-bottom:5px">全域預設棋盤材質：</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">' + n.map((function(e) {
+          i.innerHTML = '<div style="font-weight:800;color:#ffd700;margin-bottom:8px">v6.23.0 音效合成、棋盤材質與 v7 存檔中心</div><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;padding:8px;background:rgba(255,255,255,.04);border-radius:8px"><span style="font-size:.82rem;font-weight:700">WebAudio 音效開關</span><button type="button" class="mini-btn' + (S.soundOn ? " is-on" : "") + '" id="btnV616SoundToggle">' + (S.soundOn ? "已開啟 (ON)" : "已關閉 (OFF)") + '</button><span style="font-size:.82rem">音量</span><input type="range" id="v616VolSlider" min="0" max="100" value="' + Math.round(100 * (S.volume || .8)) + '" style="flex:1;max-width:130px"><b id="v616VolTxt" style="font-size:.8rem;min-width:36px">' + Math.round(100 * (S.volume || .8)) + '%</b></div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px"><button type="button" class="mini-btn" data-test-sfx="place">試聽落子(木質嗒0.1s)</button><button type="button" class="mini-btn" data-test-sfx="capture">試聽吃子(低沉咚0.2s)</button><button type="button" class="mini-btn" data-test-sfx="check">試聽將軍(金屬鏘0.3s)</button><button type="button" class="mini-btn" data-test-sfx="win">試聽勝利(五音階0.8s)</button></div><div style="font-size:.82rem;font-weight:700;color:#4dd0e1;margin-bottom:5px">全域預設棋盤材質：</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">' + n.map((function(e) {
             return '<button type="button" class="mini-btn' + (S.boardStyle === e[0] ? " is-on" : "") + '" data-v616-gmat="' + e[0] + '">' + e[1] + "</button>";
           })).join("") + '</div><div style="font-size:.82rem;font-weight:700;color:#e040fb;margin-bottom:5px">單棋材質覆蓋（目前棋種：' + l("name." + a) + '）：</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px"><button type="button" class="mini-btn' + ("global" === r ? " is-on" : "") + '" data-v616-omat="global">跟隨全域預設</button>' + n.map((function(e) {
             return '<button type="button" class="mini-btn' + (r === e[0] ? " is-on" : "") + '" data-v616-omat="' + e[0] + '">' + e[1] + "</button>";
@@ -26525,7 +26693,7 @@ var __T2S_MAP = null;
           var clearedCount = Object.keys(v617State.storyCleared || {}).length;
           var chIdx = Math.max(0, Math.min(STORY_CHAPTERS.length - 1, v617State.selectedChapter || 0));
           var chObj = STORY_CHAPTERS[chIdx];
-          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.74rem;color:#94a3b8">星海編年史 · 蒼穹失落星圖主線戰役</div><div style="font-size:1.05rem;font-weight:900;color:#fde047">已完成戰役幕數：' + clearedCount + ' / 24 幕</div></div><div style="display:flex;gap:4px;flex-wrap:wrap">';
+          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.74rem;color:#94a3b8">' + l("storyStripTitle") + '</div><div style="font-size:1.05rem;font-weight:900;color:#fde047">已完成戰役幕數：' + clearedCount + ' / 24 幕</div></div><div style="display:flex;gap:4px;flex-wrap:wrap">';
           for (var cI = 0; cI < STORY_CHAPTERS.length; cI++) {
             htmlOut += '<button type="button" class="mini-btn' + (cI === chIdx ? " is-on" : "") + '" data-v618-ch="' + cI + '" style="padding:3px 8px;font-size:.72rem">第' + (cI + 1) + "章</button>";
           }
@@ -26557,7 +26725,7 @@ var __T2S_MAP = null;
           for (var aIdx = 0; aIdx < chObj.acts.length; aIdx++) {
             var ac = chObj.acts[aIdx];
             var isDone = !!(v617State.storyCleared && v617State.storyCleared[ac.key]);
-            htmlOut += '<div class="v617-card" style="border-color:' + (isDone ? "#22c55e" : chObj.color) + '"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span class="v617-badge ' + (isDone ? "green" : "gold") + '">' + ac.actNo + " · " + ac.name + '</span><span style="font-size:.72rem;color:#fde047">+' + ac.reward + ' 星幣</span></div><div style="font-weight:800;font-size:.84rem;color:#fff;margin-bottom:3px">試煉棋盤：' + l("name." + ac.game) + " (" + l(ac.diff) + ')</div><div style="font-size:.74rem;color:#94a3b8;line-height:1.4">戰術目標：' + ac.objective + '</div></div><div style="display:flex;gap:5px;margin-top:6px"><button type="button" class="mini-btn" data-v618-preview-act="' + ac.key + '" style="flex:0 0 auto">預覽對話</button><button type="button" class="mini-btn is-on" data-v618-start-act="' + chIdx + ":" + aIdx + '" style="flex:1;justify-content:center">' + (isDone ? "✓ 已通關 · 重溫戰役" : "出征此幕戰役 →") + "</button></div></div>";
+            htmlOut += '<div class="v617-card" style="border-color:' + (isDone ? "#22c55e" : chObj.color) + '"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span class="v617-badge ' + (isDone ? "green" : "gold") + '">' + ac.actNo + " · " + ac.name + '</span><span style="font-size:.72rem;color:#fde047">+' + ac.reward + ' 星幣</span></div><div style="font-weight:800;font-size:.84rem;color:#fff;margin-bottom:3px">' + l("storyActGameLabel") + l("name." + ac.game) + " (" + l(ac.diff) + ')</div><div style="font-size:.74rem;color:#94a3b8;line-height:1.4">' + l("storyActObjectiveLabel") + ac.objective + '</div></div><div style="display:flex;gap:5px;margin-top:6px"><button type="button" class="mini-btn" data-v618-preview-act="' + ac.key + '" style="flex:0 0 auto">' + l("storyPreviewBtn") + '</button><button type="button" class="mini-btn is-on" data-v618-start-act="' + chIdx + ":" + aIdx + '" style="flex:1;justify-content:center">' + (isDone ? l("storyReplayBtn") : l("storyStartBtn")) + "</button></div></div>";
           }
           htmlOut += "</div>";
         } else if ("guide" === curTab) {
@@ -26570,7 +26738,7 @@ var __T2S_MAP = null;
           htmlOut += "</div>";
           var tutObj = uf[gSel] || uf.ttt;
           var stepsArr = tutObj && tutObj.steps ? tutObj.steps : [ "步驟 1：搶佔中心格建立優勢。", "步驟 2：觀察對手威脅並即時封堵。", "步驟 3：構築雙重威脅鎖定勝局！" ];
-          htmlOut += '<div class="v618-story-theater"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px"><div><span class="v617-badge gold" style="margin-right:6px">30秒極速上手</span><b style="font-size:.95rem;color:#fff">' + l("name." + gSel) + ' · 核心規則與互動實戰引導</b></div><button type="button" class="primary-btn" data-v618-launch-guide="' + gSel + ':0" style="padding:6px 14px;font-size:.78rem">✦ 啟動棋盤動態引導實戰 →</button></div><div style="font-size:.79rem;color:#e2e8f0;margin-bottom:4px"><b>棋盤規格：</b>' + (tutObj ? tutObj.board : "") + '</div><div style="font-size:.77rem;color:#7dd3fc"><b>致勝心法：</b>' + (tutObj && tutObj.tips ? tutObj.tips.join(" ") : "") + "</div></div>";
+          htmlOut += '<div class="v618-story-theater"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px"><div><span class="v617-badge gold" style="margin-right:6px">' + l("guideBadge") + '</span><b style="font-size:.95rem;color:#fff">' + l("name." + gSel) + ' · 核心規則與互動實戰引導</b></div><button type="button" class="primary-btn" data-v618-launch-guide="' + gSel + ':0" style="padding:6px 14px;font-size:.78rem">' + l("guideLaunchBtn") + '</button></div><div style="font-size:.79rem;color:#e2e8f0;margin-bottom:4px"><b>' + l("boardSpecLabel") + '</b>' + (tutObj ? tutObj.board : "") + '</div><div style="font-size:.77rem;color:#7dd3fc"><b>' + l("tipLabel") + '</b>' + (tutObj && tutObj.tips ? tutObj.tips.join(" ") : "") + "</div></div>";
           htmlOut += '<div class="v617-card-grid" style="grid-template-columns:repeat(auto-fit,minmax(195px,1fr));max-height:34vh">';
           for (var sI = 0; sI < stepsArr.length; sI++) {
             htmlOut += '<div class="v617-card"><div><span class="v617-badge gold" style="margin-bottom:4px">互動引導第 ' + (sI + 1) + ' 階</span><div style="font-size:.8rem;color:#fff;font-weight:700;line-height:1.45;margin-top:4px">' + stepsArr[sI] + '</div></div><button type="button" class="mini-btn is-on" data-v618-launch-guide="' + gSel + ":" + sI + '" style="width:100%;justify-content:center;margin-top:6px">從第 ' + (sI + 1) + " 階開始實戰引導</button></div>";
@@ -26588,36 +26756,36 @@ var __T2S_MAP = null;
           htmlOut += '<div class="v617-card-grid" style="grid-template-columns:1fr;max-height:44vh">';
           for (var mpI = 0; mpI < mps.length; mpI++) {
             var mp = mps[mpI];
-            htmlOut += '<div class="v617-card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px"><div><span class="v617-badge gold" style="margin-right:6px">傳奇名局 #' + (mpI + 1) + '</span><b style="font-size:.88rem;color:#fff">' + mp.title + '</b></div><span class="v617-badge">' + mp.players + '</span></div><div style="font-size:.78rem;color:#cbd5e1;margin:4px 0">' + mp.summary + '</div><div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap"><button type="button" class="mini-btn" data-v619-mp-replay="' + hG + ":" + mpI + '">🎬 載入名局鑑賞回放</button><button type="button" class="mini-btn is-on" data-v619-mp-play="' + hG + ":" + mpI + '">⚔️ 從第 ' + mp.turningStep + " 手勝負處接力對決 →</button></div></div>";
+            htmlOut += '<div class="v617-card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px"><div><span class="v617-badge gold" style="margin-right:6px">傳奇名局 #' + (mpI + 1) + '</span><b style="font-size:.88rem;color:#fff">' + mp.title + '</b></div><span class="v617-badge">' + mp.players + '</span></div><div style="font-size:.78rem;color:#cbd5e1;margin:4px 0">' + mp.summary + '</div><div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap"><button type="button" class="mini-btn" data-v619-mp-replay="' + hG + ":" + mpI + '">' + l("hallReplayBtn") + '</button><button type="button" class="mini-btn is-on" data-v619-mp-play="' + hG + ":" + mpI + '">⚔️ 從第 ' + mp.turningStep + " 手勝負處接力對決 →</button></div></div>";
           }
           htmlOut += "</div>";
         } else if ("cup" === curTab) {
-          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.74rem;color:#94a3b8">蒼穹全能王座盃 · 跨棋種系列賽中心</div><div style="font-size:1.05rem;font-weight:900;color:#fde047">' + (v617State.cupActive ? "進行中系列賽：玩家 " + v617State.cupP1Wins + " : " + v617State.cupAiWins + " AI（第 " + (v617State.cupStep + 1) + " 場）" : "已奪得全能王座盃冠軍：" + (v617State.cupsWon || 0) + " 座") + '</div></div></div>';
+          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.74rem;color:#94a3b8">' + l("cupStripTitle") + '</div><div style="font-size:1.05rem;font-weight:900;color:#fde047">' + (v617State.cupActive ? "進行中系列賽：玩家 " + v617State.cupP1Wins + " : " + v617State.cupAiWins + " AI（第 " + (v617State.cupStep + 1) + " 場）" : "已奪得全能王座盃冠軍：" + (v617State.cupsWon || 0) + " 座") + '</div></div></div>';
           htmlOut += '<div class="v617-card-grid">';
           for (var cpI = 0; cpI < COSMIC_CUPS.length; cpI++) {
             var cp = COSMIC_CUPS[cpI];
             var gListNames = cp.games.map((function(x){ return l("name." + x); })).join(" → ");
-            htmlOut += '<div class="v617-card" style="border-color:#fbbf24"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span class="v617-badge gold">' + cp.name + '</span><span style="font-size:.72rem;color:#fde047">冠軍賞金 +' + cp.reward + ' 星幣</span></div><div style="font-size:.75rem;color:#7dd3fc;margin-bottom:4px">賽程項目：' + gListNames + '</div><div style="font-size:.74rem;color:#94a3b8;line-height:1.4">' + cp.desc + '</div></div><button type="button" class="mini-btn is-on" data-v619-start-cup="' + cp.id + '" style="width:100%;justify-content:center;margin-top:6px">開啟此系列賽爭霸 →</button></div>';
+            htmlOut += '<div class="v617-card" style="border-color:#fbbf24"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span class="v617-badge gold">' + cp.name + '</span><span style="font-size:.72rem;color:#fde047">冠軍賞金 +' + cp.reward + ' 星幣</span></div><div style="font-size:.75rem;color:#7dd3fc;margin-bottom:4px">' + l("cupGamesLabel") + gListNames + '</div><div style="font-size:.74rem;color:#94a3b8;line-height:1.4">' + cp.desc + '</div></div><button type="button" class="mini-btn is-on" data-v619-start-cup="' + cp.id + '" style="width:100%;justify-content:center;margin-top:6px">' + l("cupStartBtn") + '</button></div>';
           }
           htmlOut += "</div>";
         } else if ("bounties" === curTab) {
           var claimedCnt = Object.keys(v617State.bountyClaimed || {}).length;
-          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.74rem;color:#94a3b8">星象委託與宗師懸賞令</div><div style="font-size:1.05rem;font-weight:900;color:#4dd0e1">已完成並領取懸賞：' + claimedCnt + " / " + BOUNTY_COMMISSIONS.length + " 項</div></div></div>";
+          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.74rem;color:#94a3b8">' + l("bountyStripTitle") + '</div><div style="font-size:1.05rem;font-weight:900;color:#4dd0e1">已完成並領取懸賞：' + claimedCnt + " / " + BOUNTY_COMMISSIONS.length + " 項</div></div></div>";
           htmlOut += '<div class="v617-card-grid">';
           for (var bI = 0; bI < BOUNTY_COMMISSIONS.length; bI++) {
             var bty = BOUNTY_COMMISSIONS[bI];
             var isClaimed = !!(v617State.bountyClaimed && v617State.bountyClaimed[bty.id]);
             var canClaim = !isClaimed && bty.check();
-            htmlOut += '<div class="v617-card" style="border-color:' + (isClaimed ? "#22c55e" : canClaim ? "#fbbf24" : "rgba(125,211,252,0.22)") + '"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span class="v617-badge ' + (isClaimed ? "green" : canClaim ? "gold" : "") + '">' + bty.title + '</span><span style="font-size:.72rem;color:#fde047">+' + bty.reward + ' 星幣</span></div><div style="font-size:.75rem;color:#cbd5e1;line-height:1.4">' + bty.desc + '</div></div><button type="button" class="mini-btn' + (canClaim ? " is-on" : "") + '" data-v619-claim-bounty="' + bty.id + '" style="width:100%;justify-content:center;margin-top:6px">' + (isClaimed ? "✓ 已領取賞金" : canClaim ? "★ 條件已達成 · 立即領取賞金！" : "達成條件後即可領取") + "</button></div>";
+            htmlOut += '<div class="v617-card" style="border-color:' + (isClaimed ? "#22c55e" : canClaim ? "#fbbf24" : "rgba(125,211,252,0.22)") + '"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span class="v617-badge ' + (isClaimed ? "green" : canClaim ? "gold" : "") + '">' + bty.title + '</span><span style="font-size:.72rem;color:#fde047">+' + bty.reward + ' 星幣</span></div><div style="font-size:.75rem;color:#cbd5e1;line-height:1.4">' + bty.desc + '</div></div><button type="button" class="mini-btn' + (canClaim ? " is-on" : "") + '" data-v619-claim-bounty="' + bty.id + '" style="width:100%;justify-content:center;margin-top:6px">' + (isClaimed ? l("bountyClaimedBtn") : canClaim ? l("bountyClaimBtn") : l("bountyLockedBtn")) + "</button></div>";
           }
           htmlOut += "</div>";
         } else if ("sanctuary" === curTab) {
           var curTrail = v617State.trailStyle || "nova";
-          htmlOut += '<div style="font-size:.8rem;font-weight:800;color:#fde047;margin-bottom:6px">✨ 落子星軌光效工坊（點擊立即切換落子與吃子星芒色彩）：</div><div class="v617-card-grid" style="max-height:24vh;margin-bottom:10px">';
+          htmlOut += '<div style="font-size:.8rem;font-weight:800;color:#fde047;margin-bottom:6px">' + l("trailWorkshopLabel") + '</div><div class="v617-card-grid" style="max-height:24vh;margin-bottom:10px">';
           for (var trI = 0; trI < TRAIL_STYLES.length; trI++) {
             var tr = TRAIL_STYLES[trI];
             var isTrOn = curTrail === tr.id;
-            htmlOut += '<div class="v617-card" style="padding:8px 10px;border-color:' + (isTrOn ? tr.c1 : "rgba(125,211,252,0.2)") + '"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:800;color:' + tr.c1 + ';font-size:.8rem">● ' + tr.name + '</span><button type="button" class="mini-btn' + (isTrOn ? " is-on" : "") + '" data-v619-trail="' + tr.id + '" style="padding:2px 8px;font-size:.7rem">' + (isTrOn ? "使用中" : "套用") + '</button></div><div style="font-size:.7rem;color:#94a3b8">' + tr.desc + "</div></div>";
+            htmlOut += '<div class="v617-card" style="padding:8px 10px;border-color:' + (isTrOn ? tr.c1 : "rgba(125,211,252,0.2)") + '"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:800;color:' + tr.c1 + ';font-size:.8rem">● ' + tr.name + '</span><button type="button" class="mini-btn' + (isTrOn ? " is-on" : "") + '" data-v619-trail="' + tr.id + '" style="padding:2px 8px;font-size:.7rem">' + (isTrOn ? l("trailActive") : l("trailApply")) + '</button></div><div style="font-size:.7rem;color:#94a3b8">' + tr.desc + "</div></div>";
           }
           htmlOut += '</div><div style="font-size:.8rem;font-weight:800;color:#7dd3fc;margin-bottom:6px">❖ ' + l("nexusMasteryLabel").replace("{n}", L.length) + '：</div><div class="v617-card-grid" style="max-height:24vh">';
           for (var gmI = 0; gmI < L.length; gmI++) {
@@ -26642,13 +26810,13 @@ var __T2S_MAP = null;
         } else if ("exam" === curTab) {
           var dLv = Math.min(v617State.danLevel || 0, DAN_RANKS.length - 1);
           var curD = DAN_RANKS[dLv];
-          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.75rem;color:#94a3b8">當前星海官方認證段位</div><div style="font-size:1.15rem;font-weight:900;color:#fde047">【' + curD.rank + "】" + curD.title + '</div></div><div style="text-align:right"><div style="font-size:.75rem;color:#94a3b8">已通過段位考核</div><div style="font-size:1rem;font-weight:800;color:#4dd0e1">' + Object.keys(v617State.danCleared || {}).length + " / " + DAN_RANKS.length + " 階</div></div></div>";
+          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.75rem;color:#94a3b8">' + l("examStripTitle") + '</div><div style="font-size:1.15rem;font-weight:900;color:#fde047">【' + curD.rank + "】" + curD.title + '</div></div><div style="text-align:right"><div style="font-size:.75rem;color:#94a3b8">' + l("examClearedLabel") + '</div><div style="font-size:1rem;font-weight:800;color:#4dd0e1">' + Object.keys(v617State.danCleared || {}).length + " / " + DAN_RANKS.length + " 階</div></div></div>";
           htmlOut += '<div class="v617-card-grid">';
           for (var dIdx = 0; dIdx < DAN_RANKS.length; dIdx++) {
             var dr = DAN_RANKS[dIdx];
             var isCleared = !!(v617State.danCleared && v617State.danCleared[dr.idx]);
             var isCurrent = dIdx === dLv;
-            htmlOut += '<div class="v617-card" style="border-color:' + (isCleared ? "rgba(34,197,94,0.5)" : isCurrent ? "#fbbf24" : "rgba(125,211,252,0.22)") + '"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span class="v617-badge ' + (isCleared ? "green" : isCurrent ? "gold" : "") + '">' + dr.rank + " · " + dr.title + '</span><span style="font-size:.72rem;color:#fde047">+' + dr.reward + ' 星幣</span></div><div style="font-weight:800;font-size:.84rem;color:#fff;margin-bottom:2px">考核項目：' + l("name." + dr.game) + " (" + l(dr.diff) + ')</div><div style="font-size:.75rem;color:#94a3b8;line-height:1.4">' + dr.desc + '</div></div><button type="button" class="mini-btn' + (isCurrent ? " is-on" : "") + '" data-v617-exam="' + dr.idx + '" style="width:100%;justify-content:center;margin-top:4px">' + (isCleared ? "✓ 已獲證書 · 再次挑戰" : "立即參加升段檢定") + "</button></div>";
+            htmlOut += '<div class="v617-card" style="border-color:' + (isCleared ? "rgba(34,197,94,0.5)" : isCurrent ? "#fbbf24" : "rgba(125,211,252,0.22)") + '"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span class="v617-badge ' + (isCleared ? "green" : isCurrent ? "gold" : "") + '">' + dr.rank + " · " + dr.title + '</span><span style="font-size:.72rem;color:#fde047">+' + dr.reward + ' 星幣</span></div><div style="font-weight:800;font-size:.84rem;color:#fff;margin-bottom:2px">考核項目：' + l("name." + dr.game) + " (" + l(dr.diff) + ')</div><div style="font-size:.75rem;color:#94a3b8;line-height:1.4">' + dr.desc + '</div></div><button type="button" class="mini-btn' + (isCurrent ? " is-on" : "") + '" data-v617-exam="' + dr.idx + '" style="width:100%;justify-content:center;margin-top:4px">' + (isCleared ? l("examReplayBtn") : l("examStartBtn")) + "</button></div>";
           }
           htmlOut += "</div>";
         } else if ("tower" === curTab) {
@@ -26656,12 +26824,12 @@ var __T2S_MAP = null;
           var bestFl = Math.max(fl, v617State.towerBest || 1);
           var towerGame = L[(fl - 1) % L.length];
           var towerDiff = fl <= 15 ? "easy" : fl <= 45 ? "normal" : "hard";
-          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.75rem;color:#94a3b8">無盡星淵試煉塔 · 當前層數</div><div style="font-size:1.18rem;font-weight:900;color:#4dd0e1">第 ' + fl + " / 100 層" + (fl % 5 === 0 ? ' <span class="v617-badge gold">★ 守關Boss層</span>' : "") + '</div><div style="font-size:.76rem;color:#cbd5e1;margin-top:2px">本層鎮守棋種：<b style="color:#fde047">' + l("name." + towerGame) + " (" + l(towerDiff) + ')</b> · 最高紀錄：第 ' + bestFl + ' 層</div></div><button type="button" class="primary-btn" id="btnV617StartTower" style="padding:8px 16px;font-size:.84rem">立即攻堅第 ' + fl + " 層 →</button></div>";
+          htmlOut += '<div class="v617-stat-strip"><div><div style="font-size:.75rem;color:#94a3b8">' + l("towerStripTitle") + '</div><div style="font-size:1.18rem;font-weight:900;color:#4dd0e1">第 ' + fl + " / 100 層" + (fl % 5 === 0 ? ' <span class="v617-badge gold">★ 守關Boss層</span>' : "") + '</div><div style="font-size:.76rem;color:#cbd5e1;margin-top:2px">本層鎮守棋種：<b style="color:#fde047">' + l("name." + towerGame) + " (" + l(towerDiff) + ')</b> · 最高紀錄：第 ' + bestFl + ' 層</div></div><button type="button" class="primary-btn" id="btnV617StartTower" style="padding:8px 16px;font-size:.84rem">立即攻堅第 ' + fl + " 層 →</button></div>";
           htmlOut += '<div style="font-size:.78rem;font-weight:800;color:#7dd3fc;margin-bottom:6px">✦ 點擊切換攜帶的星遺物祝福（最多同時裝備 3 件，已裝備 ' + (v617State.towerRelics ? v617State.towerRelics.length : 0) + '/3）：</div><div class="v617-card-grid" style="max-height:42vh">';
           for (var rIdx = 0; rIdx < TOWER_RELICS.length; rIdx++) {
             var rl = TOWER_RELICS[rIdx];
             var eq = v617State.towerRelics && v617State.towerRelics.indexOf(rl.id) >= 0;
-            htmlOut += '<div class="v617-card" style="border-color:' + (eq ? "#fbbf24" : "rgba(125,211,252,0.2)") + ';background:' + (eq ? "rgba(30,41,82,0.9)" : "rgba(14,21,52,0.8)") + '"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px"><span style="font-weight:800;color:' + (eq ? "#fde047" : "#e2e8f0") + ';font-size:.83rem">' + (eq ? "★ " : "☆ ") + rl.name + '</span><span class="v617-badge ' + (eq ? "gold" : "") + '">' + rl.bonus + '</span></div><div style="font-size:.74rem;color:#94a3b8;line-height:1.4">' + rl.desc + '</div></div><button type="button" class="mini-btn' + (eq ? " is-on" : "") + '" data-v617-relic="' + rl.id + '" style="width:100%;justify-content:center">' + (eq ? "已裝備 (點擊卸下)" : "裝備此星遺物") + "</button></div>";
+            htmlOut += '<div class="v617-card" style="border-color:' + (eq ? "#fbbf24" : "rgba(125,211,252,0.2)") + ';background:' + (eq ? "rgba(30,41,82,0.9)" : "rgba(14,21,52,0.8)") + '"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px"><span style="font-weight:800;color:' + (eq ? "#fde047" : "#e2e8f0") + ';font-size:.83rem">' + (eq ? "★ " : "☆ ") + rl.name + '</span><span class="v617-badge ' + (eq ? "gold" : "") + '">' + rl.bonus + '</span></div><div style="font-size:.74rem;color:#94a3b8;line-height:1.4">' + rl.desc + '</div></div><button type="button" class="mini-btn' + (eq ? " is-on" : "") + '" data-v617-relic="' + rl.id + '" style="width:100%;justify-content:center">' + (eq ? l("relicEquipped") : l("relicEquipBtn")) + "</button></div>";
           }
           htmlOut += "</div>";
         } else if ("joseki" === curTab) {
@@ -26676,7 +26844,7 @@ var __T2S_MAP = null;
           htmlOut += '<div class="v617-card-grid" style="grid-template-columns:1fr;max-height:44vh">';
           for (var oIdx = 0; oIdx < ops.length; oIdx++) {
             var op = ops[oIdx];
-            htmlOut += '<div class="v617-card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px"><div><span class="v617-badge gold" style="margin-right:6px">' + op.tag + '</span><b style="font-size:.9rem;color:#fff">' + op.name + '</b></div><span class="v617-badge">' + op.winRate + '</span></div><div style="font-size:.79rem;color:#cbd5e1;line-height:1.5;margin:4px 0">' + op.desc + '</div><div style="display:flex;justify-content:flex-end"><button type="button" class="mini-btn is-on" data-v617-play-op="' + selG + ":" + oIdx + '">載入棋盤實戰演練 →</button></div></div>';
+            htmlOut += '<div class="v617-card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px"><div><span class="v617-badge gold" style="margin-right:6px">' + op.tag + '</span><b style="font-size:.9rem;color:#fff">' + op.name + '</b></div><span class="v617-badge">' + op.winRate + '</span></div><div style="font-size:.79rem;color:#cbd5e1;line-height:1.5;margin:4px 0">' + op.desc + '</div><div style="display:flex;justify-content:flex-end"><button type="button" class="mini-btn is-on" data-v617-play-op="' + selG + ":" + oIdx + '">' + l("openingPlayBtn") + '</button></div></div>';
           }
           htmlOut += "</div>";
         } else if ("masters" === curTab) {
@@ -26712,8 +26880,8 @@ var __T2S_MAP = null;
             var rad = (vals[aI] / 100) * 58;
             pts.push((110 + Math.cos(ang) * rad).toFixed(1) + "," + (75 + Math.sin(ang) * rad).toFixed(1));
           }
-          htmlOut += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;align-items:center;margin-bottom:10px"><div style="background:rgba(10,16,42,0.85);border:1px solid rgba(77,208,225,0.3);border-radius:12px;padding:10px;text-align:center"><div style="font-weight:800;color:#ffd700;font-size:.82rem;margin-bottom:4px">玩家六維棋力星圖診斷</div><svg viewBox="0 0 220 150" style="width:100%;max-width:240px;margin:0 auto;display:block"><polygon points="110,17 160,46 160,104 110,133 60,104 60,46" fill="none" stroke="rgba(148,163,184,0.25)" stroke-width="1"/><polygon points="110,36 144,55 144,95 110,114 76,95 76,55" fill="none" stroke="rgba(148,163,184,0.2)" stroke-width="1"/><polygon points="' + pts.join(" ") + '" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="2"/><text x="110" y="11" fill="#bae6fd" font-size="8.5" text-anchor="middle">開局 ' + sOpen + '</text><text x="192" y="48" fill="#bae6fd" font-size="8.5" text-anchor="middle">中盤 ' + sMid + '</text><text x="192" y="110" fill="#bae6fd" font-size="8.5" text-anchor="middle">官子 ' + sEnd + '</text><text x="110" y="146" fill="#bae6fd" font-size="8.5" text-anchor="middle">韌性 ' + sDef + '</text><text x="28" y="110" fill="#bae6fd" font-size="8.5" text-anchor="middle">時控 ' + sTime + '</text><text x="28" y="48" fill="#bae6fd" font-size="8.5" text-anchor="middle">廣度 ' + sBroad + '</text></svg></div>';
-          htmlOut += '<div style="display:flex;flex-direction:column;gap:7px"><div style="font-weight:800;color:#7dd3fc;font-size:.82rem">✦ 星樞特訓法則開關（對局中即時生效）：</div>';
+          htmlOut += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;align-items:center;margin-bottom:10px"><div style="background:rgba(10,16,42,0.85);border:1px solid rgba(77,208,225,0.3);border-radius:12px;padding:10px;text-align:center"><div style="font-weight:800;color:#ffd700;font-size:.82rem;margin-bottom:4px">' + l("labRadarTitle") + '</div><svg viewBox="0 0 220 150" style="width:100%;max-width:240px;margin:0 auto;display:block"><polygon points="110,17 160,46 160,104 110,133 60,104 60,46" fill="none" stroke="rgba(148,163,184,0.25)" stroke-width="1"/><polygon points="110,36 144,55 144,95 110,114 76,95 76,55" fill="none" stroke="rgba(148,163,184,0.2)" stroke-width="1"/><polygon points="' + pts.join(" ") + '" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="2"/><text x="110" y="11" fill="#bae6fd" font-size="8.5" text-anchor="middle">開局 ' + sOpen + '</text><text x="192" y="48" fill="#bae6fd" font-size="8.5" text-anchor="middle">中盤 ' + sMid + '</text><text x="192" y="110" fill="#bae6fd" font-size="8.5" text-anchor="middle">官子 ' + sEnd + '</text><text x="110" y="146" fill="#bae6fd" font-size="8.5" text-anchor="middle">韌性 ' + sDef + '</text><text x="28" y="110" fill="#bae6fd" font-size="8.5" text-anchor="middle">時控 ' + sTime + '</text><text x="28" y="48" fill="#bae6fd" font-size="8.5" text-anchor="middle">廣度 ' + sBroad + '</text></svg></div>';
+          htmlOut += '<div style="display:flex;flex-direction:column;gap:7px"><div style="font-weight:800;color:#7dd3fc;font-size:.82rem">' + l("drillRuleLabel") + '</div>';
           var drills = [
             { k: "blitzDrill", title: "閃電直覺特訓 (快節奏落子)", desc: "鍛鍊第一感棋形直覺，獲勝額外 +20 星幣" },
             { k: "ironmanNoUndo", title: "鐵人無悔試煉 (禁止悔棋)", desc: "模擬正式職業賽場落子無悔，獲勝賞金 +50%" },
@@ -26722,23 +26890,24 @@ var __T2S_MAP = null;
           for (var drI = 0; drI < drills.length; drI++) {
             var dl2 = drills[drI];
             var isOn = dl2.isS ? !!S.coachVision : !!v617State[dl2.k];
-            htmlOut += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(14,21,52,0.85);border:1px solid ' + (isOn ? "#fbbf24" : "rgba(125,211,252,0.22)") + ';border-radius:9px"><div><div style="font-weight:800;font-size:.8rem;color:#fff">' + dl2.title + '</div><div style="font-size:.71rem;color:#94a3b8">' + dl2.desc + '</div></div><button type="button" class="mini-btn' + (isOn ? " is-on" : "") + '" data-v617-drill="' + dl2.k + '">' + (isOn ? "已開啟" : "開啟") + "</button></div>";
+            htmlOut += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(14,21,52,0.85);border:1px solid ' + (isOn ? "#fbbf24" : "rgba(125,211,252,0.22)") + ';border-radius:9px"><div><div style="font-weight:800;font-size:.8rem;color:#fff">' + dl2.title + '</div><div style="font-size:.71rem;color:#94a3b8">' + dl2.desc + '</div></div><button type="button" class="mini-btn' + (isOn ? " is-on" : "") + '" data-v617-drill="' + dl2.k + '">' + (isOn ? l("drillOn") : l("drillOff")) + "</button></div>";
           }
           htmlOut += "</div></div>";
 
           var canSaveNow = v("view-game") && v("view-game").classList.contains("active") && S.history && S.history.length > 0;
-          htmlOut += '<div class="v617-stat-strip"><div><div style="font-weight:800;color:#fde047;font-size:.84rem">⌛ 星海時光書籤庫（共 ' + (v617State.bookmarks ? v617State.bookmarks.length : 0) + ' 個局面快照）</div></div>' + (canSaveNow ? '<button type="button" class="primary-btn" id="btnV617SaveBookmarkNow" style="padding:5px 12px;font-size:.76rem">+ 保存當前盤面為書籤</button>' : "") + "</div>";
+          htmlOut += '<div class="v617-stat-strip"><div><div style="font-weight:800;color:#fde047;font-size:.84rem">⌛ 星海時光書籤庫（共 ' + (v617State.bookmarks ? v617State.bookmarks.length : 0) + ' 個局面快照）</div></div>' + (canSaveNow ? '<button type="button" class="primary-btn" id="btnV617SaveBookmarkNow" style="padding:5px 12px;font-size:.76rem">' + l("bookmarkSaveBtn") + '</button>' : "") + "</div>";
           htmlOut += '<div class="v617-card-grid" style="grid-template-columns:1fr;max-height:22vh">';
           for (var bIdx = 0; bIdx < (v617State.bookmarks || []).length; bIdx++) {
             var bm = v617State.bookmarks[bIdx];
-            htmlOut += '<div class="v617-card" style="padding:7px 10px"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px"><div><span class="v617-badge" style="margin-right:6px">' + l("name." + (bm.game || "gomoku")) + '</span><b style="color:#fff;font-size:.82rem">' + Se(bm.title) + '</b></div><button type="button" class="mini-btn is-on" data-v617-load-bm="' + bIdx + '" style="padding:3px 8px;font-size:.72rem">載入此局面 →</button></div></div>';
+            htmlOut += '<div class="v617-card" style="padding:7px 10px"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px"><div><span class="v617-badge" style="margin-right:6px">' + l("name." + (bm.game || "gomoku")) + '</span><b style="color:#fff;font-size:.82rem">' + Se(bm.title) + '</b></div><button type="button" class="mini-btn is-on" data-v617-load-bm="' + bIdx + '" style="padding:3px 8px;font-size:.72rem">' + l("bookmarkLoadBtn") + '</button></div></div>';
           }
           htmlOut += "</div>";
         }
 
-        htmlOut = '<div class="v617-card" style="margin-bottom:10px"><div style="font-weight:800;color:#ffd700;font-size:.82rem">✦ v6.22.0 更新條目</div><div style="font-size:.74rem;color:#cbd5e1;line-height:1.55;margin-top:3px">分類對應修正（連線／占地／吃子／策略）；棋種、題庫、每日與星樞計數改由程式動態產生；音效快捷靜音；主題卡顯式編輯入口；筆記字數提示與未儲存防護；空狀態與清除篩選；窄屏響應式與 ARIA 改善；補齊多語字典鍵。<br><span style="opacity:.7">Category mapping fixed; dynamic game/puzzle/daily/nexus counts; quick mute; explicit theme edit entry; notes char counter &amp; unsaved guard; empty-state clear filter; responsive &amp; ARIA fixes; i18n keys completed.</span></div></div>' +
+        htmlOut = '<div class="v617-card" style="margin-bottom:10px"><div style="font-weight:800;color:#ffd700;font-size:.82rem">✦ v6.23.0 更新條目</div><div style="font-size:.74rem;color:#cbd5e1;line-height:1.55;margin-top:3px">存檔與快照子狀態四處路徑對齊；快速切局競態下補齊 grid 索引防禦守衛，消除渲染／評估／分派例外與 NaN 座標異常；45+ 面板多語字典鍵補齊（英語／繁中）；商店三區與成就面板新增已擁有／總數進度徽章；題庫 352 題靜態與動態計數核對一致。<br><span style="opacity:.7">Save/snapshot sub-states aligned across all four paths; defensive grid-index guards against stale-timer races on quick game switches, removing renderer/evaluator/dispatcher exceptions and NaN-coordinate errors; 45+ panel i18n keys (EN/zh-Hant); owned/total progress badges in shop sections and achievements; puzzle count 352 verified statically and at runtime.</span></div></div>' +
+        '<div class="v617-card" style="margin-bottom:10px"><div style="font-weight:800;color:#ffd700;font-size:.82rem">✦ v6.22.0 更新條目</div><div style="font-size:.74rem;color:#cbd5e1;line-height:1.55;margin-top:3px">分類對應修正（連線／占地／吃子／策略）；棋種、題庫、每日與星樞計數改由程式動態產生；音效快捷靜音；主題卡顯式編輯入口；筆記字數提示與未儲存防護；空狀態與清除篩選；窄屏響應式與 ARIA 改善；補齊多語字典鍵。<br><span style="opacity:.7">Category mapping fixed; dynamic game/puzzle/daily/nexus counts; quick mute; explicit theme edit entry; notes char counter &amp; unsaved guard; empty-state clear filter; responsive &amp; ARIA fixes; i18n keys completed.</span></div></div>' +
         '<div class="v617-card" style="margin-bottom:10px"><div style="font-weight:800;color:#ffd700;font-size:.82rem">✦ v6.21.0 更新條目</div><div style="font-size:.74rem;color:#cbd5e1;line-height:1.55;margin-top:3px">新增 12 項成就與星宮收藏（邊框／特效／稱號）；修復存檔遷移、悔棋快照、匯入校驗與介面接線問題。</div></div>' + htmlOut;
-        lf("✦ 蒼穹星樞聖殿 v6.22.0 · 蒼穹星宮篇", htmlOut);
+        lf("✦ 蒼穹星樞聖殿 v6.23.0 · 蒼穹星宮篇", htmlOut);
 
         // Wire tab switches
         var tabBtns = document.querySelectorAll("[data-v617-tab]");
@@ -27185,7 +27354,7 @@ var __T2S_MAP = null;
         if (mb && !v("btnOdysseyToStoryChronicles")) {
           var banner = document.createElement("div");
           banner.style.cssText = "margin-bottom:10px;padding:9px 12px;border-radius:10px;background:linear-gradient(90deg,rgba(56,189,248,0.2),rgba(251,191,36,0.22));border:1px solid #fbbf24;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap";
-          banner.innerHTML = '<span style="font-size:.8rem;font-weight:800;color:#fde047">📖 v6.22.0「星海編年史 · 八章 24 幕主線劇情戰役」已開啟！</span><button type="button" class="mini-btn is-on" id="btnOdysseyToStoryChronicles">進入劇情劇場 →</button>';
+          banner.innerHTML = '<span style="font-size:.8rem;font-weight:800;color:#fde047">📖 v6.23.0「星海編年史 · 八章 24 幕主線劇情戰役」已開啟！</span><button type="button" class="mini-btn is-on" id="btnOdysseyToStoryChronicles">進入劇情劇場 →</button>';
           mb.insertBefore(banner, mb.firstChild);
           var bStory = v("btnOdysseyToStoryChronicles");
           bStory && bStory.addEventListener("click", (function(ev) {

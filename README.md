@@ -6,7 +6,7 @@
 
 - `src/`（`index.html`、`css/style.css`、`js/01-game.js`）：多檔網頁原始碼
 - `index.html`：打包後單檔成品（GitHub Pages 線上版）
-- `starchess-v6.22.0-standalone.html`：單檔離線成品，瀏覽器打開即玩
+- `starchess-v6.23.0-standalone.html`：單檔離線成品，瀏覽器打開即玩
 
 ## Android 版
 
