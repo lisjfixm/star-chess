@@ -358,3 +358,6 @@ body{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}
 /* --- UX-13: keep at least one restore entry visible in immersive mode (top back button) --- */
 body.immersive-mode.in-game-view .game-top{display:flex !important;}
 body.immersive-mode.in-game-view .game-top .top-back{display:inline-flex !important;}
+
+/* --- UX-15: settlement button row skeleton height, avoid jump when optional buttons toggle --- */
+.res-actions{min-height:152px;}
