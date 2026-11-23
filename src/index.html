@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="星之棋">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2305051a'/%3E%3Cpath d='M50 15 L61 38 L86 40 L67 56 L73 81 L50 67 L27 81 L33 56 L14 40 L39 38 Z' fill='%234dd0e1'/%3E%3C/svg%3E">
 <link rel="manifest" href='data:application/json,%7B%22name%22%3A%22%E6%98%9F%E4%B9%8B%E6%A3%8B%22%2C%22short_name%22%3A%22%E6%98%9F%E4%B9%8B%E6%A3%8B%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2305051a%22%2C%22theme_color%22%3A%22%2305051a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data:image/svg+xml,%253Csvg%2520xmlns%253D%2527http%253A//www.w3.org/2000/svg%2527%2520viewBox%253D%25270%25200%2520100%2520100%2527%253E%253Crect%2520width%253D%2527100%2527%2520height%253D%2527100%2527%2520rx%253D%252720%2527%2520fill%253D%2527%252305051a%2527/%253E%253Cpath%2520d%253D%2527M50%252015%2520L61%252038%2520L86%252040%2520L67%252056%2520L73%252081%2520L50%252067%2520L27%252081%2520L33%252056%2520L14%252040%2520L39%252038%2520Z%2527%2520fill%253D%2527%25234dd0e1%2527/%253E%253C/svg%3E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image/svg+xml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D'>
-<title>星之棋 v6.21.0 · 蒼穹星宮篇</title>
+<title>星之棋 v6.22.0 · 蒼穹星宮篇</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2305051a'/%3E%3Cpath d='M50 15 L61 38 L86 40 L67 56 L73 81 L50 67 L27 81 L33 56 L14 40 L39 38 Z' fill='%234dd0e1'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 <style id="snakes-ui">
@@ -97,8 +97,8 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <button class="lang-btn" data-lang="ja" type="button">日</button>
 </div>
 
-<button class="bgm-toggle" id="btnBgmToggle" type="button" title="Cosmic BGM"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span></button>
-<button class="sound-toggle" id="btnSound" type="button" title="音效"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></span></button>
+<button class="bgm-toggle" id="btnBgmToggle" type="button" title="背景音樂" aria-pressed="false"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span></button>
+<button class="sound-toggle" id="btnSound" type="button" title="音效" aria-pressed="false"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></span></button>
 
 <div class="screen">
 
@@ -138,9 +138,9 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 </div>
 </div>
 <div class="hrb-right">
-<button class="coin-pill-bar" id="btnHeroCoin" type="button" title="Star Coins"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l1.65 3.35 3.7.54-2.68 2.61.63 3.68L12 14.94l-3.3 1.74.63-3.68-2.68-2.61 3.7-.54L12 6.5z"/></svg><span id="hrbCoinVal">0</span></button>
+<button class="coin-pill-bar" id="btnHeroCoin" type="button" title="星幣" data-i18n-title="starCoins"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l1.65 3.35 3.7.54-2.68 2.61.63 3.68L12 14.94l-3.3 1.74.63-3.68-2.68-2.61 3.7-.54L12 6.5z"/></svg><span id="hrbCoinVal">0</span></button>
 <button class="hrb-pill" id="btnOpenBook" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span data-i18n="openingBook">開局百科</span></button>
-<button class="hrb-pill nexus-hero-btn" id="btnAstralNexusHub" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span id="lblAstralNexusBtn">星樞聖殿 v6.21.0</span></button>
+<button class="hrb-pill nexus-hero-btn" id="btnAstralNexusHub" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span id="lblAstralNexusBtn">星樞聖殿 v6.22.0</span></button>
 </div>
 </div>
 
@@ -160,15 +160,15 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <input type="search" id="gameSearchInput" class="menu-search-inp" placeholder="搜尋 26 種星海棋藝..." aria-label="Search games">
 </div>
 <div class="v616-cols-seg" id="gridColsSeg" role="group" aria-label="排列模式切換">
-<button type="button" class="menu-view-btn col-mode-btn" id="btnGridCol1" data-cols="1" title="單個一排 (1列)">
+<button type="button" class="menu-view-btn col-mode-btn" id="btnGridCol1" data-cols="1" title="單個一排 (1列)" aria-pressed="false">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>
 <span data-i18n="colMode1">單個一排</span>
 </button>
-<button type="button" class="menu-view-btn col-mode-btn is-on" id="btnGridToggle" data-cols="2" title="兩個一排 (2列)">
+<button type="button" class="menu-view-btn col-mode-btn is-on" id="btnGridToggle" data-cols="2" title="兩個一排 (2列)" aria-pressed="true">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
 <span data-i18n="gridView">雙欄</span>
 </button>
-<button type="button" class="menu-view-btn col-mode-btn" id="btnGridCol3" data-cols="3" title="三個一排 (3列)">
+<button type="button" class="menu-view-btn col-mode-btn" id="btnGridCol3" data-cols="3" title="三個一排 (3列)" aria-pressed="false">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="5" rx="0.8"/><rect x="9.5" y="3" width="5" height="5" rx="0.8"/><rect x="16" y="3" width="5" height="5" rx="0.8"/><rect x="3" y="9.5" width="5" height="5" rx="0.8"/><rect x="9.5" y="9.5" width="5" height="5" rx="0.8"/><rect x="16" y="9.5" width="5" height="5" rx="0.8"/><rect x="3" y="16" width="5" height="5" rx="0.8"/><rect x="9.5" y="16" width="5" height="5" rx="0.8"/><rect x="16" y="16" width="5" height="5" rx="0.8"/></svg>
 <span data-i18n="colMode3">三個一排</span>
 </button>
@@ -184,7 +184,10 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <button type="button" class="mini-btn" id="btnMenuOpenPuzzles290" style="border-color:rgba(255,215,0,.45);color:#ffd700"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span data-i18n="openPuzzles290Btn">謎題題庫 (290題)</span></button>
 </div>
 <div class="card-list grid-2col" id="gameCardList">
-<div id="menuEmptyState" class="menu-empty-state hidden" data-i18n="menuEmptyState">此分類暫無棋藝</div>
+<div id="menuEmptyState" class="menu-empty-state hidden">
+<p class="menu-empty-state-text" data-i18n="menuEmptyState">此分類暫無棋藝</p>
+<button type="button" class="menu-empty-state-btn primary-btn" id="btnClearFilter" data-i18n="btnClearFilter">清除篩選</button>
+</div>
 <button type="button" class="game-card" data-game="ttt">
 <div class="gc-ico">
 <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
@@ -635,7 +638,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 </div>
 
 <p class="foot-hint" data-i18n="footHint">选择一种棋艺，开启星空对决</p>
-<p class="version-tag">v6.21.0 · 蒼穹星宮篇</p>
+<p class="version-tag">v6.22.0 · 蒼穹星宮篇</p>
 </div>
 
 
@@ -808,23 +811,23 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 </div>
 <div class="timer-mode-row" id="timerModeGroup">
 <span class="tm-label" data-i18n="timerMode">計時</span>
-<button class="tm-btn is-on" id="tm-unlimited" type="button" data-tm="unlimited" data-i18n="unlimited">無限制</button>
-<button class="tm-btn" id="tm-blitz" type="button" data-tm="blitz" data-i18n="blitz">快棋10'</button>
-<button class="tm-btn" id="tm-rapid" type="button" data-tm="rapid" data-i18n="rapid">快棋5'</button>
-<button class="tm-btn" id="tm-bullet" type="button" data-tm="bullet" data-i18n="bullet">子彈3'</button>
-<button class="tm-btn" id="tm-bullet1" type="button" data-tm="bullet1" data-i18n="bullet1">子彈1'</button>
-<button class="tm-btn" id="tm-custom" type="button" data-tm="custom" data-i18n="customTimer">自訂</button>
-<button class="tm-btn" id="tm-fischer" type="button" data-tm="fischer" data-i18n="fischer">菲舍爾</button>
+<button class="tm-btn is-on" id="tm-unlimited" type="button" data-tm="unlimited" data-i18n="unlimited" aria-pressed="true">無限制</button>
+<button class="tm-btn" id="tm-blitz" type="button" data-tm="blitz" data-i18n="blitz" aria-pressed="false">快棋10'</button>
+<button class="tm-btn" id="tm-rapid" type="button" data-tm="rapid" data-i18n="rapid" aria-pressed="false">快棋5'</button>
+<button class="tm-btn" id="tm-bullet" type="button" data-tm="bullet" data-i18n="bullet" aria-pressed="false">子彈3'</button>
+<button class="tm-btn" id="tm-bullet1" type="button" data-tm="bullet1" data-i18n="bullet1" aria-pressed="false">子彈1'</button>
+<button class="tm-btn" id="tm-custom" type="button" data-tm="custom" data-i18n="customTimer" aria-pressed="false">自訂</button>
+<button class="tm-btn" id="tm-fischer" type="button" data-tm="fischer" data-i18n="fischer" aria-pressed="false">菲舍爾</button>
 </div>
 <div class="persona-row" id="personaGroup">
 <span class="tm-label" data-i18n="aiPersona">AI 性格</span>
-<button class="persona-btn is-on" type="button" data-persona="balanced" data-i18n="personaBalanced">均衡智者</button>
-<button class="persona-btn" type="button" data-persona="aggressive" data-i18n="personaAggressive">烈焰狂攻</button>
-<button class="persona-btn" type="button" data-persona="defensive" data-i18n="personaDefensive">玄冰鐵壁</button>
-<button class="persona-btn" type="button" data-persona="tricky" data-i18n="personaTricky">星靈詭道</button>
+<button class="persona-btn is-on" type="button" data-persona="balanced" data-i18n="personaBalanced" aria-pressed="true">均衡智者</button>
+<button class="persona-btn" type="button" data-persona="aggressive" data-i18n="personaAggressive" aria-pressed="false">烈焰狂攻</button>
+<button class="persona-btn" type="button" data-persona="defensive" data-i18n="personaDefensive" aria-pressed="false">玄冰鐵壁</button>
+<button class="persona-btn" type="button" data-persona="tricky" data-i18n="personaTricky" aria-pressed="false">星靈詭道</button>
 </div>
 <div class="diff-expand-bar">
-<button class="diff-expand-toggle" id="btnToggleDiffDetails" type="button">
+<button class="diff-expand-toggle" id="btnToggleDiffDetails" type="button" aria-expanded="false">
 <span id="txtToggleDiffDetails" data-i18n="expandDetails">展開詳細設定</span>
 <span id="icoToggleDiffDetails">▾</span>
 </button>
@@ -848,26 +851,26 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <button class="mini-btn" id="btnHint" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></span><span data-i18n="hint">提示</span></button>
 <button class="mini-btn" id="btnUndo" type="button" data-i18n="undo">↶ 悔棋</button>
 <button class="mini-btn" id="btnGameRestart" type="button" data-i18n="restart">↻ 重开</button>
-<button class="mini-btn" id="btnTopWhyMove" type="button" title="AI 深度點評與復盤"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span data-i18n="whyBtnShort">為什麼</span></button>
-<button class="mini-btn nexus-glow-pill" id="btnInGameNexus" type="button" title="蒼穹星樞中心 v6.21.0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span>星樞</span></button>
-<button class="mini-btn" id="btnMoreTools" type="button" title="More Tools"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg></span><span data-i18n="moreTools">工具</span></button>
+<button class="mini-btn" id="btnTopWhyMove" type="button" title="AI 深度點評與復盤" data-i18n-title="whyBtnShort"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span data-i18n="whyBtnShort">為什麼</span></button>
+<button class="mini-btn nexus-glow-pill" id="btnInGameNexus" type="button" title="蒼穹星樞中心 v6.22.0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span>星樞</span></button>
+<button class="mini-btn" id="btnMoreTools" type="button" title="工具" data-i18n-title="moreTools"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg></span><span data-i18n="moreTools">工具</span></button>
 </div>
 </div>
 <div class="more-tools-drawer" id="moreToolsDrawer">
 <button class="mini-btn" id="btnRedo" type="button" data-i18n="redo">↷ 重做</button>
 <button class="mini-btn" id="btnGameTutorial" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span data-i18n="tutorialShort">教學</span></button>
-<button class="mini-btn" id="btnTopGameStats" type="button" title="單棋統計"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span data-i18n="statsBtnShort">統計</span></button>
-<button class="mini-btn" id="btnTopShareCode" type="button" title="分享短碼"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span data-i18n="sharePosition">分享</span></button>
+<button class="mini-btn" id="btnTopGameStats" type="button" title="單棋統計" data-i18n-title="statsBtnShort"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span data-i18n="statsBtnShort">統計</span></button>
+<button class="mini-btn" id="btnTopShareCode" type="button" title="分享短碼" data-i18n-title="sharePosition"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span data-i18n="sharePosition">分享</span></button>
 <button class="mini-btn" id="btnGameStarShop" type="button"><span class="ic ic-gold"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5l1.65 3.35 3.7.54-2.68 2.61.63 3.68L12 14.94l-3.3 1.74.63-3.68-2.68-2.61 3.7-.54L12 6.5z"/></svg></span><span data-i18n="starShop">星幣工坊</span> (<span id="gameCoinVal">0</span>)</button>
-<button class="mini-btn" id="btnToggleCoords" type="button" title="Coordinates"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></span><span data-i18n="toggleCoords">座標</span></button>
-<button class="mini-btn" id="btnFlipBoard" type="button" title="Flip"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span><span data-i18n="flipBoard">翻轉</span></button>
-<button class="mini-btn" id="btnHeatmap" type="button" title="Heatmap"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg></span><span data-i18n="heatmap">熱圖</span></button>
-<button class="mini-btn" id="btnCoachVision" type="button" title="Coach Vision"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span><span data-i18n="coachVision">星瞳教練</span></button>
-<button class="mini-btn" id="btnSandbox" type="button" title="Sandbox"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span data-i18n="sandboxMode">沙盒擺盤</span></button>
-<button class="mini-btn" id="btnNotes" type="button" title="Notes"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span data-i18n="gameNotes">筆記</span></button>
-<button class="mini-btn" id="btnShare" type="button" title="Share"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span data-i18n="sharePosition">分享</span></button>
+<button class="mini-btn" id="btnToggleCoords" type="button" title="座標" data-i18n-title="toggleCoords" aria-pressed="false"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg></span><span data-i18n="toggleCoords">座標</span></button>
+<button class="mini-btn" id="btnFlipBoard" type="button" title="翻轉棋盤" data-i18n-title="flipBoard" aria-pressed="false"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span><span data-i18n="flipBoard">翻轉</span></button>
+<button class="mini-btn" id="btnHeatmap" type="button" title="熱圖" data-i18n-title="heatmap" aria-pressed="false"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg></span><span data-i18n="heatmap">熱圖</span></button>
+<button class="mini-btn" id="btnCoachVision" type="button" title="星瞳教練" data-i18n-title="coachVision" aria-pressed="false"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span><span data-i18n="coachVision">星瞳教練</span></button>
+<button class="mini-btn" id="btnSandbox" type="button" title="沙盒擺盤" data-i18n-title="sandboxMode" aria-pressed="false"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span data-i18n="sandboxMode">沙盒擺盤</span></button>
+<button class="mini-btn" id="btnNotes" type="button" title="筆記" data-i18n-title="gameNotes"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span data-i18n="gameNotes">筆記</span></button>
+<button class="mini-btn" id="btnShare" type="button" title="分享" data-i18n-title="sharePosition"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span><span data-i18n="sharePosition">分享</span></button>
 <button class="mini-btn" id="btnExportPNG" type="button" data-i18n="exportPNG" aria-label="Export board image"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span data-i18n="exportPNG">匯出圖片</span></button>
-<button class="mini-btn" id="btnShortcuts" type="button" title="Shortcuts"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span data-i18n="shortcuts">快捷鍵</span></button>
+<button class="mini-btn" id="btnShortcuts" type="button" title="快捷鍵" data-i18n-title="shortcuts"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span data-i18n="shortcuts">快捷鍵</span></button>
 </div>
 
 <div class="planet-opponent-bar" id="planetOpponentBar">
@@ -876,12 +879,12 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 </div>
 <div class="sandbox-bar" id="sandboxBar">
 <span class="sbx-tag" data-i18n="sandboxMode">沙盒擺盤</span>
-<button class="sbx-btn is-on" type="button" data-sbx="p1" data-i18n="sbxPlaceP1">放置先手</button>
-<button class="sbx-btn" type="button" data-sbx="p2" data-i18n="sbxPlaceP2">放置後手</button>
-<button class="sbx-btn" type="button" data-sbx="erase" data-i18n="sbxErase">清除格子</button>
-<button class="sbx-btn" type="button" id="btnSbxTurn" data-i18n="sbxSwitchTurn">切換行棋方</button>
-<button class="sbx-btn" type="button" id="btnSbxClearAll" data-i18n="sbxClearBoard">清空棋盤</button>
-<button class="sbx-btn" type="button" id="btnSbxDone" data-i18n="sbxResume">完成並繼續</button>
+<button class="sbx-btn is-on" type="button" data-sbx="p1" data-i18n="sbxPlaceP1" aria-pressed="true">放置先手</button>
+<button class="sbx-btn" type="button" data-sbx="p2" data-i18n="sbxPlaceP2" aria-pressed="false">放置後手</button>
+<button class="sbx-btn" type="button" data-sbx="erase" data-i18n="sbxErase" aria-pressed="false">清除格子</button>
+<button class="sbx-btn" type="button" id="btnSbxTurn" data-i18n="sbxSwitchTurn" aria-pressed="false">切換行棋方</button>
+<button class="sbx-btn" type="button" id="btnSbxClearAll" data-i18n="sbxClearBoard" aria-pressed="false">清空棋盤</button>
+<button class="sbx-btn" type="button" id="btnSbxDone" data-i18n="sbxResume" aria-pressed="false">完成並繼續</button>
 </div>
 <div class="quest-stage-banner" id="questStageBanner">
 <div class="qsb-left">
@@ -903,8 +906,8 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <div class="eval-fill" id="evalFill"></div>
 <span class="eval-label" id="evalLabel">0.0</span>
 </div>
-<button type="button" class="tactical-radar-pill" id="tacticalRadarPill" title="Tactical Radar">50%</button>
-<button type="button" class="tactical-radar-pill smart-guide-pill" id="btnSmartGuidePill" title="開啟/關閉三步實戰引導">✦ 引導</button>
+<button type="button" class="tactical-radar-pill" id="tacticalRadarPill" title="戰術雷達">50%</button>
+<button type="button" class="tactical-radar-pill smart-guide-pill" id="btnSmartGuidePill" title="開啟/關閉三步實戰引導" aria-pressed="false">✦ 引導</button>
 </div>
 <div class="arrows" id="colArrows"></div>
 <div class="replay-bar hidden" id="replayBar">
@@ -917,7 +920,7 @@ body.snakes-mode .board-box { align-items:center; justify-content:center; }
 <button class="mini-btn replay-spd is-on" data-spd="1000" type="button">1x</button>
 <button class="mini-btn replay-spd" data-spd="500" type="button">2x</button>
 <button class="mini-btn replay-spd" data-spd="250" type="button">4x</button>
-<button class="mini-btn" id="btnAiCommentary" type="button" data-i18n="commentaryOff">AI講解</button>
+<button class="mini-btn" id="btnAiCommentary" type="button" data-i18n="commentaryOff" aria-pressed="false">AI講解</button>
 <button class="mini-btn" id="replayExit" type="button" data-i18n="exitReplay">退出回放</button>
 </div>
 <div class="replay-commentary hidden" id="replayCommentary"></div>

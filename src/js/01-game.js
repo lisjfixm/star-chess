@@ -2240,14 +2240,17 @@ var __T2S_MAP = null;
   function d() {
     document.documentElement.lang = o;
     try {
-      document.title = l("logo") + " v6.21.0";
+      document.title = l("logo") + " v6.22.0";
     } catch (e) {}
     for (var e = document.querySelectorAll("[data-i18n]"), t = 0; t < e.length; t++) e[t].textContent = l(e[t].getAttribute("data-i18n"));
     for (var a = document.querySelectorAll("[data-i18n-alt]"), r = 0; r < a.length; r++) a[r].setAttribute("alt", l(a[r].getAttribute("data-i18n-alt")));
-    for (var n = document.querySelectorAll("[data-i18n-html]"), i = 0; i < n.length; i++) n[i].innerHTML = l(n[i].getAttribute("data-i18n-html")) + '<span class="dots">...</span>';
+    for (var tl = document.querySelectorAll("[data-i18n-title]"), tli = 0; tli < tl.length; tli++) {
+      var tk = tl[tli].getAttribute("data-i18n-title"), tv = (n[o] && n[o][tk]) || n["zh-Hant"][tk];
+      void 0 !== tv && (tl[tli].title = tv);
+    }
+    for (var nHtml = document.querySelectorAll("[data-i18n-html]"), i = 0; i < nHtml.length; i++) nHtml[i].innerHTML = l(nHtml[i].getAttribute("data-i18n-html")) + '<span class="dots">...</span>';
     for (var s = document.querySelectorAll(".lang-btn"), c = 0; c < s.length; c++) s[c].classList.toggle("active", s[c].getAttribute("data-lang") === o);
-    var gs = v("gameSearchInput");
-    gs && (gs.placeholder = l("searchPlaceholder"));
+    refreshMenuCounts();
     var d = v("modeGameName"), u = v("diffGameName"), p = v("gameHeader");
     S.game && (d && (d.textContent = l("name." + S.game)), u && (u.textContent = l("name." + S.game)), 
     p && (p.textContent = l("name." + S.game))), f();
@@ -2717,7 +2720,15 @@ var __T2S_MAP = null;
       morris: 150,
       mancala: 130,
       ataxx: 140,
-      breakthrough: 135
+      breakthrough: 135,
+      qubic: 0,
+      uttt: 0,
+      banqi: 0,
+      shogi: 0,
+      loa: 0,
+      yavalath: 0,
+      amazons: 0,
+      snakes: 0
     }[t] || 0);
   }
   function _(e, t, a) {
@@ -2899,7 +2910,7 @@ var __T2S_MAP = null;
         t += '<div class="theme-card' + (f ? " active" : "") + '" data-ct="' + c + '">', 
         t += '<div class="theme-preview" style="background:' + d.bg + '">', t += '<div class="tp-title" style="background:linear-gradient(135deg,' + d.p1 + "," + d.accent + "," + d.p2 + ')">' + l("logo") + "</div>", 
         t += '<div class="tp-board"><div class="tp-cell" style="background:' + d.p1 + '"></div><div class="tp-cell" style="background:' + d.p2 + '"></div><div class="tp-cell" style="background:' + d.accent + '"></div><div class="tp-cell" style="background:' + d.board + '"></div></div>', 
-        t += "</div>", t += '<div class="theme-name">' + Se(d.name || l("customTheme")) + "</div>", 
+        t += "</div>", t += '<div class="theme-name">' + Se(d.name || l("customTheme")) + "</div>", t += '<button type="button" data-ct-edit="1" class="theme-edit-btn" aria-label="' + l("themeEdit") + '" title="' + l("themeEdit") + '" style="position:absolute;top:6px;right:6px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,14,39,.72);border:1px solid var(--line);border-radius:8px;cursor:pointer;color:#4dd0e1"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><line x1="15" y1="5" x2="19" y2="9"/></svg></button>', 
         f && (t += '<div class="theme-check">✓</div>'), t += "</div>";
       }
       s.length < G && (t += '<div class="theme-card theme-card-create" id="btnCreateTheme" style="display:flex;align-items:center;justify-content:center;min-height:120px;border:1px dashed rgba(255,255,255,.3);cursor:pointer"><div style="text-align:center;color:rgba(255,255,255,.6)"><div style="font-size:28px;line-height:1">+</div><div style="font-size:.8rem;margin-top:4px">' + l("createTheme") + "</div></div></div>"), 
@@ -2911,6 +2922,7 @@ var __T2S_MAP = null;
       for (var p = e.querySelectorAll("[data-ct]"), g = 0; g < p.length; g++) !function(e) {
         e.addEventListener("click", (function(t) {
           t.preventDefault();
+          if (t.target.closest && t.target.closest("[data-ct-edit]")) return void j(parseInt(e.getAttribute("data-ct"), 10));
           var a = parseInt(e.getAttribute("data-ct")), r = S.customThemes[a];
           if (r) {
             S.theme = "custom", K = !1, J = null, V(r);
@@ -12654,10 +12666,47 @@ var __T2S_MAP = null;
     }
   }
   var Vd = {
-    line: [ "ttt", "c4", "gomoku", "c6", "hex", "pente", "morris" ],
-    classic: [ "go", "chess", "xiangqi", "reversi", "morris" ],
-    tactic: [ "checkers", "draughts", "jungle", "dots", "mancala", "ataxx", "breakthrough", "snakes" ]
+    line: [ "ttt", "c4", "gomoku", "c6", "hex", "pente", "uttt", "qubic", "yavalath", "loa" ],
+    territory: [ "go", "morris", "ataxx", "breakthrough", "dots" ],
+    capture: [ "checkers", "draughts", "jungle", "xiangqi", "shogi", "banqi" ],
+    strategy: [ "chess", "reversi", "mancala", "amazons", "snakes" ]
   };
+  var CAT_TAB_KEY = { line: "catLineTab", territory: "catTerritoryTab", capture: "catCaptureTab", strategy: "catStrategyTab", fav: "catFavShort", all: "catAll" };
+  function puzzleTotal() {
+    var e = (hs && hs.length || 0) + (xs && xs.length || 0) + (co && co.length || 0) + (oc && oc.length || 0);
+    var t = window.V616_PUZZLES;
+    if (t) for (var a in t) Array.isArray(t[a]) && (e += t[a].length);
+    return e;
+  }
+  function refreshMenuCounts() {
+    var cards = document.querySelectorAll("#gameCardList .game-card[data-game]"), codes = [];
+    for (var c = 0; c < cards.length; c++) codes.push(cards[c].getAttribute("data-game"));
+    function countFor(cat) {
+      if ("all" === cat) return codes.length;
+      if ("fav" === cat) {
+        var n = 0;
+        for (var f = 0; f < codes.length; f++) S.favGames && S.favGames[codes[f]] && n++;
+        return n;
+      }
+      var list = Vd[cat] || [], m = 0;
+      for (var g = 0; g < codes.length; g++) list.indexOf(codes[g]) >= 0 && m++;
+      return m;
+    }
+    var tabs = document.querySelectorAll("#menuCatTabs .cat-tab");
+    for (var t = 0; t < tabs.length; t++) {
+      var cat = tabs[t].getAttribute("data-cat"), key = CAT_TAB_KEY[cat];
+      if (!key) continue;
+      var label = l(key) + " (" + countFor(cat) + ")", span = tabs[t].querySelector("span[data-i18n]") || tabs[t].querySelector("span");
+      span ? (span.textContent = label) : (tabs[t].textContent = label);
+    }
+    var ma = v("btnMenuOpenPuzzles290");
+    if (ma) {
+      var ms = ma.querySelector("[data-i18n]") || ma.querySelector("span"), mt2 = l("openPuzzles290Btn") + " (" + puzzleTotal() + ")";
+      ms ? (ms.textContent = mt2) : (ma.textContent = mt2);
+    }
+    var gs = v("gameSearchInput");
+    gs && (gs.placeholder = l("searchPlaceholder").replace("{n}", L.length));
+  }
   function jd(e) {
     S.menuCat = e || "all";
     for (var t = document.querySelectorAll("#menuCatTabs .cat-tab"), a = 0; a < t.length; a++) t[a].classList.toggle("active", t[a].getAttribute("data-cat") === S.menuCat);
@@ -12667,6 +12716,7 @@ var __T2S_MAP = null;
     }
     var es = v("menuEmptyState");
     es && es.classList.toggle("hidden", vv > 0);
+    refreshMenuCounts();
   }
   function Ud() {
     var e = v("hrbRankTitle"), t = v("hrbEloVal"), a = v("hrbSubText");
@@ -12884,11 +12934,32 @@ var __T2S_MAP = null;
     S.volume >= 1 ? (S.volume = .5, S.soundOn = !0) : S.volume >= .5 ? (S.volume = 0, 
     S.soundOn = !1) : (S.volume = 1, S.soundOn = !0);
     try {
-      localStorage.setItem("starchess.vol", String(S.volume));
+      localStorage.setItem("starchess.vol", String(S.volume)), localStorage.setItem("starchess.soundOn", S.soundOn ? "1" : "0");
     } catch (e) {}
-    var e = v("btnSound");
-    e && (e.innerHTML = '<span class="ic">' + w[ef(S.volume)] + "</span>", e.setAttribute("aria-pressed", S.soundOn ? "true" : "false"), e.setAttribute("aria-label", S.soundOn ? "音效開啟" : "音效關閉（靜音）")), S.soundOn && br("click");
+    syncSoundBtn(), S.soundOn && br("click");
   }
+  function syncSoundBtn() {
+    var e = v("btnSound");
+    if (!e) return;
+    e.innerHTML = '<span class="ic">' + (S.soundOn ? w[ef(S.volume)] : w.soundOff) + "</span>";
+    e.setAttribute("aria-pressed", S.soundOn ? "true" : "false");
+    e.setAttribute("aria-label", l(S.soundOn ? "soundOnLabel" : "soundOffLabel"));
+  }
+  function toggleSoundMute() {
+    S.soundOn = !S.soundOn;
+    try {
+      localStorage.setItem("starchess.soundOn", S.soundOn ? "1" : "0");
+    } catch (e) {}
+    syncSoundBtn(), S.soundOn && br("click");
+  }
+  document.addEventListener("click", function(ev) {
+    var b = ev.target && ev.target.closest && ev.target.closest("button[aria-pressed]");
+    if (!b || "btnSound" === b.id) return;
+    var scope = b.parentElement;
+    function sync(x) { x.setAttribute("aria-pressed", x.classList.contains("is-on") ? "true" : "false"); }
+    if (scope && scope.querySelectorAll) for (var i = 0, nodes = scope.querySelectorAll("[aria-pressed]"); i < nodes.length; i++) sync(nodes[i]);
+    sync(b);
+  });
   var af = [ "place", "capture", "win", "lose", "undo", "check", "castle", "promote" ];
   function rf() {
     try {
@@ -12981,7 +13052,7 @@ var __T2S_MAP = null;
       var t = v("volVal");
       t && (t.textContent = x.value + "%");
       var a = v("btnSound");
-      a && (a.innerHTML = '<span class="ic">' + w[ef(e)] + "</span>"), br("click");
+      syncSoundBtn(), br("click");
     }));
     for (var k = document.querySelectorAll(".sfx-toggle"), M = 0; M < k.length; M++) !function(e) {
       e.addEventListener("change", (function() {
@@ -13077,8 +13148,8 @@ var __T2S_MAP = null;
       }));
     }(y[b]);
     var M = v("btnSound");
-    M && (M.innerHTML = '<span class="ic">' + w[ef(S.volume)] + "</span>", M.setAttribute("aria-pressed", S.soundOn ? "true" : "false"), M.setAttribute("aria-label", S.soundOn ? "音效開啟" : "音效關閉（靜音）"), M.addEventListener("click", (function(e) {
-      e.preventDefault(), nf();
+    M && (syncSoundBtn(), M.addEventListener("click", (function(e) {
+      e.preventDefault(), toggleSoundMute();
     })));
     var C = v("btnSettings");
     C && C.addEventListener("click", (function(e) {
@@ -13254,8 +13325,18 @@ var __T2S_MAP = null;
     var ce = v("btnNotes");
     ce && ce.addEventListener("click", (function(e) {
       e.preventDefault(), function() {
-        var e = '<textarea id="notesText" rows="6" style="width:100%;background:#0a0a24;color:#fff;border:1px solid #4dd0e1;border-radius:8px;padding:8px;font-size:14px" placeholder="' + l("notesPlaceholder") + '">' + Se(S.gameNotes || "") + '</textarea><div style="margin-top:10px;text-align:right"><button class="mini-btn" id="notesSave" type="button">' + l("notesSaved") + "</button></div>";
+        var baseline = S.gameNotes || "";
+        var e = '<textarea id="notesText" rows="6" style="width:100%;background:#0a0a24;color:#fff;border:1px solid #4dd0e1;border-radius:8px;padding:8px;font-size:14px" placeholder="' + l("notesPlaceholder") + '">' + Se(baseline) + '</textarea><div style="margin-top:10px;display:flex;justify-content:flex-end;align-items:center;gap:8px"><span id="notesCount" style="font-size:.75rem;opacity:.8"></span><button class="mini-btn" id="notesSave" type="button">' + l("notesSaved") + "</button></div>";
         lf(l("gameNotes"), e);
+        var ta = document.getElementById("notesText"), nc = v("notesCount");
+        function updateCount() {
+          nc && (nc.textContent = l("notesCountFmt").replace("{n}", ta ? ta.value.length : 0));
+        }
+        ta && ta.addEventListener("input", updateCount), updateCount();
+        pendingNoteGuard = function() {
+          if (ta && ta.value !== baseline) return confirm(l("notesUnsavedConfirm"));
+          return true;
+        };
         var t = v("notesSave");
         t && t.addEventListener("click", (function() {
           var e = document.getElementById("notesText");
@@ -13263,6 +13344,7 @@ var __T2S_MAP = null;
           try {
             localStorage.setItem("starchess.notes", S.gameNotes);
           } catch (e) {}
+          pendingNoteGuard = null;
           or(), cf(), we(l("notesSaved"));
         }));
       }();
@@ -13555,6 +13637,7 @@ var __T2S_MAP = null;
       }
     }();
   }
+  var pendingNoteGuard = null;
   var sf = [];
   function lf(e, t, a) {
     var r = v("genModal");
@@ -13565,6 +13648,8 @@ var __T2S_MAP = null;
     r;
   }
   function cf() {
+    if (pendingNoteGuard && !pendingNoteGuard()) return;
+    pendingNoteGuard = null;
     var e = v("genModal");
     e && e.classList.remove("active"), sf = [];
   }
@@ -14151,6 +14236,10 @@ var __T2S_MAP = null;
       try {
         var e = parseFloat(localStorage.getItem("starchess.vol"));
         isNaN(e) || (S.volume = e, S.soundOn = e > 0);
+      } catch (e) {}
+      try {
+        var so = localStorage.getItem("starchess.soundOn");
+        null !== so && (S.soundOn = "1" === so);
       } catch (e) {}
       try {
         var t = parseInt(localStorage.getItem("starchess.customTimerLimit"), 10);
@@ -15465,7 +15554,7 @@ var __T2S_MAP = null;
           t += '<div class="theme-card' + (f ? " active" : "") + '" data-ct="' + c + '">', 
           t += '<div class="theme-preview" style="background:' + d.bg + '">', t += '<div class="tp-title" style="background:linear-gradient(135deg,' + d.p1 + "," + d.accent + "," + d.p2 + ')">' + l("logo") + "</div>", 
           t += '<div class="tp-board"><div class="tp-cell" style="background:' + d.p1 + '"></div><div class="tp-cell" style="background:' + d.p2 + '"></div><div class="tp-cell" style="background:' + d.accent + '"></div><div class="tp-cell" style="background:' + d.board + '"></div></div>', 
-          t += "</div>", t += '<div class="theme-name">' + Se(d.name || l("customTheme")) + "</div>", 
+          t += "</div>", t += '<div class="theme-name">' + Se(d.name || l("customTheme")) + "</div>", t += '<button type="button" data-ct-edit="1" class="theme-edit-btn" aria-label="' + l("themeEdit") + '" title="' + l("themeEdit") + '" style="position:absolute;top:6px;right:6px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center;background:rgba(10,14,39,.72);border:1px solid var(--line);border-radius:8px;cursor:pointer;color:#4dd0e1"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/><line x1="15" y1="5" x2="19" y2="9"/></svg></button>', 
           f && (t += '<div class="theme-check">✓</div>'), t += "</div>";
         }
         s.length < G && (t += '<div class="theme-card theme-card-create" id="btnCreateTheme" style="display:flex;align-items:center;justify-content:center;min-height:120px;border:1px dashed rgba(255,255,255,.3);cursor:pointer"><div style="text-align:center;color:rgba(255,255,255,.6)"><div style="font-size:28px;line-height:1">+</div><div style="font-size:.8rem;margin-top:4px">' + l("createTheme") + "</div></div></div>"), 
@@ -15504,6 +15593,7 @@ var __T2S_MAP = null;
         for (var F = e.querySelectorAll("[data-ct]"), Z = 0; Z < F.length; Z++) !function(e) {
           e.addEventListener("click", (function(t) {
             t.preventDefault();
+            if (t.target.closest && t.target.closest("[data-ct-edit]")) return void j(parseInt(e.getAttribute("data-ct"), 10));
             var a = parseInt(e.getAttribute("data-ct")), r = S.customThemes[a];
             if (r) {
               S.theme = "custom", S.specialBg = "", E = "", K = !1, J = null, _(), V(r);
@@ -15649,13 +15739,13 @@ var __T2S_MAP = null;
         achd_mancalaHard: "Win Star Mancala on Hard",
         ach_grandMaster16: "Supreme Star Monarch",
         achd_grandMaster16: "Play all 16 cosmic board games",
-        catAll: "All (16)",
+        catAll: "All",
         catFav: "★ Pinned",
         moreHub: "More Hub",
         collapseHub: "Less Hub",
         gridView: "2-Col",
         listView: "1-Col",
-        searchPlaceholder: "Search 16 board games...",
+        searchPlaceholder: "Search {n} board games...",
         morrisHand: "Hand",
         morrisOnBoard: "Board",
         morrisPhasePlace: "Place stone",
@@ -15703,13 +15793,13 @@ var __T2S_MAP = null;
         achd_mancalaHard: "困難模式星際播種棋獲勝",
         ach_grandMaster16: "寰宇十六弈聖",
         achd_grandMaster16: "體驗全部 16 種星海棋藝",
-        catAll: "全部 (16)",
+        catAll: "全部",
         catFav: "★ 置頂收藏",
         moreHub: "更多功能",
         collapseHub: "收起面板",
         gridView: "雙欄",
         listView: "單欄",
-        searchPlaceholder: "搜尋 16 種星海棋藝...",
+        searchPlaceholder: "搜尋 {n} 種星海棋藝...",
         morrisHand: "未落",
         morrisOnBoard: "盤面",
         morrisPhasePlace: "請布子",
@@ -15794,7 +15884,7 @@ var __T2S_MAP = null;
     }
     function tt() {
       var e = document.querySelector(".board-box");
-      e && (e.classList.remove("frame-gold", "frame-cyber", "frame-void"), S.activeFrame && "default" !== S.activeFrame && e.classList.add("frame-" + S.activeFrame));
+      e && (e.classList.remove("frame-gold", "frame-cyber", "frame-void", "frame-nebula"), S.activeFrame && "default" !== S.activeFrame && e.classList.add("frame-" + S.activeFrame));
     }
     S.ownedFrames = {
       default: !0
@@ -15807,7 +15897,7 @@ var __T2S_MAP = null;
     };
     function st() {
       var e = v("btnBgmToggle");
-      e && e.classList.toggle("is-playing", S.bgmMode && "off" !== S.bgmMode);
+      e && (e.classList.toggle("is-playing", S.bgmMode && "off" !== S.bgmMode), e.setAttribute("aria-pressed", e.classList.contains("is-playing") ? "true" : "false"));
     }
     function lt() {
       if (S.bgmMode && "off" !== S.bgmMode && S.soundOn && S.volume && !document.hidden) try {
@@ -15928,7 +16018,6 @@ var __T2S_MAP = null;
         a && (a.textContent = l(S.grid2Col ? "gridView" : "listView"));
       }
       var r = v("gameSearchInput");
-      r && (r.placeholder = l("searchPlaceholder"));
       for (var n = r && r.value ? r.value.trim().toLowerCase() : "", i = S.menuCat || "all", o = document.querySelectorAll("#gameCardList .game-card[data-game]"), s = 0, vv = 0; s < o.length; s++) {
         var c = o[s], d = c.getAttribute("data-game"), f = !0;
         "fav" === i ? f = !(!S.favGames || !S.favGames[d]) : "all" !== i && (f = !!(Vd[i] && Vd[i].indexOf(d) >= 0));
@@ -15941,6 +16030,7 @@ var __T2S_MAP = null;
       }
       var es = v("menuEmptyState");
       es && es.classList.toggle("hidden", vv > 0);
+      refreshMenuCounts();
     }
     $d = function() {
       gt();
@@ -16004,6 +16094,13 @@ var __T2S_MAP = null;
     var St = v("gameSearchInput");
     St && St.addEventListener("input", (function() {
       mt();
+    }));
+    var Cf = v("btnClearFilter");
+    Cf && Cf.addEventListener("click", (function() {
+      var gs = v("gameSearchInput");
+      if (gs) gs.value = "";
+      S.menuCat = "all";
+      jd("all"), mt();
     }));
     var wt = v("btnGridToggle");
     wt && wt.addEventListener("click", (function(e) {
@@ -16382,7 +16479,7 @@ var __T2S_MAP = null;
         var t = v("volVal");
         t && (t.textContent = B.value + "%");
         var a = v("btnSound");
-        a && (a.innerHTML = '<span class="ic">' + w[ef(e)] + "</span>"), br("click");
+        syncSoundBtn(), br("click");
       }));
       var I = v("bgmVolSlider");
       I && I.addEventListener("input", (function() {
@@ -16469,8 +16566,7 @@ var __T2S_MAP = null;
             localStorage.setItem("starchess.simplifiedAnim", "0"), localStorage.setItem("starchess.showElo", "0");
           } catch (e) {}
           Ft(), jt(), Xt(), Ve();
-          var t = v("btnSound");
-          t && (t.innerHTML = '<span class="ic">' + w[ef(S.volume)] + "</span>"), S.game && Ct(), 
+          syncSoundBtn(), S.game && Ct(),
           br("win"), we(l("resetSettingsDone")), nf();
         }();
       }));
@@ -16500,8 +16596,8 @@ var __T2S_MAP = null;
       en: {
         master: "Master",
         Close: "✕",
-        catAll: "All (26)",
-        searchPlaceholder: "Search 26 board games...",
+        catAll: "All",
+        searchPlaceholder: "Search {n} board games...",
         menuEmptyState: "No board games in this category",
         "name.ataxx": "Star Ataxx",
         "desc.ataxx": "Clone & jump · Assimilate neighbors",
@@ -16586,8 +16682,8 @@ var __T2S_MAP = null;
       "zh-Hant": {
         master: "大師",
         Close: "✕",
-        catAll: "全部 (26)",
-        searchPlaceholder: "搜尋 26 種星海棋藝...",
+        catAll: "全部",
+        searchPlaceholder: "搜尋 {n} 種星海棋藝...",
         menuEmptyState: "此分類暫無棋藝",
         "name.ataxx": "星際同化棋",
         "desc.ataxx": "分裂躍遷 · 鄰格同化",
@@ -19165,8 +19261,7 @@ var __T2S_MAP = null;
         }
       };
       for (var u in f) for (var p in uf[u] = f[u], i) i[p] && !i[p][u] && (i[p][u] = f[u].board + " " + f[u].rules.join(" "));
-      void 0 !== Vd && (Vd.line.push("qubic", "uttt", "yavalath"), Vd.classic.push("banqi", "shogi"), 
-      Vd.tactic.push("loa", "amazons")), S.rvHandicap = 0, S.rvCornerHint = !0;
+      S.rvHandicap = 0, S.rvCornerHint = !0;
       var g = wl;
       wl = function() {
         g(), S.rvHandicap >= 1 && (S.grid[0][0] = t), S.rvHandicap >= 2 && (S.grid[7][7] = t);
@@ -20932,7 +21027,11 @@ var __T2S_MAP = null;
           baseIdx: s % (void 0 !== co && co.length ? co.length : 1)
         });
       }(), window.openEndgameAndDojoModal = function(e) {
-        var r = e || "dojo", n = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><button type="button" class="mini-btn' + ("dojo" === r ? " is-on" : "") + '" data-eh-tab="dojo">6大棋類入門教學道場</button><button type="button" class="mini-btn' + ("chess" === r ? " is-on" : "") + '" data-eh-tab="chess">西洋棋殘局 (50題)</button><button type="button" class="mini-btn' + ("xiangqi" === r ? " is-on" : "") + '" data-eh-tab="xiangqi">象棋連將殺 (50題)</button><button type="button" class="mini-btn' + ("gomoku" === r ? " is-on" : "") + '" data-eh-tab="gomoku">五子棋必勝 (30題)</button><button type="button" class="mini-btn' + ("go" === r ? " is-on" : "") + '" data-eh-tab="go">圍棋死活 (30題)</button></div>';
+        var r = e || "dojo";
+        function ehBtn(k, label) {
+          return '<button type="button" class="mini-btn' + (r === k ? " is-on" : "") + '" data-eh-tab="' + k + '">' + label + "</button>";
+        }
+        var n = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">' + ehBtn("dojo", l("ehDojoTab")) + ehBtn("chess", l("ehChessTab") + " (" + lt.chess.length + ")") + ehBtn("xiangqi", l("ehXiangqiTab") + " (" + lt.xiangqi.length + ")") + ehBtn("gomoku", l("ehGomokuTab") + " (" + lt.gomoku.length + ")") + ehBtn("go", l("ehGoTab") + " (" + lt.go.length + ")") + "</div>";
         if ("dojo" === r) {
           var i = {};
           try {
@@ -21151,7 +21250,7 @@ var __T2S_MAP = null;
           var x = URL.createObjectURL(new Blob([ new Uint8Array(c) ], {
             type: "image/gif"
           })), k = document.createElement("a");
-          k.href = x, k.download = "starchess-" + (S.game || "replay") + "-v6.21.0.gif", document.body.appendChild(k), 
+          k.href = x, k.download = "starchess-" + (S.game || "replay") + "-v6.22.0.gif", document.body.appendChild(k), 
           k.click(), document.body.removeChild(k), setTimeout((function() {
             URL.revokeObjectURL(x);
           }), 3e3), we("已匯出整盤棋快速回放 GIF 動畫！");
@@ -21179,7 +21278,7 @@ var __T2S_MAP = null;
         var e = v("genModalBody");
         if (e) {
           for (var t = void 0 !== X ? X : [], a = t.length, r = 0, n = 0; n < t.length; n++) "win" !== t[n].res && "p1win" !== t[n].res || r++;
-          var i = '<div style="margin-top:14px;padding:10px 12px;background:rgba(16,22,58,.78);border:1px solid var(--line);border-radius:10px"><h4 style="color:#ffd700;margin:0 0 6px">' + l("monthlyReportTitle") + '</h4><div style="display:flex;justify-content:space-around;font-size:.86rem;margin-bottom:8px"><span>本月對局：<b>' + a + ' 局</b></span><span>本月勝場：<b style="color:#4ade80">' + r + ' 勝</b></span><span>綜合 ELO：<b style="color:#4dd0e1">' + (S.elo || 1e3) + '</b></span></div><h4 style="color:#fb7185;margin:10px 0 6px">' + l("weaknessTitle") + '</h4><div style="font-size:.82rem;line-height:1.5">AI 診斷建議：在黑白棋請開啟「角落優先提示」避免放棄角落；在五子棋請多演練「必勝手順 30 題」提升斜線活三防守敏銳度。</div></div>';
+          var i = '<div style="margin-top:14px;padding:10px 12px;background:rgba(16,22,58,.78);border:1px solid var(--line);border-radius:10px"><h4 style="color:#ffd700;margin:0 0 6px">' + l("monthlyReportTitle") + '</h4><div style="display:flex;justify-content:space-around;font-size:.86rem;margin-bottom:8px"><span>' + l("monthGames").replace("{n}", a) + '</span><span>' + l("monthWins").replace("{n}", r) + '</span><span>' + l("monthElo") + '<b style="color:#4dd0e1">' + (S.elo || 1e3) + '</b></span></div><h4 style="color:#fb7185;margin:10px 0 6px">' + l("weaknessTitle") + '</h4><div style="font-size:.82rem;line-height:1.5">' + l("weaknessAdvice") + '</div></div>';
           e.insertAdjacentHTML("beforeend", i);
         }
       }, S.specialMode = null, S.knockout = null, S.league = {
@@ -21211,7 +21310,7 @@ var __T2S_MAP = null;
           tier: "青銅 Bronze"
         };
         n.tier = pt(n.pts || 0);
-        var i = '<div style="display:flex;flex-direction:column;gap:10px;padding:4px"><div style="background:rgba(16,22,58,.82);border:1px solid var(--line);border-radius:12px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><b style="color:#ffd700">' + l("modeKnockout") + '</b><span style="color:#4dd0e1">進度：第 ' + (r + 1) + ' 輪 / 8人賽程</span></div><button type="button" class="primary-btn" id="btnStartKnockout" style="width:100%;padding:8px">進入 8 人淘汰賽下一輪</button></div><div style="background:rgba(16,22,58,.82);border:1px solid var(--line);border-radius:12px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><b style="color:#38bdf8">' + l("modeLeague") + '</b><span style="color:#ffd700">段位：' + n.tier + " (" + (n.pts || 0) + ' pt)</span></div><button type="button" class="mini-btn is-on" id="btnStartLeague" style="width:100%;padding:8px">進行本週聯賽積分戰</button></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px"><button type="button" class="mini-btn" id="btnStartChaos" style="padding:10px"><b style="color:#c084fc">' + l("modeChaos") + '</b></button><button type="button" class="mini-btn" id="btnStartReverse" style="padding:10px"><b style="color:#fb7185">' + l("modeReverse") + '</b></button><button type="button" class="mini-btn" id="btnStartSpeedrun" style="padding:10px"><b style="color:#4ade80">' + l("modeSpeedrun") + "</b></button></div></div>";
+        var i = '<div style="display:flex;flex-direction:column;gap:10px;padding:4px"><div style="background:rgba(16,22,58,.82);border:1px solid var(--line);border-radius:12px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><b style="color:#ffd700">' + l("modeKnockout") + '</b><span style="color:#4dd0e1">' + l("koProgress").replace("{n}", r + 1) + '</span></div><button type="button" class="primary-btn" id="btnStartKnockout" style="width:100%;padding:8px">' + l("koNextBtn") + '</button></div><div style="background:rgba(16,22,58,.82);border:1px solid var(--line);border-radius:12px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><b style="color:#38bdf8">' + l("modeLeague") + '</b><span style="color:#ffd700">' + l("leagueTier") + n.tier + " (" + (n.pts || 0) + ' pt)</span></div><button type="button" class="mini-btn is-on" id="btnStartLeague" style="width:100%;padding:8px">' + l("leagueBtn") + '</button></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px"><button type="button" class="mini-btn" id="btnStartChaos" style="padding:10px"><b style="color:#c084fc">' + l("modeChaos") + '</b></button><button type="button" class="mini-btn" id="btnStartReverse" style="padding:10px"><b style="color:#fb7185">' + l("modeReverse") + '</b></button><button type="button" class="mini-btn" id="btnStartSpeedrun" style="padding:10px"><b style="color:#4ade80">' + l("modeSpeedrun") + "</b></button></div></div>";
         lf(l("arenaModesTitle"), i);
         var o = v("btnStartKnockout");
         o && o.addEventListener("click", (function() {
@@ -21231,7 +21330,7 @@ var __T2S_MAP = null;
         }));
         var d = v("btnStartReverse");
         d && d.addEventListener("click", (function() {
-          cf(), S.specialMode = "reverse", $e(e, "ai", "normal"), we("反向模式：先連成線者判負！");
+          cf(), S.specialMode = "reverse", $e(e, "ai", "normal"), we(l("reverseToast"));
         }));
         var f = v("btnStartSpeedrun");
         f && f.addEventListener("click", (function() {
@@ -21249,7 +21348,7 @@ var __T2S_MAP = null;
                     localStorage.setItem("starchess.speedrunBest", String(S.speedrunBest));
                   } catch (e) {}
                 }
-                lf("60秒極速挑戰結算", '<div style="text-align:center;padding:14px"><div style="font-size:1.4rem;font-weight:900;color:#ffd700;margin-bottom:8px">時間到！本輪擊敗 AI：' + S.speedrunWins + ' 局</div><div style="font-size:.95rem;color:#4dd0e1;margin-bottom:14px">歷史最高紀錄：' + S.speedrunBest + " 局</div></div>");
+                lf(l("speedrunResultTitle"), '<div style="text-align:center;padding:14px"><div style="font-size:1.4rem;font-weight:900;color:#ffd700;margin-bottom:8px">' + l("speedrunTimeUp").replace("{n}", S.speedrunWins) + '</div><div style="font-size:.95rem;color:#4dd0e1;margin-bottom:14px">' + l("speedrunBest").replace("{n}", S.speedrunBest) + '</div></div>');
               }
             } else ht();
           }), 1e3);
@@ -21309,7 +21408,7 @@ var __T2S_MAP = null;
         var n = r.getContext("2d");
         n.fillStyle = "#12163a", n.fillRect(0, 0, 600, 340), n.strokeStyle = "#38bdf8", 
         n.lineWidth = 3, n.strokeRect(10, 10, 580, 320), n.fillStyle = "#ffd700", n.font = "bold 26px sans-serif", 
-        n.fillText("星之棋 v6.21.0 · 榮耀戰績卡", 32, 52), n.fillStyle = "#ffffff", n.font = "bold 22px sans-serif", 
+        n.fillText("星之棋 v6.22.0 · 榮耀戰績卡", 32, 52), n.fillStyle = "#ffffff", n.font = "bold 22px sans-serif", 
         n.fillText("棋種：" + (l("name." + t.game) || t.game) + "  |  手數：" + (t.moves || 0), 32, 115);
         var i = r.toDataURL("image/png");
         lf(l("battleCardModalTitle"), '<div style="text-align:center;padding:6px"><img src="' + i + '" alt="Battle Card" style="max-width:100%;border-radius:10px;margin-bottom:10px"/><button type="button" class="primary-btn" id="btnDownloadBattleCardPng">下載戰績卡 PNG</button></div>');
@@ -21362,7 +21461,7 @@ var __T2S_MAP = null;
         Pt();
         var e = v("genModalBody");
         if (e && !v("v615SettingsGroup")) {
-          var t = '<div class="v64-group" id="v615SettingsGroup" style="margin-top:12px;padding:12px;background:rgba(14,20,52,.78);border:1px solid var(--line);border-radius:12px"><div style="color:#ffd700;font-weight:800;margin-bottom:8px">v6.21.0 棋盤材質、棋子樣式與無障礙設定</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">' + [ [ "default", "星空" ], [ "wood", l("boardWood") ], [ "marble", l("boardMarble") ], [ "minimal", l("boardMinimal") ], [ "neon", l("boardNeon") ], [ "retro", l("boardRetro") ] ].map((function(e) {
+          var t = '<div class="v64-group" id="v615SettingsGroup" style="margin-top:12px;padding:12px;background:rgba(14,20,52,.78);border:1px solid var(--line);border-radius:12px"><div style="color:#ffd700;font-weight:800;margin-bottom:8px">v6.22.0 棋盤材質、棋子樣式與無障礙設定</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">' + [ [ "default", "星空" ], [ "wood", l("boardWood") ], [ "marble", l("boardMarble") ], [ "minimal", l("boardMinimal") ], [ "neon", l("boardNeon") ], [ "retro", l("boardRetro") ] ].map((function(e) {
             return '<button type="button" class="mini-btn' + (S.boardStyle === e[0] ? " is-on" : "") + '" data-bstyle="' + e[0] + '">' + e[1] + "</button>";
           })).join("") + '</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">' + [ [ "classic", l("pieceCircle") ], [ "square", l("pieceSquare") ], [ "crystal", l("pieceCrystal") ], [ "metal", l("pieceMetal") ], [ "sketch", l("pieceSketch") ] ].map((function(e) {
             return '<button type="button" class="mini-btn' + (S.pieceSkin === e[0] ? " is-on" : "") + '" data-pskin="' + e[0] + '">' + e[1] + "</button>";
@@ -21585,60 +21684,177 @@ var __T2S_MAP = null;
       var Zt = document.createElement("style");
       for (d in Zt.textContent = "\n    #starfield { position:fixed !important; inset:0 !important; z-index:0 !important; pointer-events:none !important; display:block !important; opacity:1 !important; }\n    .nebula { position:fixed !important; pointer-events:none !important; z-index:0 !important; }\n    .view { position:relative; z-index:1; background:transparent !important; }\n    .v616-cat-tabs { display:flex; gap:7px; width:100%; max-width:680px; margin:8px auto 6px; justify-content:center; flex-wrap:wrap; }\n    .v616-cat-tabs .cat-tab { flex:1 1 auto; min-width:58px; text-align:center; padding:7px 10px; font-weight:800; font-size:.86rem; border-radius:12px; transition:all .2s; }\n    .v616-cat-tabs .cat-tab.active { background:linear-gradient(135deg, rgba(77,208,225,.28), rgba(224,64,251,.25)); border-color:#4dd0e1; color:#fff; box-shadow:0 0 14px rgba(77,208,225,.32); }\n    .v616-cat-tabs .cat-fav-star.active { border-color:#ffd700; color:#ffd700; box-shadow:0 0 14px rgba(255,215,0,.35); }\n    .menu-filter-bar { width:100%; max-width:680px !important; display:flex; align-items:center; gap:8px; margin:0 auto 8px !important; flex-wrap:wrap; }\n    .v616-cols-seg { display:inline-flex; align-items:center; gap:4px; background:rgba(12,16,44,.75); border:1px solid var(--line); border-radius:12px; padding:3px; flex-shrink:0; }\n    .v616-cols-seg .col-mode-btn { min-height:32px !important; min-width:auto !important; padding:4px 9px !important; border-radius:9px !important; border:1px solid transparent !important; background:transparent !important; color:#94a3b8; font-size:.76rem !important; font-weight:700; display:inline-flex; align-items:center; gap:4px; cursor:pointer; transition:all .18s ease; }\n    .v616-cols-seg .col-mode-btn svg { width:14px; height:14px; flex-shrink:0; }\n    .v616-cols-seg .col-mode-btn:hover { color:#e2e8f0; background:rgba(255,255,255,.06) !important; }\n    .v616-cols-seg .col-mode-btn.is-on { color:#fff !important; border-color:rgba(77,208,225,.55) !important; background:linear-gradient(135deg, rgba(77,208,225,.26), rgba(168,85,247,.22)) !important; box-shadow:0 0 10px rgba(77,208,225,.25); }\n    .v616-share-bar { display:flex; gap:6px; width:100%; max-width:680px; margin:0 auto 10px; align-items:center; flex-wrap:wrap; }\n    .v616-share-inp-wrap { flex:1 1 190px; display:flex; align-items:center; gap:6px; background:rgba(14,20,52,.78); border:1px solid var(--line); border-radius:10px; padding:5px 10px; }\n    .v616-share-inp { width:100%; background:transparent; border:none; color:#fff; font-size:.82rem; outline:none; font-family:monospace; }\n    .v616-share-inp::placeholder { color:rgba(180,200,255,.55); font-family:sans-serif; }\n\n    /* 三種可切換排列模式：1. 單個一排 (grid-1col) / 2. 兩個一排 (grid-2col) / 3. 三個一排 (grid-3col) */\n    #gameCardList { width:100%; max-width:680px !important; margin:0 auto; display:grid !important; transition:all .22s ease; }\n    #gameCardList .game-card.cat-hidden { display:none !important; }\n\n    /* 模式 1：單個一排 (1列) */\n    #gameCardList.grid-1col {\n      grid-template-columns: 1fr !important;\n      gap: 10px !important;\n    }\n    #gameCardList.grid-1col .game-card {\n      flex-direction: row !important;\n      align-items: center !important;\n      padding: 13px 16px !important;\n      gap: 14px !important;\n      min-height: 66px !important;\n    }\n    #gameCardList.grid-1col .game-card .gc-ico { width: 46px !important; height: 46px !important; flex-shrink: 0; }\n    #gameCardList.grid-1col .game-card .gc-txt { flex: 1; min-width: 0; }\n    #gameCardList.grid-1col .game-card .gc-name { font-size: 1.04rem !important; line-height: 1.25; }\n    #gameCardList.grid-1col .game-card .gc-desc { font-size: .78rem !important; line-height: 1.35; white-space: normal; overflow: hidden; }\n    #gameCardList.grid-1col .game-card .gc-meta-col { width: auto !important; display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 4px; margin-left: auto; margin-top: 0 !important; flex-shrink: 0; }\n    #gameCardList.grid-1col .game-card .gc-arrow { display: flex !important; }\n\n    /* 模式 2：兩個一排 (2列) */\n    #gameCardList.grid-2col {\n      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;\n      gap: 10px !important;\n    }\n    #gameCardList.grid-2col .game-card {\n      flex-direction: row !important;\n      align-items: center !important;\n      padding: 11px 12px !important;\n      gap: 10px !important;\n      min-height: 64px !important;\n    }\n    #gameCardList.grid-2col .game-card .gc-ico { width: 38px !important; height: 38px !important; flex-shrink: 0; }\n    #gameCardList.grid-2col .game-card .gc-txt { flex: 1; min-width: 0; }\n    #gameCardList.grid-2col .game-card .gc-name { font-size: .92rem !important; line-height: 1.22; }\n    #gameCardList.grid-2col .game-card .gc-desc { font-size: .70rem !important; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }\n    #gameCardList.grid-2col .game-card .gc-meta-col { width: auto !important; display: flex !important; flex-direction: column !important; align-items: flex-end !important; gap: 3px; margin-left: auto; margin-top: 0 !important; flex-shrink: 0; }\n    #gameCardList.grid-2col .game-card .gc-arrow { display: none !important; }\n\n    /* 模式 3：三個一排 (3列) */\n    #gameCardList.grid-3col {\n      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;\n      gap: 8px !important;\n    }\n    #gameCardList.grid-3col .game-card {\n      flex-direction: column !important;\n      align-items: flex-start !important;\n      padding: 10px 9px !important;\n      gap: 5px !important;\n      min-height: 98px !important;\n    }\n    #gameCardList.grid-3col .game-card .gc-ico { width: 30px !important; height: 30px !important; flex-shrink: 0; }\n    #gameCardList.grid-3col .game-card .gc-txt { width: 100%; min-width: 0; }\n    #gameCardList.grid-3col .game-card .gc-name { font-size: .84rem !important; line-height: 1.2; }\n    #gameCardList.grid-3col .game-card .gc-desc { font-size: .66rem !important; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; white-space: normal; }\n    #gameCardList.grid-3col .game-card .gc-meta-col { width: 100% !important; display: flex !important; flex-direction: row !important; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2px; margin-top: auto !important; }\n    #gameCardList.grid-3col .game-card .gc-arrow { display: none !important; }\n\n    .gc-recent-dots { display:inline-flex; gap:3px; align-items:center; margin-top:3px; min-height:10px; }\n    .gc-rdot { width:7px; height:7px; border-radius:50%; display:inline-block; box-shadow:0 0 4px rgba(0,0,0,.5); }\n    .gc-rdot.w { background:#22c55e; }\n    .gc-rdot.l { background:#ef4444; }\n    .gc-rdot.d { background:#94a3b8; }\n    .gc-rdot.e { background:rgba(255,255,255,.15); }\n    .gc-elo { display:inline-block !important; font-size:.73rem; font-weight:800; color:#4dd0e1; }\n\n    /* P3-11: 橫屏時棋盤佔滿寬度，計時器和走子歷史放在棋盤下方可摺疊 */\n    @media (orientation: landscape) and (max-height: 640px) {\n      #view-game .board-box { width:100% !important; max-width:96vw !important; margin:2px auto !important; }\n      #view-game #boardViewport { width:100% !important; display:flex; justify-content:center; }\n      #view-game .landscape-fold-bar { display:flex !important; }\n      body.landscape-timers-folded #timerBar,\n      body.landscape-timers-folded .history-panel { display:none !important; }\n    }\n    body.force-landscape-board #view-game .board-box { width:100% !important; max-width:96vw !important; }\n    .landscape-fold-bar { display:none; justify-content:center; gap:8px; margin:4px auto; width:100%; max-width:560px; }\n  ", 
       document.head.appendChild(Zt), window.GAME_CATS_V616 = {
-        line: [ "ttt", "c4", "gomoku", "c6", "hex", "pente", "morris", "qubic", "uttt", "yavalath" ],
-        territory: [ "go", "reversi", "dots", "ataxx", "amazons" ],
-        capture: [ "chess", "xiangqi", "shogi", "banqi", "jungle", "draughts" ],
-        strategy: [ "checkers", "mancala", "breakthrough", "loa", "snakes" ]
+        line: [ "ttt", "c4", "gomoku", "c6", "hex", "pente", "uttt", "qubic", "yavalath", "loa" ],
+        territory: [ "go", "morris", "ataxx", "breakthrough", "dots" ],
+        capture: [ "checkers", "draughts", "jungle", "xiangqi", "shogi", "banqi" ],
+        strategy: [ "chess", "reversi", "mancala", "amazons", "snakes" ]
       }, window.GAME_CATS_V616) Vd[d] = window.GAME_CATS_V616[d];
       var Xt = {
         "zh-Hant": {
-          catLineTab: "連線 (10)",
-          catTerritoryTab: "占地 (5)",
-          catCaptureTab: "吃子 (6)",
-          catStrategyTab: "策略 (5)",
+          catLineTab: "連線",
+          catTerritoryTab: "占地",
+          catCaptureTab: "吃子",
+          catStrategyTab: "策略",
           catFavShort: "收藏",
           colMode1: "單個一排",
           gridView: "兩個一排",
           listView: "單個一排",
           colMode3: "三個一排",
           loadShareCodeBtn: "載入局面",
-          openPuzzles290Btn: "謎題題庫 (290題)",
+          openPuzzles290Btn: "謎題題庫",
           whyBtnShort: "為什麼",
           statsBtnShort: "統計"
         },
         "zh-Hans": {},
         en: {
-          catLineTab: "Connect (10)",
-          catTerritoryTab: "Territory (5)",
-          catCaptureTab: "Capture (6)",
-          catStrategyTab: "Strategy (5)",
+          catLineTab: "Connect",
+          catTerritoryTab: "Territory",
+          catCaptureTab: "Capture",
+          catStrategyTab: "Strategy",
           catFavShort: "Fav",
           colMode1: "1 / Row",
           gridView: "2 / Row",
           listView: "1 / Row",
           colMode3: "3 / Row",
           loadShareCodeBtn: "Load Code",
-          openPuzzles290Btn: "Puzzles (290)",
+          openPuzzles290Btn: "Puzzles",
           whyBtnShort: "Why?",
           statsBtnShort: "Stats"
         },
         ja: {
-          catLineTab: "連珠 (10)",
-          catTerritoryTab: "陣取り (5)",
-          catCaptureTab: "捕獲 (6)",
-          catStrategyTab: "戦略 (5)",
+          catLineTab: "連珠",
+          catTerritoryTab: "陣取り",
+          catCaptureTab: "捕獲",
+          catStrategyTab: "戦略",
           catFavShort: "お気に入り",
           colMode1: "1列表示",
           gridView: "2列表示",
           listView: "1列表示",
           colMode3: "3列表示",
           loadShareCodeBtn: "局面読込",
-          openPuzzles290Btn: "詰将棋・問題 (290)",
+          openPuzzles290Btn: "詰将棋・問題",
           whyBtnShort: "なぜ？",
           statsBtnShort: "統計"
         }
       };
       for (s in Xt) if (n[s]) for (var Yt in Xt[s]) n[s][Yt] = Xt[s][Yt];
+      (function() {
+        var Wt = {
+          "zh-Hant": {
+            soundOnLabel: "音效開啟",
+            soundOffLabel: "音效關閉（靜音）",
+            pzCatXiangqi: "中國象棋",
+            pzCatShogi: "將棋詰將",
+            pzCatGomoku: "五子棋謎題",
+            pzCatGo: "圍棋死活",
+            pzCatReversi: "黑白棋謎題",
+            pzCatDojo: "入門教學道場",
+            pzLibraryTitle: "星海謎題題庫 ({n} 題 · 自動保存進度)",
+            ehDojoTab: "入門教學道場",
+            ehChessTab: "西洋棋殘局",
+            ehXiangqiTab: "象棋連將殺",
+            ehGomokuTab: "五子棋必勝",
+            ehGoTab: "圍棋死活",
+            notesCountFmt: "{n} 字",
+            notesUnsavedConfirm: "筆記尚未儲存，確定要離開嗎？",
+            daily5Title: "每日五題星海挑戰 ({date})",
+            daily5Sub: "每日依日期 Seed 從 {n} 款棋選出 5 款同日同題 · 完成 5/5 解鎖每日徽章",
+            daily5Streak: "連續全通天數",
+            daily5Badge: "今日徽章：",
+            daily5BadgeDone: "✓ 已解鎖今日星徽",
+            daily5Progress: "進度 {n} / 5 題",
+            daily5TitleLabel: "專屬稱號：",
+            daily5TitleDone: "★ 七日棋士 (已解鎖)",
+            daily5TitleLock: "七日棋士 (連過7天解鎖)",
+            daily5SlotNo: "第 {n} 題",
+            daily5SlotNoLabel: "題號",
+            daily5SlotDone: "✓ 已完成",
+            daily5SlotPlay: "挑戰此題",
+            daily5ToastDone: "恭喜完成今日全部 5 題挑戰！已解鎖「今日星徽」",
+            daily5ToastTitle: " 與「七日棋士」稱號！",
+            nexusMasteryLabel: "{n} 棋種棋魂共鳴等級（隨對局與勝利自動提升專精 Lv.1–Lv.10）",
+            koProgress: "進度：第 {n} 輪 / 8人賽程",
+            koNextBtn: "進入 8 人淘汰賽下一輪",
+            leagueTier: "段位：",
+            leagueBtn: "進行本週聯賽積分戰",
+            monthGames: "本月對局：{n} 局",
+            monthWins: "本月勝場：{n} 勝",
+            monthElo: "綜合 ELO：",
+            weaknessAdvice: "AI 診斷建議：在黑白棋請開啟「角落優先提示」避免放棄角落；在五子棋請多演練「必勝手順 30 題」提升斜線活三防守敏銳度。",
+            reverseToast: "反向模式：先連成線者判負！",
+            speedrunResultTitle: "60秒極速挑戰結算",
+            speedrunTimeUp: "時間到！本輪擊敗 AI：{n} 局",
+            speedrunBest: "歷史最高紀錄：{n} 局",
+            btnClearFilter: "清除篩選",
+            themeEdit: "編輯主題",
+            lockInGame: "請於開局前切換",
+            snRoll: "擲骰",
+            snLadder: "爬梯",
+            snSnake: "滑行蛇",
+            snMoved: "移至"
+          },
+          en: {
+            soundOnLabel: "Sound on",
+            soundOffLabel: "Sound off (muted)",
+            pzCatXiangqi: "Xiangqi",
+            pzCatShogi: "Shogi Tsume",
+            pzCatGomoku: "Gomoku Puzzles",
+            pzCatGo: "Go Life & Death",
+            pzCatReversi: "Reversi Puzzles",
+            pzCatDojo: "Beginner Dojo",
+            pzLibraryTitle: "Star Puzzle Library ({n} puzzles · progress saved)",
+            ehDojoTab: "Beginner Dojo",
+            ehChessTab: "Chess Endgame",
+            ehXiangqiTab: "Xiangqi Checkmates",
+            ehGomokuTab: "Gomoku Wins",
+            ehGoTab: "Go Life & Death",
+            notesCountFmt: "{n} chars",
+            notesUnsavedConfirm: "Notes are unsaved. Leave anyway?",
+            daily5Title: "Daily Five-Star Challenge ({date})",
+            daily5Sub: "Five same-day picks seeded by date from {n} games · finish 5/5 to unlock the daily badge",
+            daily5Streak: "Clear streak",
+            daily5Badge: "Today's badge:",
+            daily5BadgeDone: "✓ Today's star emblem unlocked",
+            daily5Progress: "Progress {n}/5",
+            daily5TitleLabel: "Title:",
+            daily5TitleDone: "★ Seven-Day Master (unlocked)",
+            daily5TitleLock: "Seven-Day Master (clear 7 days to unlock)",
+            daily5SlotNo: "Puzzle {n}",
+            daily5SlotNoLabel: "No.",
+            daily5SlotDone: "✓ Done",
+            daily5SlotPlay: "Challenge",
+            daily5ToastDone: "You cleared all 5 daily challenges! Today's star emblem unlocked",
+            daily5ToastTitle: ' and the "Seven-Day Master" title!',
+            nexusMasteryLabel: "{n} games · Soul resonance level (proficiency Lv.1–Lv.10 grows with wins)",
+            koProgress: "Round {n} / 8-player bracket",
+            koNextBtn: "Enter next knockout round",
+            leagueTier: "Tier:",
+            leagueBtn: "Play this week's league match",
+            monthGames: "Games this month: {n}",
+            monthWins: "Wins this month: {n}",
+            monthElo: "Overall ELO:",
+            weaknessAdvice: "AI advice: in Reversi, enable the corner-priority hint to avoid giving up corners; in Gomoku, practice forced-win sequences to sharpen open-three defense.",
+            reverseToast: "Reverse mode: first to connect a line loses!",
+            speedrunResultTitle: "60-Second Speedrun Results",
+            speedrunTimeUp: "Time up! AI wins defeated: {n}",
+            speedrunBest: "Personal best: {n}",
+            btnClearFilter: "Clear filter",
+            themeEdit: "Edit theme",
+            lockInGame: "Change before the game starts",
+            snRoll: "Roll",
+            snLadder: "Ladder",
+            snSnake: "Snake slide",
+            snMoved: "Moved to"
+          },
+          "zh-Hans": {
+            btnClearFilter: "清除筛选"
+          },
+          ja: {
+            btnClearFilter: "絞り込み解除"
+          }
+        };
+        for (var Zk in Wt) if (n[Zk]) for (var Wj in Wt[Zk]) n[Zk][Wj] = Wt[Zk][Wj];
+      })();
       S.gridCols = 2;
       try {
         var $t = parseInt(localStorage.getItem("starchess.gridCols"), 10);
@@ -21675,7 +21891,7 @@ var __T2S_MAP = null;
       };
       var ea = mt;
       mt = function() {
-        ea(), window.applyMenuGridCols(), "function" == typeof window.decorateGameCardsV616 && window.decorateGameCardsV616();
+        ea(), window.applyMenuGridCols(), "function" == typeof window.decorateGameCardsV616 && window.decorateGameCardsV616(), refreshMenuCounts();
       }, [ "btnGridCol1", "btnGridToggle", "btnGridCol3" ].forEach((function(e) {
         var t = v(e);
         t && t.addEventListener("click", (function(e) {
@@ -21711,7 +21927,7 @@ var __T2S_MAP = null;
         for (var r = v("gameSearchInput"), n = r && r.value ? r.value.trim().toLowerCase() : "", i = document.querySelectorAll("#gameCardList .game-card[data-game]"), o = 0; o < i.length; o++) {
           var s = i[o], c = s.getAttribute("data-game"), d = !0;
           if ("fav" === S.menuCat) d = !(!S.favGames || !S.favGames[c]); else if ("all" !== S.menuCat) {
-            d = (window.GAME_CATS_V616[S.menuCat] || Vd[S.menuCat] || window.GAME_CATS_V616.line).indexOf(c) >= 0;
+            d = (Vd[S.menuCat] || window.GAME_CATS_V616[S.menuCat] || []).indexOf(c) >= 0;
           }
           var f = !0;
           if (n) {
@@ -21721,6 +21937,7 @@ var __T2S_MAP = null;
           s.classList.toggle("cat-hidden", !(d && f));
         }
         window.decorateGameCardsV616();
+        refreshMenuCounts();
       };
       try {
         null === localStorage.getItem("starchess.showElo") && (S.showElo = !0);
@@ -23268,25 +23485,25 @@ var __T2S_MAP = null;
       }, window.openV616PuzzleModal = function(e, t) {
         for (var a = e || "xiangqi", r = window.loadV616PuzzleProg(), n = [ {
           k: "xiangqi",
-          lbl: "中國象棋 (100題)"
+          key: "pzCatXiangqi"
         }, {
           k: "shogi",
-          lbl: "將棋詰將 (50題)"
+          key: "pzCatShogi"
         }, {
           k: "gomoku",
-          lbl: "五子棋謎題 (60題)"
+          key: "pzCatGomoku"
         }, {
           k: "go",
-          lbl: "圍棋死活 (50題)"
+          key: "pzCatGo"
         }, {
           k: "reversi",
-          lbl: "黑白棋謎題 (30題)"
+          key: "pzCatReversi"
         }, {
           k: "dojo",
-          lbl: "入門教學道場"
+          key: "pzCatDojo"
         } ], i = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">', o = 0; o < n.length; o++) {
-          var s = n[o];
-          i += '<button type="button" class="mini-btn' + (a === s.k ? " is-on" : "") + '" data-pz-cat="' + s.k + '">' + s.lbl + "</button>";
+          var s = n[o], sl = "dojo" === s.k ? l(s.key) : l(s.key) + " (" + (window.V616_PUZZLES[s.k] || []).length + ")";
+          i += '<button type="button" class="mini-btn' + (a === s.k ? " is-on" : "") + '" data-pz-cat="' + s.k + '">' + sl + "</button>";
         }
         if (i += "</div>", "dojo" !== a) {
           for (var l = window.V616_PUZZLES[a] || [], c = {}, d = 0; d < l.length; d++) c[l[d].sub] = l[d].subLabel;
@@ -23310,7 +23527,7 @@ var __T2S_MAP = null;
               i += '<button type="button" class="mini-btn" data-pz-launch="' + x + '" style="text-align:left;padding:8px 10px;display:flex;flex-direction:column;gap:3px;border-color:' + ("solved" === S ? "#22c55e" : "wrong" === S ? "#ef4444" : "var(--line)") + ";background:" + ("solved" === S ? "rgba(34,197,94,.12)" : "wrong" === S ? "rgba(239,68,68,.12)" : "rgba(16,22,58,.65)") + '"><span style="font-weight:700;font-size:.82rem;color:#fff">' + ("solved" === S ? '<span style="color:#4ade80;font-weight:900">✓ </span>' : "wrong" === S ? '<span style="color:#f87171;font-weight:900">✗ </span>' : "") + "[" + k.subLabel + "] #" + k.no + '</span><span style="font-size:.73rem;opacity:.82">' + k.desc + "</span></button>";
             }
           }
-          lf("星海謎題題庫 (290題全覆蓋 · 自動保存進度)", i += "</div>");
+          lf(l("pzLibraryTitle").replace("{n}", puzzleTotal()), i += "</div>");
           for (var w = document.querySelectorAll("[data-pz-cat]"), M = 0; M < w.length; M++) !function(e) {
             e.addEventListener("click", (function() {
               window.openV616PuzzleModal(e.getAttribute("data-pz-cat"), "all");
@@ -23846,9 +24063,9 @@ var __T2S_MAP = null;
         } catch (e) {}
       }, ue = function() {
         for (var e = window.loadDailyV7(), t = _a(), a = window.getDaily5GamesForDate(t), r = e.days[t] || [ 0, 0, 0, 0, 0 ], n = 0, i = 0; i < 5; i++) r[i] && n++;
-        for (var o = !!e.badges[t], s = !!e.sevenDayTitle || e.streak >= 7, c = '<div style="padding:4px"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(16,22,58,.85);border:1px solid #4dd0e1;border-radius:12px;margin-bottom:10px"><div><div style="font-weight:800;color:#ffd700;font-size:.95rem">每日五題星海挑戰 (' + t + ')</div><div style="font-size:.76rem;color:#cbd5e1">每日依日期 Seed 從 25 款棋選出 5 款同日同題 · 完成 5/5 解鎖每日徽章</div></div><div style="text-align:right"><div style="font-size:.75rem;color:#94a3b8">連續全通天數</div><div style="font-size:1.15rem;font-weight:900;color:#4dd0e1">' + (e.streak || 0) + ' / 7 天</div></div></div><div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.35);border-radius:10px;margin-bottom:10px;font-size:.82rem"><span>今日徽章：<b>' + (o ? '<span style="color:#4ade80">✓ 已解鎖今日星徽</span>' : "進度 " + n + " / 5 題") + '</b></span><span>專屬稱號：<b style="color:' + (s ? "#ffd700" : "#94a3b8") + '">' + (s ? "★ 七日棋士 (已解鎖)" : "七日棋士 (連過7天解鎖)") + '</b></span></div><div style="display:flex;flex-direction:column;gap:7px">', d = 0; d < a.length; d++) {
+        for (var o = !!e.badges[t], s = !!e.sevenDayTitle || e.streak >= 7, c = '<div style="padding:4px"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(16,22,58,.85);border:1px solid #4dd0e1;border-radius:12px;margin-bottom:10px"><div><div style="font-weight:800;color:#ffd700;font-size:.95rem">' + l("daily5Title").replace("{date}", t) + '</div><div style="font-size:.76rem;color:#cbd5e1">' + l("daily5Sub").replace("{n}", L.length) + '</div></div><div style="text-align:right"><div style="font-size:.75rem;color:#94a3b8">' + l("daily5Streak") + '</div><div style="font-size:1.15rem;font-weight:900;color:#4dd0e1">' + (e.streak || 0) + ' / 7</div></div></div><div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.35);border-radius:10px;margin-bottom:10px;font-size:.82rem"><span>' + l("daily5Badge") + '<b>' + (o ? '<span style="color:#4ade80">' + l("daily5BadgeDone") + '</span>' : l("daily5Progress").replace("{n}", n)) + '</b></span><span>' + l("daily5TitleLabel") + '<b style="color:' + (s ? "#ffd700" : "#94a3b8") + '">' + (s ? l("daily5TitleDone") : l("daily5TitleLock")) + '</b></span></div><div style="display:flex;flex-direction:column;gap:7px">', d = 0; d < a.length; d++) {
           var f = a[d], u = !!r[d];
-          c += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(14,20,52,.78);border:1px solid ' + (u ? "#22c55e" : "var(--line)") + ';border-radius:10px"><div><div style="font-weight:800;color:#fff">第 ' + (d + 1) + " 題 · " + l("name." + f.game) + ' <span style="font-size:.75rem;color:#ffd700">(題號 #' + f.qNo + ')</span></div><div style="font-size:.75rem;color:#94a3b8">' + l("desc." + f.game) + '</div></div><button type="button" class="mini-btn' + (u ? "" : " is-on") + '" data-d5-slot="' + d + '" style="border-color:' + (u ? "#22c55e" : "") + ";color:" + (u ? "#4ade80" : "") + '">' + (u ? "✓ 已完成" : "挑戰此題") + "</button></div>";
+          c += '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(14,20,52,.78);border:1px solid ' + (u ? "#22c55e" : "var(--line)") + ';border-radius:10px"><div><div style="font-weight:800;color:#fff">' + l("daily5SlotNo").replace("{n}", d + 1) + " · " + l("name." + f.game) + ' <span style="font-size:.75rem;color:#ffd700">(' + l("daily5SlotNoLabel") + " #" + f.qNo + ')</span></div><div style="font-size:.75rem;color:#94a3b8">' + l("desc." + f.game) + '</div></div><button type="button" class="mini-btn' + (u ? "" : " is-on") + '" data-d5-slot="' + d + '" style="border-color:' + (u ? "#22c55e" : "") + ";color:" + (u ? "#4ade80" : "") + '">' + (u ? l("daily5SlotDone") : l("daily5SlotPlay")) + "</button></div>";
         }
         c += "</div></div>", lf(l("dailyChallenge"), c);
         for (var v = document.querySelectorAll("[data-d5-slot]"), p = 0; p < v.length; p++) !function(e) {
@@ -23866,7 +24083,7 @@ var __T2S_MAP = null;
           e.days[t] = e.days[t] || [ 0, 0, 0, 0, 0 ], e.days[t][S.daily5Slot] = 1;
           for (var a = !0, r = 0; r < 5; r++) e.days[t][r] || (a = !1);
           a && !e.badges[t] && (e.badges[t] = 1, e.streak = (e.streak || 0) + 1, e.streak >= 7 && (e.sevenDayTitle = !0), 
-          we("恭喜完成今日全部 5 題挑戰！已解鎖「今日星徽」" + (e.sevenDayTitle ? " 與「七日棋士」稱號！" : "！"))), window.saveDailyV7(), 
+          we(l("daily5ToastDone") + (e.sevenDayTitle ? l("daily5ToastTitle") : "！"))), window.saveDailyV7(), 
           S.daily5Slot = null;
         }
       };
@@ -24265,7 +24482,7 @@ var __T2S_MAP = null;
       }, window.migrateV6ToV7(), window.exportSaveAsJsonV7 = function() {
         var e = {
           schemaVersion: "v7",
-          gameVersion: "6.21.0",
+          gameVersion: "6.22.0",
           exportedAt: (new Date).toISOString(),
           storage: {}
         };
@@ -24327,7 +24544,7 @@ var __T2S_MAP = null;
           t && t.remove(), v("v616MasterSettingsBox") && v("v616MasterSettingsBox").remove();
           var a = S.game || "gomoku", r = S.boardStyleByGame && S.boardStyleByGame[a] ? S.boardStyleByGame[a] : "global", n = [ [ "default", "預設（透明星空）" ], [ "wood", "經典木紋（棕色線條）" ], [ "marble", "大理石（灰白紋理）" ], [ "mahjong", "麻將牌（綠色絨面）" ], [ "glass", "半透玻璃（淡藍色高光）" ] ], i = document.createElement("div");
           i.id = "v616MasterSettingsBox", i.style.cssText = "margin-bottom:12px;padding:12px;background:rgba(16,24,62,.9);border:1px solid #4dd0e1;border-radius:12px", 
-          i.innerHTML = '<div style="font-weight:800;color:#ffd700;margin-bottom:8px">v6.21.0 音效合成、棋盤材質與 v7 存檔中心</div><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;padding:8px;background:rgba(255,255,255,.04);border-radius:8px"><span style="font-size:.82rem;font-weight:700">WebAudio 音效開關</span><button type="button" class="mini-btn' + (S.soundOn ? " is-on" : "") + '" id="btnV616SoundToggle">' + (S.soundOn ? "已開啟 (ON)" : "已關閉 (OFF)") + '</button><span style="font-size:.82rem">音量</span><input type="range" id="v616VolSlider" min="0" max="100" value="' + Math.round(100 * (S.volume || .8)) + '" style="flex:1;max-width:130px"><b id="v616VolTxt" style="font-size:.8rem;min-width:36px">' + Math.round(100 * (S.volume || .8)) + '%</b></div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px"><button type="button" class="mini-btn" data-test-sfx="place">試聽落子(木質嗒0.1s)</button><button type="button" class="mini-btn" data-test-sfx="capture">試聽吃子(低沉咚0.2s)</button><button type="button" class="mini-btn" data-test-sfx="check">試聽將軍(金屬鏘0.3s)</button><button type="button" class="mini-btn" data-test-sfx="win">試聽勝利(五音階0.8s)</button></div><div style="font-size:.82rem;font-weight:700;color:#4dd0e1;margin-bottom:5px">全域預設棋盤材質：</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">' + n.map((function(e) {
+          i.innerHTML = '<div style="font-weight:800;color:#ffd700;margin-bottom:8px">v6.22.0 音效合成、棋盤材質與 v7 存檔中心</div><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;padding:8px;background:rgba(255,255,255,.04);border-radius:8px"><span style="font-size:.82rem;font-weight:700">WebAudio 音效開關</span><button type="button" class="mini-btn' + (S.soundOn ? " is-on" : "") + '" id="btnV616SoundToggle">' + (S.soundOn ? "已開啟 (ON)" : "已關閉 (OFF)") + '</button><span style="font-size:.82rem">音量</span><input type="range" id="v616VolSlider" min="0" max="100" value="' + Math.round(100 * (S.volume || .8)) + '" style="flex:1;max-width:130px"><b id="v616VolTxt" style="font-size:.8rem;min-width:36px">' + Math.round(100 * (S.volume || .8)) + '%</b></div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px"><button type="button" class="mini-btn" data-test-sfx="place">試聽落子(木質嗒0.1s)</button><button type="button" class="mini-btn" data-test-sfx="capture">試聽吃子(低沉咚0.2s)</button><button type="button" class="mini-btn" data-test-sfx="check">試聽將軍(金屬鏘0.3s)</button><button type="button" class="mini-btn" data-test-sfx="win">試聽勝利(五音階0.8s)</button></div><div style="font-size:.82rem;font-weight:700;color:#4dd0e1;margin-bottom:5px">全域預設棋盤材質：</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">' + n.map((function(e) {
             return '<button type="button" class="mini-btn' + (S.boardStyle === e[0] ? " is-on" : "") + '" data-v616-gmat="' + e[0] + '">' + e[1] + "</button>";
           })).join("") + '</div><div style="font-size:.82rem;font-weight:700;color:#e040fb;margin-bottom:5px">單棋材質覆蓋（目前棋種：' + l("name." + a) + '）：</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px"><button type="button" class="mini-btn' + ("global" === r ? " is-on" : "") + '" data-v616-omat="global">跟隨全域預設</button>' + n.map((function(e) {
             return '<button type="button" class="mini-btn' + (r === e[0] ? " is-on" : "") + '" data-v616-omat="' + e[0] + '">' + e[1] + "</button>";
@@ -24942,7 +25159,7 @@ var __T2S_MAP = null;
             var isTrOn = curTrail === tr.id;
             htmlOut += '<div class="v617-card" style="padding:8px 10px;border-color:' + (isTrOn ? tr.c1 : "rgba(125,211,252,0.2)") + '"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:800;color:' + tr.c1 + ';font-size:.8rem">● ' + tr.name + '</span><button type="button" class="mini-btn' + (isTrOn ? " is-on" : "") + '" data-v619-trail="' + tr.id + '" style="padding:2px 8px;font-size:.7rem">' + (isTrOn ? "使用中" : "套用") + '</button></div><div style="font-size:.7rem;color:#94a3b8">' + tr.desc + "</div></div>";
           }
-          htmlOut += '</div><div style="font-size:.8rem;font-weight:800;color:#7dd3fc;margin-bottom:6px">❖ 25 棋種棋魂共鳴等級（隨對局與勝利自動提升專精 Lv.1–Lv.10）：</div><div class="v617-card-grid" style="max-height:24vh">';
+          htmlOut += '</div><div style="font-size:.8rem;font-weight:800;color:#7dd3fc;margin-bottom:6px">❖ ' + l("nexusMasteryLabel").replace("{n}", L.length) + '：</div><div class="v617-card-grid" style="max-height:24vh">';
           for (var gmI = 0; gmI < L.length; gmI++) {
             var gKey = L[gmI];
             var pCnt = (S.playedGames && S.playedGames[gKey]) || 0;
@@ -25059,8 +25276,9 @@ var __T2S_MAP = null;
           htmlOut += "</div>";
         }
 
-        htmlOut = '<div class="v617-card" style="margin-bottom:10px"><div style="font-weight:800;color:#ffd700;font-size:.82rem">✦ v6.21.0 更新條目</div><div style="font-size:.74rem;color:#cbd5e1;line-height:1.55;margin-top:3px">新增 12 項成就與星宮收藏（邊框／特效／稱號）；修復存檔遷移、悔棋快照、匯入校驗與介面接線問題。</div></div>' + htmlOut;
-        lf("✦ 蒼穹星樞聖殿 v6.21.0 · 蒼穹星宮篇", htmlOut);
+        htmlOut = '<div class="v617-card" style="margin-bottom:10px"><div style="font-weight:800;color:#ffd700;font-size:.82rem">✦ v6.22.0 更新條目</div><div style="font-size:.74rem;color:#cbd5e1;line-height:1.55;margin-top:3px">分類對應修正（連線／占地／吃子／策略）；棋種、題庫、每日與星樞計數改由程式動態產生；音效快捷靜音；主題卡顯式編輯入口；筆記字數提示與未儲存防護；空狀態與清除篩選；窄屏響應式與 ARIA 改善；補齊多語字典鍵。<br><span style="opacity:.7">Category mapping fixed; dynamic game/puzzle/daily/nexus counts; quick mute; explicit theme edit entry; notes char counter &amp; unsaved guard; empty-state clear filter; responsive &amp; ARIA fixes; i18n keys completed.</span></div></div>' +
+        '<div class="v617-card" style="margin-bottom:10px"><div style="font-weight:800;color:#ffd700;font-size:.82rem">✦ v6.21.0 更新條目</div><div style="font-size:.74rem;color:#cbd5e1;line-height:1.55;margin-top:3px">新增 12 項成就與星宮收藏（邊框／特效／稱號）；修復存檔遷移、悔棋快照、匯入校驗與介面接線問題。</div></div>' + htmlOut;
+        lf("✦ 蒼穹星樞聖殿 v6.22.0 · 蒼穹星宮篇", htmlOut);
 
         // Wire tab switches
         var tabBtns = document.querySelectorAll("[data-v617-tab]");
@@ -25507,7 +25725,7 @@ var __T2S_MAP = null;
         if (mb && !v("btnOdysseyToStoryChronicles")) {
           var banner = document.createElement("div");
           banner.style.cssText = "margin-bottom:10px;padding:9px 12px;border-radius:10px;background:linear-gradient(90deg,rgba(56,189,248,0.2),rgba(251,191,36,0.22));border:1px solid #fbbf24;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap";
-          banner.innerHTML = '<span style="font-size:.8rem;font-weight:800;color:#fde047">📖 v6.21.0「星海編年史 · 八章 24 幕主線劇情戰役」已開啟！</span><button type="button" class="mini-btn is-on" id="btnOdysseyToStoryChronicles">進入劇情劇場 →</button>';
+          banner.innerHTML = '<span style="font-size:.8rem;font-weight:800;color:#fde047">📖 v6.22.0「星海編年史 · 八章 24 幕主線劇情戰役」已開啟！</span><button type="button" class="mini-btn is-on" id="btnOdysseyToStoryChronicles">進入劇情劇場 →</button>';
           mb.insertBefore(banner, mb.firstChild);
           var bStory = v("btnOdysseyToStoryChronicles");
           bStory && bStory.addEventListener("click", (function(ev) {
